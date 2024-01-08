@@ -1,0 +1,11 @@
+body {
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0; 
+    min-height: calc(
+      100vh - 10px
+    ); /* Establece la altura mínima igual a la altura de la ventana menos 50px */
+  
+    box-sizing: border-box; /* Incluye el relleno en la altura total del contenedor */
+  
+  }

@@ -1,0 +1,61 @@
+body {
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0; 
+  min-height: calc(
+    100vh - 10px
+  ); /* Establece la altura mínima igual a la altura de la ventana menos 50px */
+
+  box-sizing: border-box; /* Incluye el relleno en la altura total del contenedor */
+
+}
+.btn-primary {
+    background-color: var(--color-secundario);
+    border: none;
+    font-weight: bold;
+  }
+  #btnIngresar:active,
+  #btnIngresar:focus {
+    background-color: var(--color-primario); /* Naranja */
+    border-color: var(--color-primario); /* Color del borde si deseas cambiarlo también */
+    border-radius: 28px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+  }
+
+.card {
+    background-color: var(--color-primario);
+    border-radius: 25px; 
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2); 
+
+  }
+  .card h5 {
+    color: var(--color-secundario); /* Cambia el color del texto a blanco */
+    font-weight: bold; /* Aplica el estilo en negrita */
+    //text-decoration: underline; /* Aplica un subrayado */
+    text-underline-offset: 12px;
+  }
+  .card label, p {
+    color: var(--color-texto1); /* Cambia el color del texto a blanco */
+  }
+  
+  
+.form-control {
+    border-radius: 25px; 
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+  }
+
+
+  .form-check-input:checked {
+    background-color: var(--color-secundario);
+    border-color: var(--color-secundario);
+}
+
+.rounded-eye {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+}
+
+  

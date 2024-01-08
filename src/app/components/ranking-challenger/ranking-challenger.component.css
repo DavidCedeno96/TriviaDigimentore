@@ -1,0 +1,223 @@
+.scrollable-list {
+    max-height: 500px; /* Define la altura máxima que desees */
+    overflow-y: auto; /* Agrega un scroll vertical cuando el contenido excede la altura */
+    overflow-x: auto;
+    white-space: nowrap;
+
+  }
+
+  table{
+    min-width: 90%;
+  }
+
+/* Estilos para pantallas grandes ("lg") */
+@media (min-width: 992px) {
+  .logoCMI{
+    max-width: 300px; height: auto
+  }
+  .custom-container {
+    height: 650px; /* Altura en pantallas grandes */
+  }
+}
+
+/* Estilos para pantallas pequeñas ("sm") */
+@media (max-width: 576px) {
+  .logoCMI{
+    max-width: 150px; height: auto
+  }
+  .custom-container {
+    height: 150px; /* Altura en pantallas pequeñas */
+  }
+  .scrollable-list {
+    max-height: 250px;  
+  }
+}
+
+@media (min-width: 577px) and (max-width: 991px) {
+  .logoCMI{
+    max-width: 250px; height: auto
+  }
+  .scrollable-list {
+    max-height: 250px;  
+  }
+}
+
+  
+  /* Tamaño en pantallas grandes ("lg") */
+  @media (min-width: 992px) {
+    .scrollable-list {
+      max-height: 450px;
+    }
+    .container-ranking{
+      max-height: 600px;
+    }
+  }
+
+.odd {
+    background-color: var(--color-odd); 
+  }
+  .even {
+    background-color: var(--color-even); 
+  }
+  
+  .circle-badge {
+    width: 40px; /* Ancho del círculo */
+    height: 40px; /* Altura del círculo */
+    background-color: var(--color-primario); /* Color de fondo del círculo */
+    border-radius: 50%; /* Borde redondeado para crear un círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--color-texto1); /* Color del texto dentro del círculo */
+    font-size: 14px; /* Tamaño de fuente del texto dentro del círculo */
+  }
+  
+
+  .player-text {
+    flex-grow: 1; /* Permite que el texto "Jugador" ocupe el espacio restante */
+    text-align: left; /* Alineación del texto a la izquierda */
+    margin-left: 10px; /* Espacio entre el círculo y el texto */
+    font-weight: bold;
+    font-size: small;
+    /*Maximo 2 lineas + puntos*/
+        
+  }
+
+  .custom-badge {
+    background-color: var(--color-terciario) !important; /* Color de fondo personalizado para el badge */
+    color: var(--color-texto1); /* Color del texto dentro del badge */
+    
+  }
+
+  .number-text {
+    font-size: 16px;
+    font-weight: bold;
+
+  }
+  
+
+  .list-group-item {    
+    border: none !important;
+    display: inline-block; /* Asegura que los elementos se muestren en línea */
+    margin-right: 5px; /* Añade margen entre los elementos */
+
+  }
+
+  .container-ranking {
+    border-radius: 20px; /* Puedes ajustar el valor según el nivel de redondeo deseado */
+    padding: 20px; /* Puedes ajustar el relleno según tus necesidades */
+    border: 1px solid #ccc; /* Puedes agregar un borde opcional si lo deseas */
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+
+  }
+
+
+  .background-image {
+    position: fixed; /* Fija la imagen en su posición */
+    top: 0;
+    left: 0;
+    /* width: 100%;  *//* Ocupa el ancho completo de la ventana */
+    height: 100%; /* Ocupa el alto completo de la ventana */
+    z-index: -1; /* Coloca la imagen detrás del contenido */
+
+    background-size: cover; /* Hace que la imagen sea responsiva */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+  
+    /* Añade otros estilos según tus necesidades, como el fondo específico que desees */
+  }
+
+  /* Estilo para dispositivos LG */
+@media (min-width: 992px) {
+  .imagen-lg {
+    height: 300px; /* Altura específica para dispositivos LG */
+  }
+ 
+  .centrar-verticalmente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Estilos personalizados para dispositivos de tamaño medio (md) */
+@media (min-width: 768px) {
+  .imagen-md {
+    height: 200px; /* Altura específica para dispositivos SM */
+  }
+}
+
+/* Estilo para dispositivos SM */
+@media (max-width: 768px) {
+  
+  .imagen-sm {
+    height: 150px; /* Altura específica para dispositivos SM */
+  }
+  .centrar-verticalmente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-secundario);
+  border: none;
+  font-weight: bold;
+  border-radius: 25px;
+  font-size: 24px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus
+{
+  background-color: var(--color-primario); /* Naranja */
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+
+  
+}
+h4 {
+  color: var(--color-terciario);
+}
+
+.card {
+  
+  /* border: 1px solid #ccc; */
+  overflow: hidden; /* Para asegurar que el contenido no se desborde */  
+  flex-direction: column;
+  border-radius: 25px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+
+}
+
+.card-top {
+  background-color: var(--color-primario);
+  text-align: center;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Para asegurar que la imagen cubra todo el contenedor */
+}
+
+.card-bottom {
+  background-color: white;
+}
+
+.player-text {
+  color: var(--color-texto1);
+}
+
+.gris-oscuro {
+    background-color: #b3b3b3; /* Color gris oscuro */
+    color: var(--color-texto1); /* Color de texto blanco o el color que desees */
+  }
+
+
+  
+ 

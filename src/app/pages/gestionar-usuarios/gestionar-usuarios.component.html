@@ -1,0 +1,329 @@
+<body class="justify-content-center align-items-center">
+  <div class="container-orange py-2">
+    <div class="row">
+      <!-- Menu -->
+      <div class="col">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+              style="background-color: var(--color-secundario)"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              style="
+                border-radius: 0;
+                background-color: var(--color-background);
+                font-weight: bold;
+              "
+            >
+              <div class="offcanvas-header">
+                <img
+                  [src]="logoEmpresaLateral"
+                  alt="Logo_AppMenu.png"
+                  style="max-height: 40px; width: auto"
+                  class="ms-3"
+                />
+                <!-- <h5 class="offcanvas-title ps-2" id="offcanvasNavbarLabel" style="font-weight: bold; font-size: 30px; color: #3d5057;">
+                  
+                  Menú</h5> -->
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <hr />
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      aria-current="page"
+                      routerLink="/Administrador"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/sala.png"
+                        alt="imgSala"
+                        style="height: 30px; width: auto"
+                      />
+                      Salas
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      routerLink="/GestionarUsuarios"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/usuario.png"
+                        alt="imgSala"
+                        style="height: 30px; width: auto"
+                      />
+                      Usuarios
+                    </a>
+                  </li>
+                  <li
+                    class="nav-item"
+                    *ngIf="idRol === 3"
+                    style="cursor: pointer"
+                  >
+                    <a
+                      class="nav-link"
+                      (click)="descargarReporteSalasUsuarios()"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/reporte.png"
+                        alt="imgSala2"
+                        style="height: 30px; width: auto"
+                      />
+                      Reporte Salas
+                    </a>
+                  </li>
+                  <li class="nav-item" style="cursor: pointer">
+                    <a
+                      class="nav-link"
+                      (click)="cerrarSesion()"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/salir.png"
+                        style="height: 30px; width: auto"
+                      />
+                      Salir
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+     
+    </div>
+
+    <div class="row text-center">
+      <div class="col my-4 ">
+        <img
+          [src]="logoEmpresa"
+          style="height: 80px; width: auto"
+          alt="Imagen"
+          class="image-inside-container"
+        />
+      </div>
+    </div>
+
+    <div class="row mx-2" style="vertical-align: middle">
+      <div
+        class="col-2 col-lg-2 text-end px-3 py-1 py-lg-4"
+        style="color: var(--color-texto1); font-weight: bold"
+      >
+        Buscar
+      </div>
+      <!-- Buscador de Usuarios -->
+      <div class="col-lg-8 col-10 py-lg-3">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: white"
+            placeholder="Ingrese el ID/Nombre del usuario"
+            [(ngModel)]="textoBuscar"
+            (input)="verUsuariosAll($event)"
+            (keyup.enter)="buscar()"
+          />
+          <button class="btn btn-primary" type="button" (click)="buscar()">
+            <svg class="icono-svg2" >
+              <use xlink:href="assets/Icons/Lupa.svg#Capa_1"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="col-6 col-lg-auto px-3 py-3">
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          routerLink="/CrearUsuario"
+          [queryParams]="{ type: 'crear' }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="var(--color-iconos)"
+            class="bi bi-plus-circle-fill mx-2 my-1"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+            />
+          </svg>
+          Nuevo
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensaje error -->
+    <div
+      class="mb-3 px-md-5"
+      *ngIf="existeError"
+      style="color: var(--color-texto1)"
+    >
+      {{ result }}
+    </div>
+  </div>
+
+  <div class="container-with-shadow"></div>
+  <!-- TITULO Y BUSCADOR -->
+  <div class="container">
+    <!-- USARIOS CREADOS -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12 mx-auto">
+          <div
+            class="mt-5 text-center"
+            *ngIf="Usuarios.length === 0 || auxUsuarios.length === 0"
+          >
+            <h3>No se pudo encontrar ningun usuario</h3>
+          </div>
+          <div class="card my-2" *ngFor="let usuario of cardsToShow">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div
+                  class="col-sm-12 col-lg-8 align-items-center text-center text-lg-start my-3"
+                >
+                  <div class="container" style="color: var(--color-texto2);">
+                    <div>
+                      <strong>Nombre:</strong>
+                      {{ usuario.nombre }}
+                    </div>
+
+                    <div *ngIf="usuario.correo != 'N/A'">
+                      <strong>Email:</strong>
+                      {{ usuario.correo }}
+                    </div>
+
+                    <div *ngIf="usuario.contrasena != 'N/A'">
+                      <strong>DPI:</strong>
+                      {{ usuario.contrasena }}
+                    </div>
+
+                    <div>
+                      <strong>Rol:</strong>
+                      {{ usuario.rol }}
+                    </div>
+                  </div>
+                </div>
+                <!-- Botones -->
+                <div class="col-sm-12 col-lg-4 text-end">
+                  <button
+                    type="button"
+                    class="btn btn-secondary mx-1"
+                    (click)="copyUsuario(usuario.nombre)"
+                  >
+                    Copiar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary mx-1"
+                    (click)="
+                      cambiarPag('/CrearUsuario', 'editar', usuario.idUsuario)
+                    "
+                  >
+                  <svg class="icono-svg2" >
+                    <use xlink:href="assets/Icons/Editar.svg#Capa_1"></use>
+                  </svg> 
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary mx-1 my-2"
+                    (click)="confirmEliminar(usuario.idUsuario)"
+                  >
+                  <svg class="icono-svg2" >
+                    <use xlink:href="assets/Icons/Basurero.svg#Capa_1"></use>
+                  </svg>  
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-toast [styleClass]="'col-10 col-md-6 col-lg-3'"></p-toast>
+  <p-confirmDialog #cd [styleClass]="'col-10 col-md-4'">
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        pButton
+        label="Cancelar"
+        (click)="cd.reject()"
+      ></button>
+      <button
+        type="button"
+        pButton
+        class="btn btn-primary"
+        label="Aceptar"
+        (click)="cd.accept()"
+      ></button>
+    </ng-template>
+  </p-confirmDialog>
+
+  <div class="container" style="height: 15px"></div>
+
+  <!-- Paginación de Bootstrap -->
+  <nav aria-label="Page navigation modal-2">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage - 1)"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [class.active]="currentPage === page"
+      >
+        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === pages.length">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage + 1)"
+          aria-label="Next"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="flexcontainer"></div>
+</body>

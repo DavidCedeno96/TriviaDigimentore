@@ -1,0 +1,493 @@
+<body class="justify-content-center align-items-center">
+  <div class="container-orange py-2">
+    <div class="row">
+      <!-- Menu -->
+      <div class="col">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
+              style="background-color: var(--color-secundario)"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="offcanvas offcanvas-start"
+              tabindex="-1"
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              style="
+                border-radius: 0;
+                background-color: var(--color-background);
+                font-weight: bold;
+              "
+            >
+              <div class="offcanvas-header">
+                <img class="ms-3"
+                  [src]=logoMenuLateral
+                  alt="Logo_AppMenu.png"
+                  style="max-height: 40px; width: auto"
+                />
+                <!-- <h5 class="offcanvas-title ps-2" id="offcanvasNavbarLabel" style="font-weight: bold; font-size: 30px; color: #3d5057;">
+                  
+                  Menú</h5> -->
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <hr />
+              <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active"
+                      aria-current="page"
+                      routerLink="/Administrador"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/sala.png"
+                        alt="imgSala"
+                        style="height: 30px; width: auto"
+                      />
+                      Salas
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      routerLink="/GestionarUsuarios"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/usuario.png"
+                        alt="imgSala"
+                        style="height: 30px; width: auto"
+                      />
+                      Usuarios
+                    </a>
+                  </li>
+                  <li
+                    class="nav-item"
+                    *ngIf="idRol === 3"
+                    style="cursor: pointer"
+                  >
+                    <a
+                      class="nav-link"
+                      (click)="descargarReporteSalasUsuarios()"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/reporte.png"
+                        alt="imgSala2"
+                        style="height: 30px; width: auto"
+                      />
+                      Reporte Salas
+                    </a>
+                  </li>
+                  <li class="nav-item" style="cursor: pointer">
+                    <a
+                      class="nav-link"
+                      (click)="cerrarSesion()"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <img
+                        class="ps-3 pe-2"
+                        src="assets/Imagenes Juego/salir.png"
+                        style="height: 30px; width: auto"
+                      />
+                      Salir
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+     
+    </div>
+
+    <div class="row text-center">
+      <div class="col my-4">
+        <img
+          [src]=logoMenu
+          style="height: 80px; width: auto"
+          alt="Imagen"
+          class="image-inside-container"
+        />
+      </div>
+    </div>
+
+    <div class="row mx-2" style="vertical-align: middle">
+      <div
+        class="col-2 col-lg-2 text-end px-3 py-1 py-lg-4"
+        style="color: var(--color-texto1);; font-weight: bold"
+      >
+        Buscar
+      </div>
+      <!-- Buscador de Salas -->
+      <div class="col-8 py-lg-3">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: #fff"
+            placeholder="Ingrese el nombre de la sala"
+            [(ngModel)]="textoBuscar"
+            (input)="verSalasAll($event)"
+            (keyup.enter)="buscar()"
+          />
+          <button class="btn btn-primary" type="button" (click)="buscar()">
+            <svg class="icono-svg2" >
+              <use xlink:href="assets/Icons/Lupa.svg#Capa_1"></use>
+            </svg> 
+            
+          </button>
+        </div>
+      </div>
+      <div class="col-6 col-lg-auto px-3 py-3">
+        <button
+          type="button"
+          class="btn btn-primary px-4"
+          routerLink="/CrearSala"
+          [queryParams]="{ type: 'crear' }"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="var(--color-iconos)"
+            class="bi bi-plus-circle-fill mx-2 my-1"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"
+            />
+          </svg>
+          Nueva
+        </button>
+      </div>
+      <!-- <div class="col-6 col-lg-auto px-3 py-3" *ngIf="idRol === 3">
+        <button class="btn btn-primary px-4" (click)="descargarReporte()">
+          Reporte salas
+        </button>
+      </div> -->
+    </div>
+
+    <!-- Mensaje error -->
+    <div
+      class="mb-3 px-md-5"
+      *ngIf="existeError"
+      style="color: rgb(255, 255, 255)"
+    >
+      {{ result }}
+    </div>
+  </div>
+
+  <div class="container-with-shadow"></div>
+  <!-- TITULO Y BUSCADOR -->
+  <div class="container">
+    <!-- SALAS CREADAS -->
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto">
+          <div class="card my-2" *ngFor="let sala of cardsToShow">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div
+                  class="col-sm-12 col-lg-2 align-items-center text-center px-sm-2"
+                >
+                  <img
+                    [src]="getImageSala(sala.imagen)"
+                    onerror="this.src='assets/Imagenes Juego/ImagenDefault.png'"
+                    alt="Imagen"
+                    class="img-fluid imagen-lg imagen-md imagen-sm"
+                  />
+                </div>
+                <!-- Información de las salas -->
+                <div
+                  class="col-sm-12 col-lg-6 align-items-center text-center text-lg-start my-3"
+                >
+                  <div class="container">
+                    <div class="row" style="color: var(--color-texto2);">
+                      <div class="py-sm-0 py-lg-2 col-sm-12 col-lg-2">
+                        <strong>Id:</strong>
+                        {{ sala.idSala }}
+                      </div>
+                      <div class="py-sm-0 py-lg-2 col-sm-12 col-lg-10">
+                        <strong>Sala:</strong>
+                        {{ sala.nombre }}
+                      </div>
+                      <div class="py-sm-0 py-lg-2 col-sm-12 col-lg-6">
+                        <strong>Modo:</strong>
+                        {{ sala.modoJuego }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Botones -->
+                <div class="col-sm-12 col-lg-4 text-end">
+                  <div class="container mt-5">
+                    <div
+                      class="btn-group"
+                      dropdown
+                      #dropdown="bs-dropdown"
+                      [autoClose]="true"
+                    >
+                      <button
+                        id="button-basic"
+                        dropdownToggle
+                        type="button"
+                        class="btn btn-primary dropdown-toggle"
+                        aria-controls="dropdown-basic"
+                      >
+                      <svg class="icono-svg2" >
+                        <use xlink:href="assets/Icons/Engrane.svg#Capa_1"></use>
+                      </svg> 
+                        <strong>Configuración</strong>
+                        <span class="caret"></span>
+                      </button>
+
+                      <ul
+                        id="dropdown-basic"
+                        *dropdownMenu
+                        class="dropdown-menu"
+                        style="background-color: var(--color-secundario); cursor: default"
+                        role="menu"
+                        aria-labelledby="button-basic"
+                      >
+                        <li role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="cambiarPag('/Sala', sala.idSala)"
+                            ><svg class="icono-svg2" >
+                              <use xlink:href="assets/Icons/Editar.svg#Capa_1"></use>
+                            </svg> 
+                            <strong>Editar</strong></a
+                          >
+                        </li>
+
+                        <li role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="confirmEliminar(sala.idSala)"
+                          >
+                          <svg class="icono-svg2" >
+                            <use xlink:href="assets/Icons/Basurero.svg#Capa_1"></use>
+                          </svg>                            
+                            <strong>Eliminar</strong></a
+                          >
+                        </li>
+
+                        <li role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="
+                              cambiarPag('/RankingChallengers', sala.idSala)
+                            "
+                            ><svg class="icono-svg2" >
+                              <use xlink:href="assets/Icons/Trofeo.svg#Capa_1"></use>
+                            </svg>   
+                            <strong>Resultados</strong>
+                          </a>
+                        </li>
+                        <li
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                          role="menuitem"
+                        >
+                          <a
+                            class="dropdown-item"
+                            (click)="dataSalaOnModal(sala)"
+                          >
+                          <svg class="icono-svg2" >
+                            <use xlink:href="assets/Icons/Compartir.svg#Capa_1"></use>
+                          </svg>  
+                            <strong>Compartir</strong>
+                          </a>
+                        </li>
+                        <li role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="confirmResetear(sala.idSala)"
+                          >
+                          <svg class="icono-svg2" >
+                            <use xlink:href="assets/Icons/Reset.svg#Capa_1"></use>
+                          </svg>   
+                            <strong>Resetear</strong>
+                          </a>
+                        </li>
+                        <li *ngIf="sala.estado === 1" role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="cambiarEstado(sala, 0)"
+                          >
+                            <img
+                              src="assets/Icons/Activado.svg"
+                              alt="Icono"
+                              class="icono-svg2"
+                            />
+                            <strong>Activado</strong>
+                          </a>
+                        </li>
+                        <li *ngIf="sala.estado === 0" role="menuitem">
+                          <a
+                            class="dropdown-item"
+                            (click)="cambiarEstado(sala, 1)"
+                          >
+                            <img
+                              src="assets/Icons/Desactivado.svg"
+                              alt="Icono"
+                              class="icono-svg2"
+                            />
+                            <strong>Desactivado</strong>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                 
+                </div>
+
+                <!-- INICIO MODAL -->
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                  style="background-color: rgba(0, 0, 0, 0.5)"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="exampleModalLabel"
+                          style="font-weight: bold; color: var(--color-primario)"
+                        >
+                          Compartir
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                          #closeModal
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text-center mb-3">
+                          <h5 style="font-weight: bold">
+                            {{ salaItem.nombre }}
+                          </h5>
+                        </div>
+                        <div class="row g-3">
+                          <div class="col-12 text-truncate">
+                            <strong>Link:&nbsp;</strong>
+                            <a
+                              class="link-primary"
+                              (click)="
+                                cambiarPag('/EntradaSala', salaItem.idSala)
+                              "
+                              >{{ currentURL }}</a
+                            >
+                          </div>
+                          <div class="col-12 text-truncate">
+                            <strong>Código de la sala:&nbsp;</strong>
+                            <span>{{ currentCodigo }}</span>
+                          </div>
+                        </div>
+                        <div class="row py-2">
+                          <div class="col-12 text-end">
+                            <button
+                              class="btn btn-primary btn-sm"
+                              (click)="allCopySala()"
+                            >
+                              Copiar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- FIN MODAL -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="height: 15px"></div>
+
+  <!-- Paginación de Bootstrap -->
+  <nav aria-label="Page navigation modal-2">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage - 1)"
+          aria-label="Previous"
+        >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [class.active]="currentPage === page"
+      >
+        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === pages.length">
+        <a
+          class="page-link"
+          (click)="onPageChange(currentPage + 1)"
+          aria-label="Next"
+        >
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container" style="height: 15px"></div>
+
+  <p-toast [styleClass]="'col-10 col-md-6 col-lg-3'"></p-toast>
+  <p-confirmDialog #cd [styleClass]="'col-10 col-md-4'">
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        class="btn btn-primary me-2"
+        pButton
+        label="Cancelar"
+        (click)="cd.reject()"
+      ></button>
+      <button
+        type="button"
+        pButton
+        class="btn btn-primary"
+        label="Aceptar"
+        (click)="cd.accept()"
+      ></button>
+    </ng-template>
+  </p-confirmDialog>
+
+  <div class="flexcontainer"></div>
+</body>
