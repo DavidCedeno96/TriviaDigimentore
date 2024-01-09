@@ -29,6 +29,8 @@ import { MessageService } from 'primeng/api';
 import { JuegoChallenger } from 'src/app/model/JuegoChallenger';
 import { SalaJuegoService } from 'src/app/services/sala-juego.service';
 
+import * as PIXI from 'pixi.js';
+
 declare var bootstrap: any;
 declare var LeaderLine: any;
 
@@ -281,6 +283,10 @@ export class ChallengersGameComponent
     '#b39039b5',
   ];
 
+  //PIXI JS
+  @ViewChild('pixiContainer', { static: false }) pixiContainer: ElementRef;
+
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -307,7 +313,7 @@ export class ChallengersGameComponent
     this.musicaFondo.play();
 
     setTimeout(() => {
-      this.mostrarModal(); //ACTIVAR CUANDO TERMINES DE TESTEAR <------------
+      //this.mostrarModal(); //ACTIVAR CUANDO TERMINES DE TESTEAR <------------
       //console.log("Entro");
     }, this.tiempoMostrarPrimerModal);
 
@@ -346,6 +352,36 @@ export class ChallengersGameComponent
   }
 
   ngAfterViewInit() {
+    //pixi program
+    const app = new PIXI.Application({ background: '#fff', resizeTo: window });
+
+    this.pixiContainer.nativeElement.appendChild(app.view);
+    const container = new PIXI.Container();
+    app.stage.addChild(container);
+  
+
+    //CONEJO
+
+    // create a new Sprite from an image path.
+    const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
+
+    // center the sprite's anchor point
+    bunny.anchor.set(0.5);
+
+    // move the sprite to the center of the screen
+    bunny.x = app.screen.width / 2;
+    bunny.y = app.screen.height / 2;
+
+    app.stage.addChild(bunny);
+
+    app.ticker.add(() =>
+    {
+        // just for fun, let's rotate mr rabbit a little
+        bunny.rotation += 0.1;
+    });
+
+    
+  
     //Slide para la meta
     this.optionsMeta = {
       readOnly: true,

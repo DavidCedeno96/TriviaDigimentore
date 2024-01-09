@@ -33,10 +33,12 @@
     "ngx-dropzone": "^3.1.0",
     "ngx-dropzone-wrapper": "^15.0.0",
     "ngx-slider-v2": "^16.0.2",
+    "pixi.js": "^7.3.3",
     "primeng": "^16.4.0",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.7.32",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
+    "vite": "^5.0.11",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
