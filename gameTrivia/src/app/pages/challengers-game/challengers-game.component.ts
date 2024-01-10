@@ -213,28 +213,7 @@ export class ChallengersGameComponent
     showTicks: false,
     readOnly: true,
   };
-  /* optionsAux1: Options = {
-    floor: 0,
-    ceil: this.cantidadDeBotones,
-    showTicks: false,
-    readOnly: true,
-  };
-  optionsAux2: Options = {
-    floor: 0,
-    ceil: this.cantidadDeBotones,
-    showTicks: false,
-    readOnly: true,
-  };
-  optionsAux3: Options = {
-    floor: 0,
-    ceil: this.cantidadDeBotones,
-    showTicks: false,
-    readOnly: true,
-  }; */
-
-  /* value2: number = 2; // Valor del slider jugador 2
-  value3: number = 3; // Valor del slider jugador 3
-  value4: number = 4; // Valor del slider jugador 4 */
+ 
 
   optionsMeta: Options = {
     floor: 0,
@@ -285,7 +264,9 @@ export class ChallengersGameComponent
 
   //PIXI JS
   @ViewChild('pixiContainer', { static: false }) pixiContainer: ElementRef;
-
+  private character: PIXI.Sprite;
+  private app: PIXI.Application;
+  yfloor1 = 0;
 
   constructor(
     private renderer: Renderer2,
@@ -301,6 +282,7 @@ export class ChallengersGameComponent
     this.puntosGanados = 0;
     this.puedeResponder = true;
     this.tiempoDelJugador = 0; //Tiempo que se demora en contestar las preguntas, esto se acumula
+    
   }
 
   ngOnInit() {
@@ -353,35 +335,25 @@ export class ChallengersGameComponent
 
   ngAfterViewInit() {
     //pixi program
-    const app = new PIXI.Application({ background: '#fff', resizeTo: window });
+   this.app = new PIXI.Application({ backgroundAlpha: 0, resizeTo: window });
 
-    this.pixiContainer.nativeElement.appendChild(app.view);
+/* this.app = new PIXI.Application({ background: '#1099bb', resizeTo: window });
+ */   
+
+    this.pixiContainer.nativeElement.appendChild(this.app.view);
     const container = new PIXI.Container();
-    app.stage.addChild(container);
-  
+    this.app.stage.addChild(container);
 
-    //CONEJO
-
-    // create a new Sprite from an image path.
-    const bunny = PIXI.Sprite.from('https://pixijs.com/assets/bunny.png');
-
-    // center the sprite's anchor point
-    bunny.anchor.set(0.5);
-
-    // move the sprite to the center of the screen
-    bunny.x = app.screen.width / 2;
-    bunny.y = app.screen.height / 2;
-
-    app.stage.addChild(bunny);
-
-    app.ticker.add(() =>
-    {
-        // just for fun, let's rotate mr rabbit a little
-        bunny.rotation += 0.1;
-    });
+    //CHARACTER
+   
+    this.loadFloorTextures();
+    this.createFloors();
+    this.createHero();
+    this.yfloor1=this.app.screen.height-120;
+    this.app.ticker.add(this.update.bind(this));
+    this.setupKeyboard();
 
     
-  
     //Slide para la meta
     this.optionsMeta = {
       readOnly: true,
@@ -445,6 +417,180 @@ export class ChallengersGameComponent
     this.modal.hide();
     this.sidebarVisible4 = false;
     this.lineas.forEach((linea) => linea.remove());
+  }
+
+  //CHARACTER
+  private createHero(): void {
+    this.character = PIXI.Sprite.from('assets/game1/Character2.png');
+    // Ajusta la ruta a tu imagen de héroe
+    
+    this.character.anchor.set(0.5);
+    this.character.x = this.app.screen.width / 2;
+    this.character.y = this.app.screen.width-this.character.height*1.25;// Posición inicial
+    // Establecer tamaño fijo
+   
+    this.app.stage.addChild(this.character);
+  }
+
+  //PISO
+ 
+
+  private floors: PIXI.Sprite[] = [];
+  private floorTextures: PIXI.Texture[] = [];
+
+  private rocks: PIXI.Sprite[] = [];
+  private rocksTextures: PIXI.Texture[] = [];
+
+private loadFloorTextures(): void {
+  //PISOS
+  const ruta = "assets/game1/";
+  const texturePaths = [
+    ruta+'plataforma1.png',
+    ruta+'plataforma2.png',
+    ruta+'plataforma3.png'
+  ];
+
+  texturePaths.forEach((path) => {
+    const texture = PIXI.Texture.from(path);
+    this.floorTextures.push(texture);
+  });
+  //
+  const texturePaths2 = [
+    ruta+'piedras1.png',
+    ruta+'piedras2.png',
+    ruta+'piedras3.png'
+  ];
+
+  texturePaths2.forEach((path) => {
+    const texture = PIXI.Texture.from(path);
+    this.rocksTextures.push(texture);
+  });
+}
+
+private createFloors(): void {
+  const h=this.app.screen.height;
+  const w=this.app.screen.width;
+  const floorYPositions = [h -240, h-400  ];
+  const floorXPositions = [w/2, w/2-100 ];
+  const floorW = [200,170 ];
+  const floorH = [120, 90 ];
+
+  this.floorTextures.forEach((texture, index) => {
+    
+    const floor = new PIXI.Sprite(texture);
+    floor.anchor.set(0.5,0);  
+    floor.width = floorW[index];
+    floor.height = floorH[index];
+    floor.x = floorXPositions[index];
+    floor.y = floorYPositions[index];
+    this.floors.push(floor);
+    this.app.stage.addChild(floor);
+
+    
+  });
+
+  this.rocksTextures.forEach((texture, index) => {
+    
+    const rock = new PIXI.Sprite(texture);
+    rock.anchor.set(0.5,0.95);  
+    rock.width = floorW[index]*0.6;
+    rock.height = floorH[index]*0.6;
+    rock.x = floorXPositions[index]+30;
+    rock.y = floorYPositions[index];
+    this.rocks.push(rock);
+    this.app.stage.addChild(rock);
+
+    
+  });
+
+  
+}
+
+  // colission floor
+  private collisionfloor():void{
+    //console.log(this.character.y );
+    // Verificar colisión con todos los pisos
+  this.floors.forEach((floor) => {
+    if (this.character.y > floor.y && this.character.y < floor.y + floor.height/2) {
+      this.character.y = floor.y;
+      this.velocityY = 0; // Detener cualquier movimiento vertical adicional
+    }
+  });
+  }
+
+  //SALTO CHARACTER
+
+  private gravity = 0.5; // Valor positivo para simular la gravedad
+  private jumpVelocity = -14; // Velocidad inicial del salto hacia arriba
+  private velocityY = 0; // Velocidad vertical actual del héroe
+  private velocityX = 0;
+  private direccion = false //false derecha y true izquierda   
+  
+  private jumpTime = 0; // Tiempo del salto
+  boolSaltar = false;
+  private vx = 0.1;
+  private firstTime = true;
+
+
+
+  private jump(): void {
+    //console.log(" velocityY "+ this.velocityY );
+    // Aplicar gravedad
+    this.velocityY += this.gravity;
+    this.velocityX += this.vx;
+      
+     
+
+    // Actualizar la posición vertical del héroe
+    this.character.y += this.velocityY;
+    if (this.boolSaltar) {
+      if (this.direccion) {
+        this.character.x -= this.velocityX;         
+      } else {
+        this.character.x += this.velocityX;         
+      }
+           
+    }
+    
+    // Asegurarse de que el héroe no se desplace fuera de la pantalla
+    if (this.character.y > this.yfloor1-this.character.height*1.25) { // Ajusta este valor según la altura de tu escena
+      
+      this.boolSaltar=false;
+      
+      this.character.y = this.yfloor1-this.character.height*1.25 ;
+      //this.character.x = 600;
+      this.velocityY = 0;
+      this.velocityX = 0;
+    }
+
+   
+  }  
+
+  private update(): void {
+    this.jump();
+    //wthis.collisionfloor();    
+  }  
+
+  private setupKeyboard(): void {
+    document.addEventListener('keydown', this.onKeyDown.bind(this));
+  }
+
+  private onKeyDown(event: KeyboardEvent): void {
+    if (event.code === 'KeyW') {
+      if (this.direccion) {
+        this.direccion=false;        
+      } else {
+        this.direccion=true;            
+      }
+      this.boolSaltar = true;
+      this.velocityY = this.jumpVelocity;
+      if(!this.firstTime){
+        this.vx=0.17;
+        
+      }
+      this.firstTime=false;
+      //this.velocityX = this.jumpVelocity;
+    }
   }
 
   getListaPosiciones(idSala: number, idJugador: number) {

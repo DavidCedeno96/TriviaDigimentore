@@ -1,3 +1,18 @@
+.game-container {
+  width:100%;
+  
+/*   background-image: url('../../../assets/Imagenes Juego/PatronVerde.png');
+ */  
+ background: linear-gradient(0deg, #3671D1, #00002A);
+  background-size: contain; /* el fondo se ajusta al contenedor*/
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed;
+  min-height: 100vh; /* Establece una altura máxima igual a la altura de la ventana */
+  overflow: hidden !important;
+
+  }
 .sinusoidal-container {
   width:100%;
   height: 500px;;
