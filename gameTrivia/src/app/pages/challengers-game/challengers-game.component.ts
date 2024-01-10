@@ -470,10 +470,20 @@ private loadFloorTextures(): void {
 private createFloors(): void {
   const h=this.app.screen.height;
   const w=this.app.screen.width;
-  const floorYPositions = [h -240, h-400  ];
-  const floorXPositions = [w/2, w/2-100 ];
-  const floorW = [200,170 ];
-  const floorH = [120, 90 ];
+  //const floorYPositions = [h -240, h-400  ];
+  const floorXPositions = [w/2, w/2-100, w/2+100, w/2-100, w/2+100, w/2-100, w/2+100, w/2-100, w/2+100  ];
+  const floorW = [200,170,200,170,200,170,200,170 ];
+  const floorH = [120, 90,120, 90,120, 90,120, 90 ];
+  const base = h -240;
+  var floorYPositions: number[] = [base];
+  var distanciaH= 160;
+  for (let i = 0; i < 10; i++) {
+    floorYPositions.push(base-distanciaH);
+    distanciaH+=distanciaH;
+    
+  }
+
+  
 
   this.floorTextures.forEach((texture, index) => {
     
@@ -528,7 +538,7 @@ private createFloors(): void {
   
   private jumpTime = 0; // Tiempo del salto
   boolSaltar = false;
-  private vx = 0.1;
+  private vx = 0.05;
   private firstTime = true;
 
 
@@ -585,7 +595,7 @@ private createFloors(): void {
       this.boolSaltar = true;
       this.velocityY = this.jumpVelocity;
       if(!this.firstTime){
-        this.vx=0.17;
+        this.vx=0.12;
         
       }
       this.firstTime=false;
