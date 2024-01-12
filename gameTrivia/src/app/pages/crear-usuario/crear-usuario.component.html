@@ -155,7 +155,7 @@
 
         <div class="row g-3">
           <div class="col-12">
-            <!-- Input DPI USUARIO -->
+            <!-- Input Contraseña USUARIO -->
 
             <div
               class="mb-3 subtitle"
@@ -172,7 +172,7 @@
                 placeholder="Contraseña del Usuario *"
                 [(ngModel)]="nuevoUsuario.contrasena"
                 [formControl]="dpiInput"
-                name="DPI"
+                name="contrasena"
                 required
               />
             </div>
@@ -185,9 +185,16 @@
             </small>
             <small
               class="ms-3"
+              *ngIf="dpiInput.hasError('minlength')"
+              style="color: rgb(255, 255, 255)"
+            >
+              Minimo 5 caracteres.
+            </small>
+            <small
+              class="ms-3"
               *ngIf="existeError && campo === 'clave'"
               style="color: rgb(255, 255, 255)"
-              >El dpi
+              >La contraseña
               <span class="text-lowercase">{{ result }}</span>
             </small>
           </div>
@@ -212,6 +219,7 @@
                   [(ngModel)]="nuevoUsuario.correo"
                   [formControl]="correoInput"
                   name="correo"
+                  required
                 />
               </div>
               <small
@@ -219,7 +227,7 @@
                 *ngIf="correoInput.hasError('maxlength')"
                 style="color: rgb(255, 255, 255)"
               >
-                Máximo 50 caracteres permitidos.
+                Máximo 60 caracteres permitidos.
               </small>
               <small
                 class="ms-3"

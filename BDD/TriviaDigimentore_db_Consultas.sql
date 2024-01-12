@@ -12,7 +12,7 @@ create table Usuario(
 	idUsuario int identity(1,1) primary key,
 	nombre varchar(60) not null,
 	apellido varchar(15),
-	correo varchar(40),
+	correo varchar(60) unique not null,
 	clave varchar(20) CHECK (clave <> ''),
 	foto varchar(50),
 	idRol int references Rol(idRol) not null,	
@@ -162,8 +162,8 @@ exec sp_B_UsuarioByAll
 
 exec sp_B_UsuarioLogin	
 @nombre = 'caicaza',
-@clave = '1234567',
-@correo = '',
+@correo = 'bcedeno@digimentore.com.ec',
+@clave = 'Dcedeno.2023',
 @tipoLogin = 1,
 @info = '',
 @error = '' 

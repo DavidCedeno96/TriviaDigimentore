@@ -58,6 +58,7 @@ export class CrearUsuarioComponent {
     this.dpiInput = new FormControl('', [
       Validators.required,
       Validators.maxLength(20),
+      Validators.minLength(5),
     ]);
     this.correoInput = new FormControl('', [
       Validators.required,
@@ -217,6 +218,10 @@ export class CrearUsuarioComponent {
     }
 
     if (this.dpiInput.hasError('maxlength')) {
+      isValid = false;
+    }
+
+    if (this.dpiInput.hasError('minlength')) {
       isValid = false;
     }
 

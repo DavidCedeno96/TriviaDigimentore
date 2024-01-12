@@ -16,9 +16,8 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
   styleUrls: ['./ventana-login.component.scss'],
 })
 export class VentanaLoginComponent implements OnInit {
-
   //LOGO
-  logoEmpresa: string = ""
+  logoEmpresa: string = '';
 
   //Ojos
   hidePassword: boolean = true;
@@ -73,10 +72,10 @@ export class VentanaLoginComponent implements OnInit {
     this.usuarioServicio.removeLocalItems();
 
     // Recupera los datos guardados desde el almacenamiento local
-    this.localStorage.get('user').subscribe((nombre) => {
-      if (typeof nombre == 'string') {
-        this.loginUsuario.nombre = nombre;
-        //console.log(this.loginUsuario.nombre);
+    this.localStorage.get('user').subscribe((correo) => {
+      if (typeof correo == 'string') {
+        this.loginUsuario.correo = correo;
+        //console.log(this.loginUsuario.correo);
       }
     });
 
@@ -134,9 +133,9 @@ export class VentanaLoginComponent implements OnInit {
 
             //GUARDO ESTO EN LA CASILLA DE RECUERDAME
             if (this.rememberMe) {
-              // Guarda el nombre de usuario y contraseña en el almacenamiento local
+              // Guarda el correo de usuario y contraseña en el almacenamiento local
               this.localStorage
-                .set('user', this.loginUsuario.nombre)
+                .set('user', this.loginUsuario.correo)
                 .subscribe(() => {
                   //console.log(this.loginUsuario.correo);
                 });

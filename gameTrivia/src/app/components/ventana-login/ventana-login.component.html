@@ -10,17 +10,17 @@
               >
                 LOGIN
               </h5>
-  
+
               <div class="row">
                 <div class="col-8 mx-auto">
                   <img
-                    [src]=logoEmpresa
+                    [src]="logoEmpresa"
                     class="card-img-top my-5"
                     alt="Logo empresa"
                   />
                 </div>
               </div>
-  
+
               <div
                 class="mb-3 px-md-5"
                 *ngIf="existeError"
@@ -28,7 +28,7 @@
               >
                 Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.
               </div>
-  
+
               <form
                 ngNativeValidate
                 #form
@@ -36,35 +36,42 @@
               >
                 <div class="mb-3 px-md-5">
                   <input
-                    [(ngModel)]="loginUsuario.nombre"
-                    type="text"
+                    [(ngModel)]="loginUsuario.correo"
+                    type="email"
                     class="form-control"
                     id="usermail"
-                    placeholder="Ingresa tu usuario"
+                    placeholder="Ingresa tu correo electrónico"
                     name="mailUsuario"
                     required
                   />
                 </div>
                 <div class="mb-3 px-md-5">
-                  <div class="input-group" style="height: 46px;">
+                  <div class="input-group" style="height: 46px">
                     <input
-                    [(ngModel)]="loginUsuario.contrasena"
-                    type="{{ hidePassword ? 'password' : 'text' }}"
-                    class="form-control"
-                    id="password"
-                    placeholder="Ingresa tu contraseña"
-                    name="contrasena"
-                    required>
-                    <div class="input-group-append" >
-                      <span class="input-group-text rounded-eye " (click)="togglePasswordVisibility()" style="height: 46px; position: relative;">
-                          <i class="fa" [ngClass]="{'fa-eye-slash': hidePassword, 'fa-eye': !hidePassword}"></i>
-                          
+                      [(ngModel)]="loginUsuario.contrasena"
+                      type="{{ hidePassword ? 'password' : 'text' }}"
+                      class="form-control"
+                      id="password"
+                      placeholder="Ingresa tu contraseña"
+                      name="contrasena"
+                      required
+                    />
+                    <div class="input-group-append">
+                      <span
+                        class="input-group-text rounded-eye"
+                        (click)="togglePasswordVisibility()"
+                        style="height: 46px; position: relative"
+                      >
+                        <i
+                          class="fa"
+                          [ngClass]="{
+                            'fa-eye-slash': hidePassword,
+                            'fa-eye': !hidePassword
+                          }"
+                        ></i>
                       </span>
+                    </div>
                   </div>
-  
-                  </div>
-                  
-  
                 </div>
                 <div class="mb-3 px-md-5">
                   <div class="form-check custom-checkbox">
@@ -83,7 +90,7 @@
                     </label>
                   </div>
                 </div>
-  
+
                 <div class="text-center">
                   <button
                     type="submit"
@@ -94,7 +101,7 @@
                   </button>
                 </div>
                 <div class="text-center py-2">
-                  <p >
+                  <p>
                     ¿No tienes una cuenta?
                     <strong (click)="onClickCambiar()" style="cursor: pointer"
                       >Registrarse</strong
@@ -109,4 +116,3 @@
     </div>
   </body>
 </div>
-

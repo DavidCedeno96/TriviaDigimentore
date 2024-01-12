@@ -32,20 +32,13 @@ namespace WebApiRest.Utilities
                 result.Campo = "celular";
                 validForm = false;
             }
-            if (!RE.ValidRE(usuario.Contrasena, "clave"))
+            if (!RE.ValidRE(usuario.Contrasena, "invalid"))
             {
                 result.Error = 1;
-                result.Info = WC.GetErrorClave();
+                result.Info = WC.GetInvalid();
                 result.Campo = "clave";
                 validForm = false;
-            }
-            //if (!RE.ValidRE(usuario.Contrasena, "invalid"))
-            //{
-            //    result.Error = 1;
-            //    result.Info = WC.GetInvalid();
-            //    result.Campo = "clave";
-            //    validForm = false;
-            //}
+            }            
 
             if (validForm)
             {
