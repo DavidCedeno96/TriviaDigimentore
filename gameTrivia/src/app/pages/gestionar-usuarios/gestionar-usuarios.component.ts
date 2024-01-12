@@ -17,8 +17,8 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
   providers: [ConfirmationService, MessageService],
 })
 export class GestionarUsuariosComponent {
-  logoEmpresa="";
-  logoEmpresaLateral="";
+  logoEmpresa = '';
+  logoEmpresaLateral = '';
 
   cardsPerPage: number = 6;
   currentPage: number = 1;
@@ -45,14 +45,13 @@ export class GestionarUsuariosComponent {
     private messageService: MessageService,
     private encryptionService: EncryptionService,
     private constantsService: ConstantsService,
-    private _clipboardService: ClipboardService,    
+    private _clipboardService: ClipboardService,
     private imagenesService: ImagenesService
-
   ) {}
 
   ngOnInit(): void {
-    this.logoEmpresaLateral=this.imagenesService._logoColores;
-    this.logoEmpresa=this.imagenesService._logoBlanco;
+    this.logoEmpresaLateral = this.imagenesService._logoColores;
+    this.logoEmpresa = this.imagenesService._logoBlanco;
 
     this.constantsService.loading(true);
     this.listarUsuarios('', true);
@@ -167,14 +166,15 @@ export class GestionarUsuariosComponent {
     });
   }
 
-  copyUsuario(usuario: string) {
+  copyUsuario(usuario: string, contrasena: string) {
     /* "Estimado [Nombre del Usuario],
 
 Nos complace informarte que tu clave de acceso ha sido restablecido con éxito. A continuación, encontrarás tu nueva contraseña, creada con la máxima seguridad para proteger tu cuenta. Apreciamos tu confianza en nuestro servicio y te recordamos la importancia de mantener esta información de manera confidencial. */
     const textos = [
       'Estimado usuario,',
-      'Nos complace informarte que tu nombre de usuario ha sido recuperada con éxito. Apreciamos tu confianza en nuestro servicio y te recordamos la importancia de mantener esta información de manera confidencial. Recuerda que tu contraseña es tu DPI Personal',
+      'Nos complace informarte que tu nombre de usuario ha sido recuperada con éxito. Apreciamos tu confianza en nuestro servicio y te recordamos la importancia de mantener esta información de manera confidencial.',
       'Nombre de usuario: ' + usuario,
+      'Contraseña: ' + contrasena,
     ];
     const textoAConcatenar = textos.join('\n');
     //this._clipboardService.copy(textoAConcatenar);
@@ -200,20 +200,20 @@ Nos complace informarte que tu clave de acceso ha sido restablecido con éxito. 
     }
   }
 
-    //PAGINACION
+  //PAGINACION
 
-    get cardsToShow(): any[] {
-      const startIndex = (this.currentPage - 1) * this.cardsPerPage;
-      const endIndex = startIndex + this.cardsPerPage;
-      return this.Usuarios.slice(startIndex, endIndex);
-    }
-  
-    onPageChange(pageNumber: number): void {
-      this.currentPage = pageNumber;
-    }
-  
-    get pages(): number[] {
-      const pageCount = Math.ceil(this.Usuarios.length / this.cardsPerPage);
-      return Array.from({ length: pageCount }, (_, i) => i + 1);
-    }
+  get cardsToShow(): any[] {
+    const startIndex = (this.currentPage - 1) * this.cardsPerPage;
+    const endIndex = startIndex + this.cardsPerPage;
+    return this.Usuarios.slice(startIndex, endIndex);
+  }
+
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+  }
+
+  get pages(): number[] {
+    const pageCount = Math.ceil(this.Usuarios.length / this.cardsPerPage);
+    return Array.from({ length: pageCount }, (_, i) => i + 1);
+  }
 }

@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./crear-usuario.component.css'],
 })
 export class CrearUsuarioComponent {
-  logoEmpresa="";
+  logoEmpresa = '';
 
   type: string = '';
   //imageSala: string = '';
@@ -26,6 +26,7 @@ export class CrearUsuarioComponent {
   nombreInput: FormControl;
   dpiInput: FormControl;
   correoInput: FormControl;
+  celularInput: FormControl;
 
   verErrorInputs: boolean = false;
 
@@ -47,7 +48,7 @@ export class CrearUsuarioComponent {
     private route: ActivatedRoute,
     private encryptionService: EncryptionService,
     private constantsService: ConstantsService,
-    private usuarioServicio: UsuarioService,    
+    private usuarioServicio: UsuarioService,
     private imagenesService: ImagenesService
   ) {
     this.nombreInput = new FormControl('', [
@@ -63,10 +64,14 @@ export class CrearUsuarioComponent {
       Validators.maxLength(50),
       Validators.email,
     ]);
+    this.celularInput = new FormControl('', [
+      Validators.maxLength(10),
+      Validators.minLength(10),
+    ]);
   }
 
   ngOnInit(): void {
-    this.logoEmpresa=this.imagenesService._logoColores;
+    this.logoEmpresa = this.imagenesService._logoColores;
 
     this.route.queryParams.subscribe((params) => {
       this.type = params['type'];

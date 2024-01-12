@@ -50,7 +50,10 @@
     >
       <div class="row">
         <div class="col">
-          <h2 class="text-center py-3" style="color: var(--color-texto1); font-weight: bold">
+          <h2
+            class="text-center py-3"
+            style="color: var(--color-texto1); font-weight: bold"
+          >
             {{ titulo }}
           </h2>
         </div>
@@ -69,7 +72,11 @@
         <div class="row g-3">
           <div class="col-12">
             <!-- Input nombre Usuario -->
-            <div class="mb-3 subtitle" style="font-weight: bold" *ngIf="isEditar">
+            <div
+              class="mb-3 subtitle"
+              style="font-weight: bold"
+              *ngIf="isEditar"
+            >
               Nombre y Apellido del Usuario
             </div>
 
@@ -103,17 +110,66 @@
 
         <div class="row g-3">
           <div class="col-12">
-            <!-- Input DPI USUARIO -->
-
-            <div class="mb-3 subtitle" style="font-weight: bold" *ngIf="isEditar">
-              DPI del Usuario
+            <!-- Input celular Usuario -->
+            <div
+              class="mb-3 subtitle"
+              style="font-weight: bold"
+              *ngIf="isEditar"
+            >
+              Teléfono celular
             </div>
 
             <div class="input-group">
               <input
                 type="text"
                 class="form-control custom-placeholder"
-                placeholder="DPI del Usuario *"
+                placeholder="Télefono celular del Usuario *"
+                [(ngModel)]="nuevoUsuario.telefono"
+                [formControl]="celularInput"
+                name="telefono"
+              />
+            </div>
+            <small
+              class="ms-3"
+              *ngIf="nombreInput.hasError('maxlength')"
+              style="color: rgb(255, 255, 255)"
+            >
+              Máximo 10 caracteres permitidos.
+            </small>
+            <small
+              class="ms-3"
+              *ngIf="nombreInput.hasError('minlength')"
+              style="color: rgb(255, 255, 255)"
+            >
+              Mínimo 10 caracteres permitidos.
+            </small>
+            <small
+              class="ms-3"
+              *ngIf="existeError && campo === 'celular'"
+              style="color: rgb(255, 255, 255)"
+            >
+              <span class="text-lowercase">{{ result }}</span>
+            </small>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <!-- Input DPI USUARIO -->
+
+            <div
+              class="mb-3 subtitle"
+              style="font-weight: bold"
+              *ngIf="isEditar"
+            >
+              Contraseña
+            </div>
+
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control custom-placeholder"
+                placeholder="Contraseña del Usuario *"
                 [(ngModel)]="nuevoUsuario.contrasena"
                 [formControl]="dpiInput"
                 name="DPI"
@@ -140,7 +196,11 @@
             <div class="col-12">
               <!-- Input correo Usuario -->
 
-              <div class="mb-3 subtitle" style="font-weight: bold" *ngIf="isEditar">
+              <div
+                class="mb-3 subtitle"
+                style="font-weight: bold"
+                *ngIf="isEditar"
+              >
                 Correo Electrónico
               </div>
 
@@ -183,7 +243,9 @@
               <!-- Input ROL -->
               <div class="container">
                 <div class="row py-2">
-                  <div class="col subtitle" style="font-weight: bold">Rol actual</div>
+                  <div class="col subtitle" style="font-weight: bold">
+                    Rol actual
+                  </div>
                 </div>
 
                 <select

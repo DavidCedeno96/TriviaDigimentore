@@ -13,7 +13,7 @@
             <div class="row">
               <div class="col-8 mx-auto">
                 <img
-                  [src]=logoEmpresa
+                  [src]="logoEmpresa"
                   class="card-img-top my-5"
                   alt="Logo empresa"
                 />
@@ -54,8 +54,6 @@
                 </small>
               </div>
 
-              
-
               <!-- CORREO USUARIO -->
               <div class="mb-3 px-md-5">
                 <input
@@ -77,27 +75,25 @@
                 </small>
               </div>
 
-               <!-- Telefono USUARIO -->
+              <!-- Telefono USUARIO -->
               <div class="mb-3 px-md-5">
                 <div class="input-group">
                   <input
-                 
                     [(ngModel)]="nuevoUsuario.telefono"
                     type="text"
                     class="form-control"
                     id="phone"
-                    placeholder="Ingresa tu número de teléfono *"
+                    placeholder="Ingresa tu número de teléfono celular*"
                     name="phoneUsuario"
                     required
                   />
-                
                 </div>
 
                 <small
                   class="ms-3"
-                  *ngIf="existeError && campo === 'clave'"
+                  *ngIf="existeError && campo === 'celular'"
                   style="color: rgb(255, 255, 255)"
-                  >Número telefónico
+                >
                   <span class="text-lowercase">{{ errorEncontrado }}</span>
                 </small>
               </div>
@@ -136,12 +132,10 @@
                   class="ms-3"
                   *ngIf="existeError && campo === 'clave'"
                   style="color: rgb(255, 255, 255)"
-                  >El Dpi
+                  >La Contraseña
                   <span class="text-lowercase">{{ errorEncontrado }}</span>
                 </small>
               </div>
-
-             
 
               <div class="text-center">
                 <button

@@ -117,11 +117,10 @@
           </div>
         </nav>
       </div>
-     
     </div>
 
     <div class="row text-center">
-      <div class="col my-4 ">
+      <div class="col my-4">
         <img
           [src]="logoEmpresa"
           style="height: 80px; width: auto"
@@ -151,7 +150,7 @@
             (keyup.enter)="buscar()"
           />
           <button class="btn btn-primary" type="button" (click)="buscar()">
-            <svg class="icono-svg2" >
+            <svg class="icono-svg2">
               <use xlink:href="assets/Icons/Lupa.svg#Capa_1"></use>
             </svg>
           </button>
@@ -210,7 +209,7 @@
                 <div
                   class="col-sm-12 col-lg-8 align-items-center text-center text-lg-start my-3"
                 >
-                  <div class="container" style="color: var(--color-texto2);">
+                  <div class="container" style="color: var(--color-texto2)">
                     <div>
                       <strong>Nombre:</strong>
                       {{ usuario.nombre }}
@@ -222,8 +221,13 @@
                     </div>
 
                     <div *ngIf="usuario.contrasena != 'N/A'">
-                      <strong>DPI:</strong>
+                      <strong>Contraseña:</strong>
                       {{ usuario.contrasena }}
+                    </div>
+
+                    <div *ngIf="usuario.telefono != ''">
+                      <strong>Celular</strong>
+                      {{ usuario.telefono }}
                     </div>
 
                     <div>
@@ -237,7 +241,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary mx-1"
-                    (click)="copyUsuario(usuario.nombre)"
+                    (click)="copyUsuario(usuario.nombre, usuario.contrasena)"
                   >
                     Copiar
                   </button>
@@ -248,9 +252,9 @@
                       cambiarPag('/CrearUsuario', 'editar', usuario.idUsuario)
                     "
                   >
-                  <svg class="icono-svg2" >
-                    <use xlink:href="assets/Icons/Editar.svg#Capa_1"></use>
-                  </svg> 
+                    <svg class="icono-svg2">
+                      <use xlink:href="assets/Icons/Editar.svg#Capa_1"></use>
+                    </svg>
                     Editar
                   </button>
                   <button
@@ -258,9 +262,9 @@
                     class="btn btn-secondary mx-1 my-2"
                     (click)="confirmEliminar(usuario.idUsuario)"
                   >
-                  <svg class="icono-svg2" >
-                    <use xlink:href="assets/Icons/Basurero.svg#Capa_1"></use>
-                  </svg>  
+                    <svg class="icono-svg2">
+                      <use xlink:href="assets/Icons/Basurero.svg#Capa_1"></use>
+                    </svg>
                     Eliminar
                   </button>
                 </div>
