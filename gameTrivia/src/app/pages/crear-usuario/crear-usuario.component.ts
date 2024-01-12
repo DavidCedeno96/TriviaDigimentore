@@ -34,6 +34,7 @@ export class CrearUsuarioComponent {
     nombre: '',
     correo: '',
     contrasena: '', //contraseña o DPI
+    telefono: '',
     idRol: 0,
     rol: '',
     iniciales: 'MC',

@@ -26,13 +26,12 @@ import { UsuarioSalaService } from 'src/app/services/usuario-sala.service';
 import { PuntosJugador } from 'src/app/model/PuntosJugador';
 import { ConstantsService } from 'src/app/constants.service';
 import { MessageService } from 'primeng/api';
-import { JuegoChallenger } from 'src/app/model/JuegoChallenger';
 import { SalaJuegoService } from 'src/app/services/sala-juego.service';
 
 import * as PIXI from 'pixi.js';
 
 declare var bootstrap: any;
-declare var LeaderLine: any;
+
 
 @Component({
   selector: 'app-challengers-game',
@@ -81,19 +80,7 @@ export class ChallengersGameComponent
   svgVisitado: string = 'assets/Icons/btnGameVisitado.svg';
 
   //Ruta de las imagenes que van entre los botones
-  imagenes: string[] = [
-    'assets/Imagenes Juego/Edif00.png',
-    'assets/Imagenes Juego/Edif01.png',
-    'assets/Imagenes Juego/Edif02.png',
-    'assets/Imagenes Juego/Edif03.png',
-    'assets/Imagenes Juego/Edif04.png',
-    'assets/Imagenes Juego/Edif05.png',
-    'assets/Imagenes Juego/Edif06.png',
-    'assets/Imagenes Juego/Edif07.png',
-    'assets/Imagenes Juego/Edif08.png',
-    'assets/Imagenes Juego/Edif09.png',
-    'assets/Imagenes Juego/Edif10.png',
-  ];
+
 
   imagenFinal: string = 'assets/Imagenes Juego/CasaFinal.png';
 
@@ -295,7 +282,7 @@ export class ChallengersGameComponent
     this.musicaFondo.play();
 
     setTimeout(() => {
-      //this.mostrarModal(); //ACTIVAR CUANDO TERMINES DE TESTEAR <------------
+      this.mostrarModal(); //ACTIVAR CUANDO TERMINES DE TESTEAR <------------
       //console.log("Entro");
     }, this.tiempoMostrarPrimerModal);
 
@@ -306,7 +293,7 @@ export class ChallengersGameComponent
 
     //Para las imagenes de los edificios principales
 
-    const OpNumEdif = (this.listaDePreguntas.length * 3) / 5.75 / 2;
+/*     const OpNumEdif = (this.listaDePreguntas.length * 3) / 5.75 / 2;
     var numberOfItems = 0;
 
     if (OpNumEdif % 1 >= 0.5) {
@@ -324,10 +311,9 @@ export class ChallengersGameComponent
       this.numIntervaloImg = 5;
     }
     this.numImagenesColocadas = 0; //Actualizo la cantidad de imagenes colocadas
-    this.cantidadDeBotones = this.listaDePreguntas.length; //La cantidad de botones es igual a la cantidad de preguntas
+    this.cantidadDeBotones = this.listaDePreguntas.length; //La cantidad de botones es igual a la cantidad de preguntas */
     this.rellenarPregunta(1);
     //this.updateCenters(window.innerWidth);
-    this.generateButtons();
     //console.log(this.PreguntasList);
 
     this.getListaPosiciones(this.idSala, this.idJugador);
@@ -347,6 +333,7 @@ export class ChallengersGameComponent
     //CHARACTER
    
     this.loadFloorTextures();
+    this.createFondo();
     this.createFloors();
     this.createHero();
     this.yfloor1=this.app.screen.height-120;
@@ -370,46 +357,17 @@ export class ChallengersGameComponent
         }
       },
       getPointerColor: (value: number): string => {
-        return '#F29523';
+        return '#ef7d00';
       },
     };
     this.valueMeta = this.listaDePreguntas.length;
     // Obtén el elemento .sinusoidal-container por su ID
-    const sinusoidalContainer = document.getElementById('sinusoidal-container');
-    // Establece la altura deseada en píxeles
-    const alturaDeseada =
-      this.listaDePreguntas.length * 130 +
-      this.numImagenesColocadas * 160 +
-      290; // Cambia esto al valor que necesites
+  
 
     // Verifica si el elemento se encontró antes de intentar establecer la altura
-    if (sinusoidalContainer) {
-      //console.log("Num preguntas"+this.listaDePreguntas.length);
-      sinusoidalContainer.style.height = alturaDeseada + 'px';
-      //console.log("Num preguntas"+this.listaDePreguntas.length);
-    }
-    //Crear lineas entr los botones
-    setTimeout(() => {
-      this.adjustLines();
-      //this.obtenerDiferenciaBotones();
-    }, 500);
-
-    window.addEventListener('resize', () => {
-      this.createLines();
-    });
-
-    if (this.elementoVehiculo) {
-      this.elementoVehiculo.nativeElement.style.transition =
-        'transform 0.5s linear';
-      this.elementoVehiculo.nativeElement.style.transform = `translate(${35}px, ${0}px)`;
-    }
-
-    this.EdificiosCount.forEach((element, i) => {
-      this.marginLeftValues[i] = this.calculateMargin2(i);
-    });
-
-    this.scrollInicial();
-
+    
+   
+   
     this.actualizarMiSlider();
   }
 
@@ -419,9 +377,92 @@ export class ChallengersGameComponent
     this.lineas.forEach((linea) => linea.remove());
   }
 
+  //Fondo
+  private createFondo():void{
+    
+    const ruta = "assets/game1/";
+   
+    //Estrellas
+    if (this.app.screen.width<577) {
+      var textureStar = PIXI.Texture.from(ruta+"Estrellas movil.png");
+      const stars = new PIXI.Sprite(textureStar);
+      stars.anchor.set(0.5);    
+      stars.x = this.app.screen.width/2;
+      stars.y = this.app.screen.height/2-100;
+      stars.scale.set(1);
+      this.app.stage.addChild(stars);
+      
+    } else {
+      for (let i = 0; i < this.starsTextures.length; i++) {
+        const texture = this.starsTextures[i];
+        const stars = new PIXI.Sprite(texture);
+       
+        switch (i) {
+          case 0:            
+            stars.anchor.set(0);
+            stars.x = 50;
+                        
+            break;
+          case 1:
+            stars.anchor.set(1,0);
+            stars.x = this.app.screen.width-50;            
+            break;
+          case 2:
+            stars.anchor.set(0,1); 
+            stars.x = 50;
+            stars.y = this.app.screen.height-200;          
+            break;
+          case 3:
+            stars.anchor.set(1,1);
+            stars.x = this.app.screen.width-50;   
+            stars.y = this.app.screen.height-200;          
+            break;
+          default:
+            break;
+        }   
+        stars.scale.set(0.95);
+        this.app.stage.addChild(stars);
+        
+      }   
+    
+    }    
+    
+      //Planetas
+      //Planeta1
+      var texturePlaneta1 = PIXI.Texture.from(ruta+"planeta1.png");           
+      const planet1 = new PIXI.Sprite(texturePlaneta1);
+      planet1.anchor.set(0,0.5); 
+     
+      
+      if (this.app.screen.width<577) {
+        planet1.x = planet1.width+10;
+      planet1.y = this.app.screen.height/2-100;
+        planet1.scale.set(0.35);        
+      }else{
+        planet1.x = planet1.width+100;
+        planet1.y = this.app.screen.height/2-100;
+        planet1.scale.set(0.5);
+        
+      }
+      
+      this.app.stage.addChild(planet1);
+      //Planeta2
+      if(this.app.screen.width>580){
+        var texturePlaneta1 = PIXI.Texture.from(ruta+"planeta2.png");           
+        const planet2 = new PIXI.Sprite(texturePlaneta1);
+        planet2.anchor.set(1,0.5); 
+        planet2.x = this.app.screen.width-80;
+        planet2.y = this.app.screen.height/2-300;
+        planet2.scale.set(0.65); 
+        this.app.stage.addChild(planet2);
+      }
+      
+
+  }
   //CHARACTER
+
   private createHero(): void {
-    this.character = PIXI.Sprite.from('assets/game1/Character2.png');
+    this.character = PIXI.Sprite.from('assets/game1/Characters2.png');
     // Ajusta la ruta a tu imagen de héroe
     
     this.character.anchor.set(0.5);
@@ -433,6 +474,9 @@ export class ChallengersGameComponent
   }
 
   //PISO
+
+  private stars: PIXI.Sprite[] = [];
+  private starsTextures: PIXI.Texture[] = [];
  
 
   private floors: PIXI.Sprite[] = [];
@@ -441,29 +485,54 @@ export class ChallengersGameComponent
   private rocks: PIXI.Sprite[] = [];
   private rocksTextures: PIXI.Texture[] = [];
 
+
+  //NAVE
+  private spaceShip: PIXI.Sprite;
+
 private loadFloorTextures(): void {
-  //PISOS
   const ruta = "assets/game1/";
+
+  //PISOS
+ 
   const texturePaths = [
     ruta+'plataforma1.png',
     ruta+'plataforma2.png',
-    ruta+'plataforma3.png'
+    ruta+'plataforma3.png',
+    ruta+'plataforma4.png'
   ];
 
   texturePaths.forEach((path) => {
     const texture = PIXI.Texture.from(path);
     this.floorTextures.push(texture);
   });
-  //
+
+
+  //PIEDRAS
   const texturePaths2 = [
     ruta+'piedras1.png',
     ruta+'piedras2.png',
-    ruta+'piedras3.png'
+    ruta+'piedras3.png',
+    ruta+'piedras4.png'
   ];
+
+  //ESTRELLAS
+
+  const texturePaths3 = [
+    ruta+'StarsD1.png',
+    ruta+'StarsD2.png',
+    ruta+'StarsD3.png',
+    ruta+'StarsD4.png'
+  ];  
 
   texturePaths2.forEach((path) => {
     const texture = PIXI.Texture.from(path);
     this.rocksTextures.push(texture);
+    
+  });
+
+  texturePaths3.forEach((path) => {
+    const texture = PIXI.Texture.from(path);
+    this.starsTextures.push(texture);
   });
 }
 
@@ -471,62 +540,75 @@ private createFloors(): void {
   const h=this.app.screen.height;
   const w=this.app.screen.width;
   //const floorYPositions = [h -240, h-400  ];
-  const floorXPositions = [w/2, w/2-100, w/2+100, w/2-100, w/2+100, w/2-100, w/2+100, w/2-100, w/2+100  ];
-  const floorW = [200,170,200,170,200,170,200,170 ];
-  const floorH = [120, 90,120, 90,120, 90,120, 90 ];
+  const floorXPositions = [w/2, w/2-100, w/2+100, w/2-100, w/2+100,];
+  const floorW = [290,170,190,290];
+  const floorH = [120, 80,90, 120 ];
   const base = h -240;
   var floorYPositions: number[] = [base];
   var distanciaH= 160;
-  for (let i = 0; i < 10; i++) {
-    floorYPositions.push(base-distanciaH);
-    distanciaH+=distanciaH;
+
+  //Rellenar posiciones en y
+  for (let i = 0; i < this.listaDePreguntas.length; i++) {
+    floorYPositions.push(base-distanciaH*(i+1));   
     
   }
 
+  const numTextures=this.floorTextures.length;
+  var jT=1;
   
-
-  this.floorTextures.forEach((texture, index) => {
-    
+  for (let i = 0; i < this.listaDePreguntas.length; i++) {
+    //Rellenar pisos
+    const texture=this.floorTextures[jT-1];
     const floor = new PIXI.Sprite(texture);
     floor.anchor.set(0.5,0);  
-    floor.width = floorW[index];
-    floor.height = floorH[index];
-    floor.x = floorXPositions[index];
-    floor.y = floorYPositions[index];
+    floor.width = floorW[jT-1];
+    floor.height = floorH[jT-1];
+    if(i<=4){
+      floor.x = floorXPositions[i];
+    }else{
+      floor.x = floorXPositions[jT-1];
+    }
+    
+    floor.y = floorYPositions[i];
     this.floors.push(floor);
     this.app.stage.addChild(floor);
+    console.log(jT);
 
-    
-  });
-
-  this.rocksTextures.forEach((texture, index) => {
-    
-    const rock = new PIXI.Sprite(texture);
+    ///Rellenar rocas
+    const textureR=this.rocksTextures[jT-1];
+    const rock = new PIXI.Sprite(textureR);
     rock.anchor.set(0.5,0.95);  
-    rock.width = floorW[index]*0.6;
-    rock.height = floorH[index]*0.6;
-    rock.x = floorXPositions[index]+30;
-    rock.y = floorYPositions[index];
+    rock.width = floorW[jT-1]*0.6;
+    rock.height = floorH[jT-1]*0.6;
+    if(i<=4){
+      rock.x = floorXPositions[i]+30;
+    }else{
+      rock.x = floorXPositions[jT-1]+30;
+    }
+    rock.y = floorYPositions[i];
     this.rocks.push(rock);
     this.app.stage.addChild(rock);
 
-    
-  });
+    jT++;    
+    if (jT>numTextures) {
+      jT=1;
+    } 
+        
+  }
 
+  //Nave
+  const textureSpaceShip=PIXI.Texture.from("assets/game1/nave2.png");
+  const ship = new PIXI.Sprite(textureSpaceShip);
+  ship.anchor.set(0.5);  
+  ship.width = 400;
+  ship.height = 170;
+  ship.x = floorXPositions[0]+50;
+  //floor.y = floorYPositions[this.listaDePreguntas.length];
+  ship.y = floorYPositions[floorYPositions.length-1]-100;
+  this.spaceShip=ship;
+  this.app.stage.addChild(ship);
   
 }
-
-  // colission floor
-  private collisionfloor():void{
-    //console.log(this.character.y );
-    // Verificar colisión con todos los pisos
-  this.floors.forEach((floor) => {
-    if (this.character.y > floor.y && this.character.y < floor.y + floor.height/2) {
-      this.character.y = floor.y;
-      this.velocityY = 0; // Detener cualquier movimiento vertical adicional
-    }
-  });
-  }
 
   //SALTO CHARACTER
 
@@ -541,16 +623,12 @@ private createFloors(): void {
   private vx = 0.05;
   private firstTime = true;
 
-
-
   private jump(): void {
     //console.log(" velocityY "+ this.velocityY );
     // Aplicar gravedad
     this.velocityY += this.gravity;
-    this.velocityX += this.vx;
-      
+    this.velocityX += this.vx;      
      
-
     // Actualizar la posición vertical del héroe
     this.character.y += this.velocityY;
     if (this.boolSaltar) {
@@ -558,26 +636,49 @@ private createFloors(): void {
         this.character.x -= this.velocityX;         
       } else {
         this.character.x += this.velocityX;         
-      }
-           
+      }           
     }
     
     // Asegurarse de que el héroe no se desplace fuera de la pantalla
     if (this.character.y > this.yfloor1-this.character.height*1.25) { // Ajusta este valor según la altura de tu escena
       
-      this.boolSaltar=false;
-      
+           
       this.character.y = this.yfloor1-this.character.height*1.25 ;
       //this.character.x = 600;
       this.velocityY = 0;
       this.velocityX = 0;
-    }
+      if (!this.respondiendo && this.boolSaltar   ) {
+        this.respondiendo=true;
+        this.mostrarModal();
+      }                                        
+      this.boolSaltar=false; 
 
-   
+      
+      //this.character = PIXI.Sprite.from('assets/game1/Characters1.png');
+    }   
   }  
+
+  private respondiendo:boolean=false;
+ 
+
+  private downfloor(){
+    let translateRocks:number=2.91;
+    if(this.boolSaltar){
+      this.floors.forEach(function(floor) {
+        floor.y += translateRocks;
+      });
+      this.rocks.forEach(function(rock) {
+        rock.y+=translateRocks;
+      });
+      this.spaceShip.y+=translateRocks;
+    }
+    
+
+  }
 
   private update(): void {
     this.jump();
+    this.downfloor();
     //wthis.collisionfloor();    
   }  
 
@@ -586,21 +687,27 @@ private createFloors(): void {
   }
 
   private onKeyDown(event: KeyboardEvent): void {
-    if (event.code === 'KeyW') {
-      if (this.direccion) {
-        this.direccion=false;        
-      } else {
-        this.direccion=true;            
-      }
-      this.boolSaltar = true;
-      this.velocityY = this.jumpVelocity;
-      if(!this.firstTime){
-        this.vx=0.12;
-        
-      }
-      this.firstTime=false;
-      //this.velocityX = this.jumpVelocity;
+    /* if (event.code === 'KeyW') {
+      this.jumpCharacter();
+    } */
+  }
+
+  private jumpCharacter():void{
+    if (this.direccion) {
+      this.character.texture = PIXI.Texture.from('assets/game1/Characters1.png');
+      this.direccion=false;        
+    } else {
+      this.character.texture = PIXI.Texture.from('assets/game1/Characters2.png');
+      this.direccion=true;            
     }
+    this.boolSaltar = true;
+    this.velocityY = this.jumpVelocity;
+    if(!this.firstTime){
+      this.vx=0.12;
+      
+    }
+    this.firstTime=false;
+
   }
 
   getListaPosiciones(idSala: number, idJugador: number) {
@@ -621,74 +728,6 @@ private createFloors(): void {
     });
   }
 
-  adjustLines() {
-    if (this.elementosImagen) {
-      const elementos = this.elementosImagen.toArray();
-      // Limpia las líneas anteriores si las hubiera
-      //this.lineas.forEach((linea: HTMLElement) => linea.remove());
-      //this.lineas.length = 0;
-
-      for (let i = 0; i < elementos.length - 1; i++) {
-        //console.log('LINEAS');
-        const linea = new LeaderLine(
-          elementos[i].nativeElement,
-          elementos[i + 1].nativeElement,
-          { dash: { animation: true } }
-        );
-
-        linea.show('draw');
-        linea.setOptions({
-          color: '#FFE608',
-          size: 15,
-          endPlug: 'behind', // Terminación en cuadrado (sin flecha)
-          path: 'straight', // Línea recta, sin curvas
-          dash: {
-            animation: {
-              duration: 2500, // Duración en milisegundos
-              timing: 'linear', // Función de temporización, por ejemplo, 'linear', 'ease-in', 'ease-out', etc.
-            },
-          },
-        });
-
-        this.lineas.push(linea);
-      }
-    }
-  }
-
-  createLines() {
-    // Limpiar las líneas anteriores si las hubiera
-    this.lineas.forEach((linea) => linea.remove());
-    this.lineas.length = 0;
-
-    if (this.elementosImagen) {
-      const elementos = this.elementosImagen.toArray();
-      for (let i = 0; i < elementos.length - 1; i++) {
-        const linea = new LeaderLine(
-          elementos[i].nativeElement,
-          elementos[i + 1].nativeElement,
-          { dash: { animation: true } }
-        );
-
-        // Configurar las opciones de la línea aquí
-        linea.setOptions({
-          color: '#FFE608',
-          size: 15,
-          endPlug: 'behind',
-          path: 'straight',
-          dash: {
-            animation: {
-              duration: 2500,
-              timing: 'linear',
-            },
-          },
-        });
-
-        linea.show('draw');
-
-        this.lineas.push(linea);
-      }
-    }
-  }
 
   rellenarPregunta(numPregunta: number) {
     //console.log(numPregunta);
@@ -699,7 +738,7 @@ private createFloors(): void {
       this.actualOpcionList = PreguntaActual.opcionList;
       //Activamos el primer boton del camino
       if (numPregunta == 1) {
-        this.activarBoton(1, 1);
+        //this.activarBoton(1, 1);
       }
     }, 1000);
   }
@@ -761,7 +800,7 @@ private createFloors(): void {
 
         setTimeout(() => {
           this.mostrarAlert = false;
-          this.moverVehiculo();
+          //this.moverVehiculo();
           this.modal.hide();
           this.sidebarVisible4 = true;
           this.numPreguntasContestadas++;
@@ -802,7 +841,7 @@ private createFloors(): void {
       this.mostrarWrongAlert = false;
       this.modal.hide();
       this.sidebarVisible4 = true;
-      this.moverVehiculo();
+      //this.moverVehiculo();
       this.numPreguntasContestadas++;
       this.puedeResponder = true;
       this.countdown = 20;
@@ -815,12 +854,16 @@ private createFloors(): void {
 
     if (this.numPreguntasContestadas + 1 < this.listaDePreguntas.length) {
       setTimeout(() => {
-        this.activarBoton(this.numPreguntasContestadas + 1, 1);
+        //this.activarBoton(this.numPreguntasContestadas + 1, 1);
         this.rellenarPregunta(this.numPreguntasContestadas + 1);
+        //Mostraremos el modal cuando termine de saltar Es decir saltar aqui
+        this.respondiendo=false;
+        this.jumpCharacter();
       }, 4000);
 
       setTimeout(() => {
-        this.mostrarModal();
+        //
+        
       }, this.tiempoMostrarModal);
     } else {
       setTimeout(() => {
@@ -834,67 +877,6 @@ private createFloors(): void {
     audio.src = nombreArchivo;
     audio.load();
     audio.play();
-  }
-
-  generateButtons() {
-    for (let i = 1; i <= this.cantidadDeBotones; i++) {
-      if (i == this.cantidadDeBotones) {
-      } else {
-        this.botones.push({
-          id: i - this.numImagenesColocadas,
-          svg: this.svgInactivo,
-          tipo: 'boton',
-          rutaImagen: '',
-        });
-      }
-    }
-  }
-
-  activarBoton(id: number, imgCambio: number) {
-    const boton = this.botones.find((b) => b.id === id);
-    if (boton) {
-      switch (imgCambio) {
-        case 1:
-          boton.svg = this.svgActivo;
-          break;
-        /*  case 2:
-          boton.svg=this.svgInactivo;
-          break;
-        case 3:
-          boton.svg=this.svgVisitado;
-          break; */
-        default:
-          boton.svg = this.svgActivo;
-          break;
-      }
-      // Hacer scroll hacia el botón activado
-      const buttonElement = this.el.nativeElement.querySelector(
-        `#boton-${id - 1}`
-      );
-      if (buttonElement) {
-        //console.log('Scroll boton');
-        buttonElement.scrollIntoView({ behavior: 'smooth' }); // Hace scroll suavemente
-
-        setTimeout(() => {
-          this.createLines();
-        }, 40);
-        setTimeout(() => {
-          this.createLines();
-        }, 70);
-        setTimeout(() => {
-          this.createLines();
-        }, 150);
-        setTimeout(() => {
-          this.createLines();
-        }, 300);
-        setTimeout(() => {
-          this.createLines();
-        }, 500);
-        setTimeout(() => {
-          this.createLines();
-        }, 750);
-      }
-    }
   }
 
   //para el temporizador
@@ -978,43 +960,6 @@ private createFloors(): void {
     });
   }
 
-  calculateMargin(index: number): number {
-    const amplitude = 100; // Ajusta la amplitud del coseno según sea necesario
-    const frequency = 1; // Ajusta la frecuencia del coseno según sea necesario
-    const res = Math.round(amplitude * Math.cos(frequency * index));
-    //console.log(index+" margin "+res);
-
-    return res;
-  }
-
-  calculateMargin2(index: number): number {
-    if (this.isEdificioPar) {
-      this.isEdificioPar = !this.isEdificioPar;
-      return 250;
-    } else {
-      this.isEdificioPar = !this.isEdificioPar;
-      return -250;
-    }
-  }
-
-  moverVehiculo() {
-    const i = this.numPreguntasContestadas + 1;
-    const h = this.altura;
-
-    if (this.elementoVehiculo) {
-      this.elementoVehiculo.nativeElement.style.transition =
-        'transform 1.5s linear';
-      this.elementoVehiculo.nativeElement.style.transform = `translate(${
-        this.numXtraslacion[this.contadorCiclo]
-      }px, ${h * i}px)`;
-      this.contadorCiclo++;
-      if (this.contadorCiclo >= 19) {
-        this.contadorCiclo = 0;
-      }
-    }
-    //this.numPreguntasContestadas++;
-  }
-
   setListOptions(iniciales: string, index: number): Options {
     let optionsAux = {
       floor: 0,
@@ -1064,67 +1009,9 @@ private createFloors(): void {
       },
     };
 
-    /* this.optionsAux1 = {
-      readOnly: true,
-      floor: 0,
-      ceil: numPreguntas,
-      showTicks: false,
-      translate: (value: number, label: LabelType): string => {
-        switch (label) {
-          case LabelType.Low:
-            return 'BC';
-
-          default:
-            return '';
-        }
-      },
-      getPointerColor: (value: number): string => {
-        return '#29292975';
-      },
-    };
-    this.optionsAux2 = {
-      readOnly: true,
-      floor: 0,
-      ceil: numPreguntas,
-      showTicks: false,
-      translate: (value: number, label: LabelType): string => {
-        switch (label) {
-          case LabelType.Low:
-            return 'PC';
-
-          default:
-            return '';
-        }
-      },
-      getPointerColor: (value: number): string => {
-        return '#29292975';
-      },
-    };
-    this.optionsAux3 = {
-      readOnly: true,
-      floor: 0,
-      ceil: numPreguntas,
-      showTicks: false,
-      translate: (value: number, label: LabelType): string => {
-        switch (label) {
-          case LabelType.Low:
-            return 'HP';
-
-          default:
-            return '';
-        }
-      },
-      getPointerColor: (value: number): string => {
-        return '#29292975';
-      },
-    }; */
+  
   }
 
-  /*  actualizarPosiciones() {
-    this.value2 = 0; // Actualizar el slider jugador 2
-    this.value3 = 0; // Actualizar el slider jugador 3
-    this.value4 = 0; // Actualizar el slider jugador 4
-  } */
 
   cambiarPag(ruta: string, id: number) {
     let idSala = this.encryptionService.encrypt(id.toString());
@@ -1132,31 +1019,5 @@ private createFloors(): void {
     this.router.navigate([ruta], { queryParams: params });
   }
 
-  scrollInicial() {
-    // Hacer scroll hacia el botón activado
-    const vehicleElement =
-      this.el.nativeElement.querySelector(`#elementoVehiculo`);
-    if (vehicleElement) {
-      //console.log('Entro carro');
 
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 40);
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 70);
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 150);
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 500);
-      setTimeout(() => {
-        vehicleElement.scrollIntoView({ behavior: 'smooth' });
-      }, 750);
-    }
-  }
 }

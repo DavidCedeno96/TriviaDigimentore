@@ -1,7 +1,7 @@
 <body>
   <div class="container">
     <div class="row justify-content-center align-items-center vh-100">
-      <div class="col-sm-8 mx-auto">
+      <div class="col-sm-11 mx-auto">
         <div class="card py-3 px-3 my-2">
           <div class="card-body">
             <h5
@@ -54,7 +54,55 @@
                 </small>
               </div>
 
-              <!-- PASSWORD USUARIO DPI-->
+              
+
+              <!-- CORREO USUARIO -->
+              <div class="mb-3 px-md-5">
+                <input
+                  [(ngModel)]="nuevoUsuario.correo"
+                  type="email"
+                  class="form-control"
+                  id="usermail"
+                  placeholder="Ingresa tu correo electrónico *"
+                  name="mailUsuario"
+                  maxlength="50"
+                />
+
+                <small
+                  class="ms-3"
+                  *ngIf="existeError && campo === 'correo'"
+                  style="color: rgb(255, 255, 255)"
+                  >El correo
+                  <span class="text-lowercase">{{ errorEncontrado }}</span>
+                </small>
+              </div>
+
+               <!-- Telefono USUARIO -->
+              <div class="mb-3 px-md-5">
+                <div class="input-group">
+                  <input
+                 
+                    [(ngModel)]="nuevoUsuario.telefono"
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Ingresa tu número de teléfono *"
+                    name="phoneUsuario"
+                    required
+                  />
+                
+                </div>
+
+                <small
+                  class="ms-3"
+                  *ngIf="existeError && campo === 'clave'"
+                  style="color: rgb(255, 255, 255)"
+                  >Número telefónico
+                  <span class="text-lowercase">{{ errorEncontrado }}</span>
+                </small>
+              </div>
+
+              <!-- PASSWORD USUARIO -->
               <div class="mb-3 px-md-5">
                 <div class="input-group">
                   <input
@@ -93,30 +141,7 @@
                 </small>
               </div>
 
-              <!-- <div class="mb-3 px-md-5">
-                    <input [(ngModel)]="nuevoUsuario.correo" type="email" class="form-control" id="usermail" placeholder="Ingresa tu correo" name="mailUsuario" required>
-                  </div> -->
-
-              <!-- CORREO USUARIO -->
-              <div class="mb-3 px-md-5">
-                <input
-                  [(ngModel)]="nuevoUsuario.correo"
-                  type="email"
-                  class="form-control"
-                  id="usermail"
-                  placeholder="Ingresa tu correo electrónico *"
-                  name="mailUsuario"
-                  maxlength="50"
-                />
-
-                <small
-                  class="ms-3"
-                  *ngIf="existeError && campo === 'correo'"
-                  style="color: rgb(255, 255, 255)"
-                  >El correo
-                  <span class="text-lowercase">{{ errorEncontrado }}</span>
-                </small>
-              </div>
+             
 
               <div class="text-center">
                 <button

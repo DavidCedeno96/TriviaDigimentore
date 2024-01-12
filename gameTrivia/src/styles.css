@@ -27,8 +27,14 @@
   --color-iconos2: #1a2e35 ;
   --color-odd: rgb(211, 211, 211);
   --color-even: #F3F3F4; 
-  --color-card: #fff; 
-   
+  --color-card: #fff;
+  
+  --color-gradient1:#3671D1;
+  --color-gradient1:#00002A;
+
+  --color-correcto:#4CAF50;
+  --color-incorrecto:#FF5733;
+
  
 }
 

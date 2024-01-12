@@ -3,7 +3,7 @@
   
 /*   background-image: url('../../../assets/Imagenes Juego/PatronVerde.png');
  */  
- background: linear-gradient(0deg, #3671D1, #00002A);
+ background: linear-gradient(0deg,#3671D1,#00002A);
   background-size: contain; /* el fondo se ajusta al contenedor*/
   background-position: center center;
   margin: 0;
@@ -29,18 +29,7 @@
 
   }
   
-  .sinusoidal-button {
-    position: relative;
-    background-color: transparent; /* Color predeterminado del botón */
-    color: white;
-    border: none;
-    /*padding: 10px 20px;*/
-    width: 120px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Animación de cambio de color */
 
-  }
 
  /*  .sinusoidal-button.active {
      
@@ -52,7 +41,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Centra vertical y horizontalmente */
-    color: #fff; /* Color del texto del número */
+    color: var(--color-texto1); /* Color del texto del número */
   }
 
 
@@ -61,11 +50,11 @@
   }
 
   button.respuesta-correcta {
-    background-color: #4CAF50; /* Verde para respuestas correctas */
+    background-color: var(--color-correcto); /* Verde para respuestas correctas */
   }
   
   button.respuesta-incorrecta {
-    background-color: #FF5733; /* Rojo para respuestas incorrectas */
+    background-color: var(--color-incorrecto); /* Rojo para respuestas incorrectas */
   }
   
   button.respuesta-bloqueada {
@@ -73,10 +62,10 @@
   }
 
   .btn-secondary {
-    background-color: #F29523;
+    background-color: var(--color-primario);
     border: none;    
     border-radius: 20px;
-    color: #ffffff;
+    color: var(--color-texto1);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
   
   }
@@ -129,23 +118,19 @@
   
   .custom-slider .ngx-slider .ngx-slider-pointer:after {
 /*     display: none; */  
-background-color: white;
+background-color: var(--color-background);
 } 
 
 .custom-slider .ngx-slider .ngx-slider-pointer.ngx-slider-active:after {
-  background-color: #4b4b4b;
+  background-color: var(--color-terciario);
 }
 }
-
-
-
 
 .container {
   width: 300px; /* Ancho del contenedor */
   height: 200px; /* Altura del contenedor */
   position: relative;
 }
-
 
 .miSlide{
   width: 100%;
@@ -156,11 +141,11 @@ background-color: white;
   
   .custom-slider2 .ngx-slider .ngx-slider-pointer:after {
 /*     display: none; */  
-background-color: white;
+background-color: var(--color-background);
 } 
 
 .custom-slider2 .ngx-slider .ngx-slider-pointer.ngx-slider-active:after {
-  background-color: #4b4b4b;
+  background-color: var(--color-terciario);
 }
 
 /* .custom-slider2 .ngx-slider-span.ngx-slider-bubble.ngx-slider-model-value {
@@ -173,7 +158,7 @@ background-color: white;
   position: absolute;
   width: 30px; 
   height: 30px; 
-  background-color: white; 
+  background-color: var(--color-background);
   border-radius: 50%; 
   top: 3px; 
   left: 50%; 
@@ -200,7 +185,7 @@ background-color: white;
   height: 25px;
   top: -12px; /* to remove the default positioning */
   bottom: 0;
-  background-color: #F29523;
+  background-color: var(--color-primario);
 
   border-radius: 0;
 }
@@ -213,7 +198,7 @@ background-color: white;
   top: -8px;
   padding-left: 22px;
   z-index: 2;
-  color: #F29523;
+  color: var(--color-primario);
   font-weight: bold;
   position: relative;
 }

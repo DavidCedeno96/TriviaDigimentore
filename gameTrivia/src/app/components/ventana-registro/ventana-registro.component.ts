@@ -27,6 +27,7 @@ export class VentanaRegistroComponent implements OnInit {
     nombre: '',
     correo: '',
     contrasena: '',
+    telefono: '',
     idRol: 2,
     rol: '',
     iniciales: '',
