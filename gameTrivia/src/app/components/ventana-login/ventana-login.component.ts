@@ -35,6 +35,8 @@ export class VentanaLoginComponent implements OnInit {
 
   tipoLogin: number = 1;
 
+  allSalas: boolean = false;
+
   existeError: boolean = false;
   rememberMe: boolean = false;
 
@@ -65,6 +67,10 @@ export class VentanaLoginComponent implements OnInit {
         this.constantsService.loading(true);
         this.iniciarSesion();
       }
+      if (params['allSalas']) {
+        this.allSalas = true;
+      }
+      //console.log(this.allSalas);
     });
 
     const url = window.location;
@@ -157,7 +163,15 @@ export class VentanaLoginComponent implements OnInit {
 
             //Ruta para el jugador
             if (idRol == 2) {
-              this.router.navigate(['/MisSalas']);
+              if (this.allSalas) {
+                this.router.navigate(['/MisSalas']);
+              } else {
+                this.router.navigate(['/MisSalas'], {
+                  queryParams: {
+                    defaultSala: '1',
+                  },
+                });
+              }
             }
             //Ruta para el administrador
             if (idRol == 1 || idRol == 3) {

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantsService } from 'src/app/constants.service';
 import { EncryptionService } from 'src/app/encryption.service';
 import { Sala, SalaReciente } from 'src/app/model/SalaModel';
@@ -13,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./player.component.css'],
 })
 export class PlayerComponent implements OnInit {
-  logoEmpresa="";
+  logoEmpresa = '';
 
   @ViewChild('closeModal') closeModal!: ElementRef;
 
@@ -57,12 +57,13 @@ export class PlayerComponent implements OnInit {
     private usuarioServicio: UsuarioService,
     private salaServicio: SalaService,
     private encryptionService: EncryptionService,
-    private constantsService: ConstantsService,  
-    private imagenesService: ImagenesService
+    private constantsService: ConstantsService,
+    private imagenesService: ImagenesService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.logoEmpresa=this.imagenesService.logoBlanco;
+    this.logoEmpresa = this.imagenesService.logoBlanco;
     this.constantsService.loading(true);
     this.idUsuario = parseInt(this.usuarioServicio.getIdUsuario()!);
     this.isLogin2 = this.usuarioServicio.getTipoLogin() == '2';
@@ -70,6 +71,13 @@ export class PlayerComponent implements OnInit {
     this.todasLasSalas();
 
     //this.salasRecientes(this.idUsuario);
+
+    this.route.queryParams.subscribe((params) => {
+      if (params['defaultSala']) {
+        let defaultSala = parseInt(params['defaultSala']);
+        this.cambiarPag('/EntradaSala', defaultSala);
+      }
+    });
   }
 
   salasRecientes(idUsuario: number) {
