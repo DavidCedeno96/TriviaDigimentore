@@ -1,6 +1,6 @@
 USE [TriviaDigimentore_db]
 GO
-/****** Object:  Table [dbo].[ModoJuego]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[ModoJuego]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Opcion]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Opcion]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -37,7 +37,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Pregunta]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Pregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -55,7 +55,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[pruebas]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[pruebas]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -65,7 +65,7 @@ CREATE TABLE [dbo].[pruebas](
 	[texto] [varchar](5) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Rol]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Rol]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,7 +82,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Sala]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -103,7 +103,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SalaJuego]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[SalaJuego]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +118,7 @@ CREATE TABLE [dbo].[SalaJuego](
 	[estadoJuego] [int] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SalaReciente]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[SalaReciente]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -130,7 +130,7 @@ CREATE TABLE [dbo].[SalaReciente](
 	[fecha_modificacion] [datetime] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -139,7 +139,7 @@ CREATE TABLE [dbo].[Usuario](
 	[idUsuario] [int] IDENTITY(1,1) NOT NULL,
 	[nombre] [varchar](60) NOT NULL,
 	[apellido] [varchar](15) NULL,
-	[correo] [varchar](50) NULL,
+	[correo] [varchar](60) NOT NULL,
 	[clave] [varchar](20) NULL,
 	[foto] [varchar](50) NULL,
 	[idRol] [int] NOT NULL,
@@ -153,7 +153,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario_Sala]    Script Date: 12/01/2024 14:39:24 ******/
+/****** Object:  Table [dbo].[Usuario_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,6 +176,54 @@ INSERT [dbo].[ModoJuego] ([idModoJuego], [nombre], [imagen], [estado], [fecha_cr
 GO
 SET IDENTITY_INSERT [dbo].[ModoJuego] OFF
 GO
+SET IDENTITY_INSERT [dbo].[Opcion] ON 
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (1, N'Antigua', 0, 1, 1, CAST(N'2024-01-12T15:01:38.137' AS DateTime), CAST(N'2024-01-12T15:01:38.137' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (2, N'Quetzaltenango', 0, 1, 1, CAST(N'2024-01-12T15:01:38.137' AS DateTime), CAST(N'2024-01-12T15:01:38.137' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (3, N'Ciudad de Guatemala', 1, 1, 1, CAST(N'2024-01-12T15:01:38.137' AS DateTime), CAST(N'2024-01-12T15:01:38.137' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (5, N'Peso guatemalteco', 0, 2, 1, CAST(N'2024-01-12T15:01:38.140' AS DateTime), CAST(N'2024-01-12T15:01:38.140' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (6, N'Quetzal', 1, 2, 1, CAST(N'2024-01-12T15:01:38.140' AS DateTime), CAST(N'2024-01-12T15:01:38.140' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (7, N'Lempira', 0, 2, 1, CAST(N'2024-01-12T15:01:38.140' AS DateTime), CAST(N'2024-01-12T15:01:38.140' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (9, N'¿Cuál es el volcán más alto de Guatemala?', 1, 3, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (10, N'Volcán Tajumulco', 0, 3, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (11, N'Volcán de Fuego', 0, 3, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (13, N'Tamales', 1, 4, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (14, N'Enchiladas', 0, 4, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (15, N'Pupusas', 0, 4, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (17, N'Tikal', 1, 5, 1, CAST(N'2024-01-12T15:01:38.147' AS DateTime), CAST(N'2024-01-12T15:01:38.147' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (18, N'Copán', 0, 5, 1, CAST(N'2024-01-12T15:01:38.147' AS DateTime), CAST(N'2024-01-12T15:01:38.147' AS DateTime))
+GO
+INSERT [dbo].[Opcion] ([idOpcion], [nombre], [correcta], [idPregunta], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (19, N'El Mirador', 0, 5, 1, CAST(N'2024-01-12T15:01:38.147' AS DateTime), CAST(N'2024-01-12T15:01:38.147' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Opcion] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Pregunta] ON 
+GO
+INSERT [dbo].[Pregunta] ([idPregunta], [nombre], [idSala], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (1, N'¿Cuál es la capital de Guatemala?', 2, 1, CAST(N'2024-01-12T15:01:38.130' AS DateTime), CAST(N'2024-01-12T15:01:38.130' AS DateTime))
+GO
+INSERT [dbo].[Pregunta] ([idPregunta], [nombre], [idSala], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (2, N'¿Cuál es la moneda oficial de Guatemala?', 2, 1, CAST(N'2024-01-12T15:01:38.140' AS DateTime), CAST(N'2024-01-12T15:01:38.140' AS DateTime))
+GO
+INSERT [dbo].[Pregunta] ([idPregunta], [nombre], [idSala], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (3, N'¿Cuál es el volcán más alto de Guatemala?', 2, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Pregunta] ([idPregunta], [nombre], [idSala], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (4, N'¿Cuál es el plato típico guatemalteco hecho a base de maíz y relleno de carne y salsa?', 2, 1, CAST(N'2024-01-12T15:01:38.143' AS DateTime), CAST(N'2024-01-12T15:01:38.143' AS DateTime))
+GO
+INSERT [dbo].[Pregunta] ([idPregunta], [nombre], [idSala], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (5, N'¿Cuál es el sitio arqueológico maya más grande de Guatemala y uno de los más importantes de la región?', 2, 1, CAST(N'2024-01-12T15:01:38.147' AS DateTime), CAST(N'2024-01-12T15:01:38.147' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[Pregunta] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Rol] ON 
 GO
 INSERT [dbo].[Rol] ([idRol], [nombre], [estado], [fecha_creacion], [fecha_modificacion]) VALUES (1, N'Administrador', 1, CAST(N'2024-01-08T14:32:47.387' AS DateTime), CAST(N'2024-01-08T14:32:47.387' AS DateTime))
@@ -190,19 +238,47 @@ SET IDENTITY_INSERT [dbo].[Sala] ON
 GO
 INSERT [dbo].[Sala] ([idSala], [nombre], [imagen], [descripcion], [idModoJuego], [estado], [fecha_creacion], [fecha_modificacion], [fecha_activacion]) VALUES (1, N'Sala 1', N'ofimatica-en-la-nube-tecnooffice.png', N'desc de sala 1', 1, 0, CAST(N'2024-01-12T11:37:16.350' AS DateTime), CAST(N'2024-01-12T11:37:16.350' AS DateTime), CAST(N'1800-01-01T00:00:00.000' AS DateTime))
 GO
+INSERT [dbo].[Sala] ([idSala], [nombre], [imagen], [descripcion], [idModoJuego], [estado], [fecha_creacion], [fecha_modificacion], [fecha_activacion]) VALUES (2, N'Nueva sala', NULL, NULL, 1, 1, CAST(N'2024-01-12T14:57:08.017' AS DateTime), CAST(N'2024-01-12T15:02:00.880' AS DateTime), CAST(N'2024-01-12T20:01:55.000' AS DateTime))
+GO
 SET IDENTITY_INSERT [dbo].[Sala] OFF
+GO
+INSERT [dbo].[SalaJuego] ([idSala], [idJugador], [iniciales], [posicion], [fecha_creacion], [fecha_modificacion], [estadoJuego]) VALUES (2, 5, N'CI', 3, CAST(N'2024-01-12T16:42:32.243' AS DateTime), CAST(N'2024-01-12T16:43:18.690' AS DateTime), 1)
+GO
+INSERT [dbo].[SalaReciente] ([idSala], [idJugador], [fecha_creacion], [fecha_modificacion]) VALUES (2, 5, CAST(N'2024-01-12T15:03:22.023' AS DateTime), CAST(N'2024-01-12T16:42:29.010' AS DateTime))
+GO
+INSERT [dbo].[SalaReciente] ([idSala], [idJugador], [fecha_creacion], [fecha_modificacion]) VALUES (2, 7, CAST(N'2024-01-12T15:52:37.107' AS DateTime), CAST(N'2024-01-12T15:52:37.107' AS DateTime))
+GO
+INSERT [dbo].[SalaReciente] ([idSala], [idJugador], [fecha_creacion], [fecha_modificacion]) VALUES (1, 6, CAST(N'2024-01-14T13:31:00.450' AS DateTime), CAST(N'2024-01-14T14:29:36.783' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[Usuario] ON 
 GO
-INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (1, N'admin', NULL, NULL, N'admin', NULL, 1, 1, CAST(N'2024-01-08T14:34:20.430' AS DateTime), CAST(N'2024-01-08T14:34:20.430' AS DateTime), NULL)
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (1, N'admin', NULL, N'admin@correo.com', N'admin', NULL, 1, 1, CAST(N'2024-01-08T14:34:20.430' AS DateTime), CAST(N'2024-01-08T14:34:20.430' AS DateTime), NULL)
 GO
-INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (2, N'sadmin', NULL, NULL, N'admin', NULL, 3, 1, CAST(N'2024-01-08T14:34:34.573' AS DateTime), CAST(N'2024-01-08T14:34:34.573' AS DateTime), NULL)
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (2, N'sadmin', NULL, N'super-admin@correo.com', N'admin', NULL, 3, 1, CAST(N'2024-01-08T14:34:34.573' AS DateTime), CAST(N'2024-01-08T14:34:34.573' AS DateTime), NULL)
 GO
 INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (3, N'Rita Lasso', NULL, N'rita@correo.com', N'User.2023', NULL, 2, 1, CAST(N'2024-01-12T14:08:56.163' AS DateTime), CAST(N'2024-01-12T14:31:02.440' AS DateTime), N'0992736250')
 GO
 INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (4, N'Benito Camelas', NULL, N'benito@correo.com', N'User2.2023', NULL, 2, 1, CAST(N'2024-01-12T14:36:30.360' AS DateTime), CAST(N'2024-01-12T14:36:30.360' AS DateTime), N'0995478414')
 GO
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (5, N'Carlos Icaza', NULL, N'cicaza@digimentore.com.ec', N'Digimentore24@', NULL, 2, 1, CAST(N'2024-01-12T15:00:33.057' AS DateTime), CAST(N'2024-01-12T15:00:33.057' AS DateTime), N'0995357576')
+GO
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (6, N'Byron Cedeño', NULL, N'bcedeno@digimentore.com.ec', N'Dcedeno.2023', NULL, 2, 1, CAST(N'2024-01-12T15:25:56.483' AS DateTime), CAST(N'2024-01-12T15:25:56.483' AS DateTime), N'0998270584')
+GO
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (7, N'Andrés López', NULL, N'mail@digimentore.net', N'Digimentore2011#', NULL, 2, 1, CAST(N'2024-01-12T15:47:51.150' AS DateTime), CAST(N'2024-01-12T15:47:51.150' AS DateTime), N'0994256314')
+GO
+INSERT [dbo].[Usuario] ([idUsuario], [nombre], [apellido], [correo], [clave], [foto], [idRol], [estado], [fecha_creacion], [fecha_modificacion], [celular]) VALUES (8, N'Dana Nuñez', NULL, N'dana@gmail.com', N'12345', NULL, 2, 1, CAST(N'2024-01-12T17:39:47.593' AS DateTime), CAST(N'2024-01-12T17:48:57.497' AS DateTime), NULL)
+GO
 SET IDENTITY_INSERT [dbo].[Usuario] OFF
+GO
+INSERT [dbo].[Usuario_Sala] ([idUsuario], [idSala], [estado], [fecha_creacion], [fecha_modificacion], [puntaje], [tiempo]) VALUES (5, 2, 1, CAST(N'2024-01-12T16:43:20.737' AS DateTime), CAST(N'2024-01-12T16:43:20.737' AS DateTime), 3, 15064)
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ_correo_usuario]    Script Date: 14/01/2024 14:45:54 ******/
+ALTER TABLE [dbo].[Usuario] ADD  CONSTRAINT [UQ_correo_usuario] UNIQUE NONCLUSTERED 
+(
+	[correo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[ModoJuego] ADD  DEFAULT ((1)) FOR [estado]
 GO
@@ -282,7 +358,7 @@ ALTER TABLE [dbo].[Usuario]  WITH CHECK ADD  CONSTRAINT [CHK_Clave_NotEmpty] CHE
 GO
 ALTER TABLE [dbo].[Usuario] CHECK CONSTRAINT [CHK_Clave_NotEmpty]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_OpcionByIdPregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_OpcionByIdPregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -336,7 +412,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Pregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Pregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -369,7 +445,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_PreguntaById]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_PreguntaById]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -423,7 +499,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_PreguntaByIdSala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_PreguntaByIdSala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -477,7 +553,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Rol]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Rol]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -503,7 +579,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -556,7 +632,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_SalaByAll]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_SalaByAll]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -619,7 +695,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_SalaById]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_SalaById]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -700,7 +776,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_SalaJuego]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_SalaJuego]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -724,7 +800,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_SalaJuegoByIds]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_SalaJuegoByIds]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -748,7 +824,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_SalaReciente]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_SalaReciente]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -825,7 +901,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Usuario]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Usuario]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -874,7 +950,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Usuario_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Usuario_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -942,7 +1018,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_Usuario_SalaByIdSala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_Usuario_SalaByIdSala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1008,7 +1084,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioByAll]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioByAll]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1074,7 +1150,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioById]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioById]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1146,7 +1222,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioLogin]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_B_UsuarioLogin]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1168,7 +1244,7 @@ BEGIN
 	declare @contUsuario1 int = 0, @contUsuario2 int = 0
 
 	select @contUsuario1 = COUNT(*) from Usuario where
-	nombre = @nombre --COLLATE SQL_Latin1_General_CP1_CS_AS
+	correo = @correo --COLLATE SQL_Latin1_General_CP1_CS_AS
 	and clave = @clave --COLLATE SQL_Latin1_General_CP1_CS_AS
 	and estado > 0
 
@@ -1185,9 +1261,9 @@ BEGIN
 			from Usuario u
 			inner join Rol r
 			on u.idRol = r.idRol
-			where u.nombre = @nombre and u.clave = @clave and u.estado > 0	
+			where u.correo = @correo and u.clave = @clave and u.estado > 0	
 
-			set @info = 'Usuario encontrado por Login normal'
+			set @info = 'Usuario encontrado por Login'
 			set @error = 0
 		end
 		else
@@ -1254,7 +1330,7 @@ BEGIN
 	print @info
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_Opcion]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_Opcion]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1321,7 +1397,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_Pregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_Pregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1373,7 +1449,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1416,7 +1492,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_SalaJuego]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_SalaJuego]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1473,7 +1549,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_SalaReciente]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_SalaReciente]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1529,7 +1605,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_Usuario]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_Usuario]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1538,7 +1614,7 @@ CREATE procedure [dbo].[sp_C_Usuario]
 	
 	@nombre varchar(60),
 	@apellido varchar(15) = null,
-	@correo varchar(50) = null,
+	@correo varchar(60) = null,
 	@celular varchar(10),
 	@clave varchar(20),
 	@foto varchar(50) = null,
@@ -1607,7 +1683,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_C_Usuario_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_C_Usuario_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1666,7 +1742,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_D_OpcionByIdPregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_D_OpcionByIdPregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1702,7 +1778,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_D_Pregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_D_Pregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1762,7 +1838,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_D_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_D_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1841,7 +1917,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_D_Usuario]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_D_Usuario]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1917,7 +1993,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_D_Usuario_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_D_Usuario_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1968,7 +2044,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_Opcion]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_Opcion]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2030,7 +2106,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_Pregunta]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_Pregunta]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2068,7 +2144,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_Sala]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_Sala]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2123,7 +2199,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_SalaByEstado]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_SalaByEstado]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2194,7 +2270,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_SalaJuego]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_SalaJuego]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2244,7 +2320,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_U_Usuario]    Script Date: 12/01/2024 14:39:25 ******/
+/****** Object:  StoredProcedure [dbo].[sp_U_Usuario]    Script Date: 14/01/2024 14:45:54 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2254,7 +2330,7 @@ CREATE procedure [dbo].[sp_U_Usuario]
 	@idUsuario int, 
 	@nombre varchar(60),
 	@apellido varchar(15) = null,
-	@correo varchar(50),
+	@correo varchar(60),
 	@celular varchar(10),
 	@clave varchar(20),
 	@foto varchar(50) = null,
