@@ -255,6 +255,8 @@ export class ChallengersGameComponent
   private app: PIXI.Application;
   yfloor1 = 0;
 
+  private isAnswerCorrect:boolean=true;
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -276,7 +278,7 @@ export class ChallengersGameComponent
     this.container = document.getElementById('containerFondo');
     //MUSICA NO LE PONEMOS EN METODO APARTE PORQUE DEJA DE FUNCIONAR
     this.musicaFondo = new Audio();
-    this.musicaFondo.src = 'assets/musicAndSFX/MusicaGame4.mp3'; // Ruta a tu archivo de música
+    this.musicaFondo.src = 'assets/musicAndSFX/SpaceFondo.mp3'; // Ruta a tu archivo de música
     this.musicaFondo.loop = true;
     this.musicaFondo.volume = 0.25; // Volumen (0.5 representa la mitad del volumen)
     this.musicaFondo.play();
@@ -289,29 +291,7 @@ export class ChallengersGameComponent
     this.idSala = this.PreguntasList[0].pregunta.idSala;
     this.listaDePreguntas = this.PreguntasList;
 
-    //this.steps = 10;
 
-    //Para las imagenes de los edificios principales
-
-/*     const OpNumEdif = (this.listaDePreguntas.length * 3) / 5.75 / 2;
-    var numberOfItems = 0;
-
-    if (OpNumEdif % 1 >= 0.5) {
-      numberOfItems = Math.ceil(OpNumEdif);
-    } else {
-      numberOfItems = Math.trunc(OpNumEdif);
-    }
-    this.EdificiosCount = Array.from(
-      { length: numberOfItems },
-      (_, index) => index
-    );
-    //console.log(this.EdificiosCount);
-
-    if (this.listaDePreguntas.length > 20) {
-      this.numIntervaloImg = 5;
-    }
-    this.numImagenesColocadas = 0; //Actualizo la cantidad de imagenes colocadas
-    this.cantidadDeBotones = this.listaDePreguntas.length; //La cantidad de botones es igual a la cantidad de preguntas */
     this.rellenarPregunta(1);
     //this.updateCenters(window.innerWidth);
     //console.log(this.PreguntasList);
@@ -364,9 +344,7 @@ export class ChallengersGameComponent
     // Obtén el elemento .sinusoidal-container por su ID
   
 
-    // Verifica si el elemento se encontró antes de intentar establecer la altura
-    
-   
+    // Verifica si el elemento se encontró antes de intentar establecer la altura   
    
     this.actualizarMiSlider();
   }
@@ -783,6 +761,7 @@ private createFloors(): void {
       //console.log(this.tiempoDelJugador);
 
       if (respuestaSeleccionada.correcta === 1) {
+        this.isAnswerCorrect=true;
         //AQUI PONER LA ACTUALIZACION DE LAS POSICIONES
         let juego = {
           idSala: this.idSala,
@@ -796,7 +775,7 @@ private createFloors(): void {
         // La respuesta es correcta, puedes reproducir un sonido, cambiar el color, etc.
         this.puntosGanados++;
         this.mostrarAlert = true;
-        this.reproducirSonido('assets/musicAndSFX/QuizCorrect.wav');
+        this.reproducirSonido('assets/musicAndSFX/CorrectSpace.mp3');
 
         setTimeout(() => {
           this.mostrarAlert = false;
@@ -830,13 +809,14 @@ private createFloors(): void {
   }
 
   preguntaMalConstestada() {
+    this.isAnswerCorrect=false;
     const indexCorrecto = this.actualOpcionList.findIndex(
       (item) => item.correcta === 1
     ); //Obtengo la id del correcto
     this.botonSeleccionado[indexCorrecto] = true; //Activo al correcto
 
     this.mostrarWrongAlert = true;
-    this.reproducirSonido('assets/musicAndSFX/QuizWrong.wav');
+    this.reproducirSonido('assets/musicAndSFX/WrongSpace.mp3');
     setTimeout(() => {
       this.mostrarWrongAlert = false;
       this.modal.hide();
@@ -858,13 +838,21 @@ private createFloors(): void {
         this.rellenarPregunta(this.numPreguntasContestadas + 1);
         //Mostraremos el modal cuando termine de saltar Es decir saltar aqui
         this.respondiendo=false;
-        this.jumpCharacter();
+        if(this.isAnswerCorrect){
+          this.jumpCharacter();
+        }
+        
       }, 4000);
 
-      setTimeout(() => {
-        //
-        
-      }, this.tiempoMostrarModal);
+      if (!this.isAnswerCorrect) {
+        setTimeout(() => {
+          //Mostrar modal si responde mal
+          this.mostrarModal();
+          
+        }, this.tiempoMostrarModal);        
+      }
+
+      
     } else {
       setTimeout(() => {
         this.onClickCambiar();
@@ -983,7 +971,7 @@ private createFloors(): void {
   }
 
   actualizarMiSlider() {
-    const numPreguntas = this.cantidadDeBotones;
+    const numPreguntas = this.listaDePreguntas.length;
 
     this.optionsMia = {
       readOnly: true,

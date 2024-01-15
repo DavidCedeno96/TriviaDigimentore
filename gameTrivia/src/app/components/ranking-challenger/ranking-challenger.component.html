@@ -5,7 +5,6 @@
 /> 
 
 
-
 <!-- <svg class="background-image2"  alt="Imagen de fondo" >
   <use xlink:href="assets/Icons/fondo.svg#Capa_1"></use>
 </svg>  -->
@@ -122,7 +121,7 @@
       <div class="custom-container d-flex flex-column mb-3 my-3 text-center">
         <div
           class="container xs-none sm-none md-block lg-block"
-          style="height: 81px"
+          style="height: 20px"
         ></div>
         <div
           class="p-2 d-md-none d-sm-none d-none d-lg-block d-xl-block text-center"
@@ -152,8 +151,47 @@
           class="d-flex justify-content-center"
           style="flex: 1; align-items: center"
         >
-          <button
-            class="btn btn-primary d-flex py-3 mx-2 px-4"
+        <div class="row">
+          <div class="col-12">
+            <div class="card py-3" style="text-align: center; background-color: var(--color-primario); color: var(--color-texto2);">
+            
+              <div class="py-3">
+                <strong>
+                  <p my-2>
+                    ¿Disfrutaste la experiencia? 
+                  </p>
+                  <p class="my-1">
+                     Contáctanos para seguir brindándote lo mejor.
+                  </p>
+
+                </strong>
+                
+              </div>
+
+              <p >
+                <a  href="https://digimentore.com.ec/contacto/" target="_blank">
+                  <button
+                class="btn btn-secondary d-flex py-3 px-4 mx-auto" style="font-size: 16px"
+              >              
+                Contacto
+              </button>
+                </a>
+                
+              </p>
+            </div>
+
+            
+
+          </div>
+
+          <div
+          class="container xs-none sm-none md-block lg-block"
+          style="height: 20px"
+        ></div>
+
+          <div class="col-12">
+            <button
+            class="btn btn-primary d-flex py-3 mx-auto px-4"
             (click)="salir()"
           >
           <svg class="icono-svg mt-1"  >
@@ -161,6 +199,10 @@
           </svg> 
             Salir
           </button>
+
+          </div>
+        </div>
+          
         </div>
       </div>
     </div>

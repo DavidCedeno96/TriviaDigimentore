@@ -35,7 +35,7 @@ export class VentanaLoginComponent implements OnInit {
 
   tipoLogin: number = 1;
 
-  allSalas: boolean = false;
+  allSalas: boolean = true;
 
   existeError: boolean = false;
   rememberMe: boolean = false;

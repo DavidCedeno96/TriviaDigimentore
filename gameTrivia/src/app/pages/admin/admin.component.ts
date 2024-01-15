@@ -219,7 +219,7 @@ export class AdminComponent implements OnInit {
 
   allCopySala() {
     const textos = [
-      'Cuando estés logueado en nuestra página de trivias, puedes ingresar directamente a la sala a través del link proporcionado. También puedes utilizar el buscador en la página principal, introduciendo el nombre de la sala y después introduces el código de la sala para acceder.',
+      '¡Explora nuestro mundo de trivias! Ingresa a la sala directamente con el enlace proporcionado. Regístrate para ganar tu merecido premio. ¡Disfruta del juego y buena suerte!',
       '',
       'Link de la Sala: ' + this.currentURL,
       'Nombre de la Sala: ' + this.salaItem.nombre,

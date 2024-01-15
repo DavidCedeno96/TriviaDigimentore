@@ -180,6 +180,13 @@
 
   
 }
+
+.btn-secondary {
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 20px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
 h4 {
   color: var(--color-terciario);
 }
@@ -216,6 +223,11 @@ h4 {
 .gris-oscuro {
     background-color: #b3b3b3; /* Color gris oscuro */
     color: var(--color-texto1); /* Color de texto blanco o el color que desees */
+  }
+
+  a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: inherit; /* Usa el color heredado (normalmente negro) */
   }
 
 
