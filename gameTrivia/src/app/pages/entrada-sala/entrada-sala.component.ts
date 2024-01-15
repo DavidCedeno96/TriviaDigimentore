@@ -45,6 +45,7 @@ export class EntradaSalaComponent implements OnInit {
       if (idSala === '') {
         history.back();
       }
+      this.idSala = parseInt(idSala);
     });
 
     this.currentIdJugador = parseInt(this.usuarioService.getIdUsuario()!);
