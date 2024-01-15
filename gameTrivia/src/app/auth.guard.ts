@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 import { UsuarioService } from './services/usuario.service';
+import { EncryptionService } from './encryption.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const usuarioServicio = inject(UsuarioService);
@@ -45,9 +46,17 @@ export const authGuardAdmin: CanActivateFn = (route, state) => {
   }
 };
 
-export const authGuardPlayer: CanActivateFn = (route, state) => {
+export const authGuardPlayer: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state
+) => {
   const usuarioServicio = inject(UsuarioService);
   const router = inject(Router);
+  let idSala = '';
+
+  if (route.queryParamMap.has('idSala')) {
+    idSala = route.queryParamMap.get('idSala')!;
+  }
 
   if (usuarioServicio.loggedIn()) {
     if (
@@ -61,7 +70,15 @@ export const authGuardPlayer: CanActivateFn = (route, state) => {
       return false;
     }
   } else {
-    router.navigate(['/Iniciar_Sesion']);
+    if (idSala) {
+      router.navigate(['/Iniciar_Sesion'], {
+        queryParams: {
+          defaultSala: idSala,
+        },
+      });
+    } else {
+      router.navigate(['/Iniciar_Sesion']);
+    }
     return false;
   }
 };

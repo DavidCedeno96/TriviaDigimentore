@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StorageMap } from '@ngx-pwa/local-storage';
 import { ConstantsService } from 'src/app/constants.service';
 import { EncryptionService } from 'src/app/encryption.service';
 import { Pregunta_OpcionList } from 'src/app/model/SalaModel';
@@ -12,7 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./entrada-sala.component.css'],
 })
 export class EntradaSalaComponent implements OnInit {
-  numVentana: number = 1;
+  numVentana: number = 0;
   idSala: number = 0;
   currentIdJugador: number = 0;
   errorResultPreOp: number = 0;
@@ -38,14 +39,15 @@ export class EntradaSalaComponent implements OnInit {
 
   ngOnInit() {
     this.constantsService.loading(false);
-    this.currentIdJugador = parseInt(this.usuarioService.getIdUsuario()!);
+
     this.route.queryParams.subscribe((params) => {
       let idSala = this.encryptionService.decrypt(params['idSala']);
       if (idSala === '') {
         history.back();
       }
-      this.idSala = parseInt(idSala);
     });
+
+    this.currentIdJugador = parseInt(this.usuarioService.getIdUsuario()!);
     this.dataPregListOpcList(this.idSala);
   }
 

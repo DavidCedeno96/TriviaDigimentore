@@ -9,6 +9,7 @@ import { ConstantsService } from 'src/app/constants.service';
 
 import { StorageMap } from '@ngx-pwa/local-storage'; // Importa LocalStorage
 import { ImagenesService } from 'src/app/services/imagenes.service';
+import { EncryptionService } from 'src/app/encryption.service';
 
 @Component({
   selector: 'app-ventana-login',
@@ -35,7 +36,7 @@ export class VentanaLoginComponent implements OnInit {
 
   tipoLogin: number = 1;
 
-  allSalas: boolean = true;
+  defaultSala: string = '';
 
   existeError: boolean = false;
   rememberMe: boolean = false;
@@ -48,7 +49,8 @@ export class VentanaLoginComponent implements OnInit {
     private route: ActivatedRoute,
     private constantsService: ConstantsService,
     private localStorage: StorageMap,
-    private imagenesService: ImagenesService
+    private imagenesService: ImagenesService,
+    private encryptionService: EncryptionService
   ) {}
 
   ngOnInit(): void {
@@ -67,8 +69,10 @@ export class VentanaLoginComponent implements OnInit {
         this.constantsService.loading(true);
         this.iniciarSesion();
       }
-      if (params['allSalas']) {
-        this.allSalas = true;
+      if (params['defaultSala']) {
+        this.defaultSala = this.encryptionService.decrypt(
+          params['defaultSala']
+        );
       }
       //console.log(this.allSalas);
     });
@@ -163,14 +167,14 @@ export class VentanaLoginComponent implements OnInit {
 
             //Ruta para el jugador
             if (idRol == 2) {
-              if (this.allSalas) {
-                this.router.navigate(['/MisSalas']);
-              } else {
+              if (this.defaultSala) {
                 this.router.navigate(['/MisSalas'], {
                   queryParams: {
-                    defaultSala: '1',
+                    defaultSala: this.defaultSala,
                   },
                 });
+              } else {
+                this.router.navigate(['/MisSalas']);
               }
             }
             //Ruta para el administrador
