@@ -157,7 +157,7 @@
 </div>
 
 <!-- FONDO DEL JUEGO-->
-<body id="game-container"  class="game-container" >
+<body id="game-container"  class="game-container" [ngStyle]="{'background': 'linear-gradient(0deg,' + color1 + ',' + color2 + ')'}" >
   <div  style="overflow: hidden" #pixiContainer></div>
   
 </body>

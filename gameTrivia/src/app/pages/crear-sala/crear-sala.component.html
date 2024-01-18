@@ -91,7 +91,7 @@
                 (change)="onFileSelected($event)"
                 class="form-control"
                 placeholder="Imagen"
-                accept=".jpg, .jpeg, .png"
+                accept=".png"
                 name="archivo"
                 pattern="[^<>=]*"
               />
@@ -130,8 +130,8 @@
             id="challenger"
             class="card py-3 px-2 mx-2"
             [style.background-color]="
-              selectedCard === 1 ? '#3D5057' : '#FFFFFF'
-            "
+              selectedCard === 1 ? 'var(--color-secundario)' : 'var(--color-background)' "
+            
             (click)="selectCard(1)"
             style="cursor: pointer"
           >
@@ -150,33 +150,677 @@
           </div>
         </div>
         <div class="col"></div>
-        <!-- <div class="col-6">
-          <div
-            id="supervivencia"
-            class="card py-3 px-2 mx-2"
-            [style.background-color]="
-              selectedCard === 2 ? '#3D5057' : '#FFFFFF'
-            "
-            (click)="selectCard(2)"
-            style="cursor: pointer"
-          >
-            <img
-              class="imagen2-lg imagen2-md imagen2-sm"
-              src="assets/Imagenes Juego/SupervivenciaNaranja.png"
-              alt=""
-            />
-
-            <p
-              class="card-title text-center"
-              [style.color]="selectedCard === 2 ? '#FFFFFF' : '#ffa600'"
-              [style.font-weight]="selectedCard === 2 ? 'bold' : 'normal'"
-            >
-              Supervivencia
-            </p>
-          </div>
-        </div> -->
+        
         <div class="text-center mt-3" *ngIf="notSelectCard">
           <h4 style="color: white">Seleccione el modo de juego</h4>
+        </div>
+        <div class="container" style="height: 30px"></div>
+        <!-- GRAFICA PARA EL JUEGO 1 -->
+        <div class="container" *ngIf="selectedCard" >
+          <div class="card p-3">
+            <div class="card-body">
+              <h4 class="card-title pb-3">Gráfica del juego</h4>
+              <h5 class="card-subtitle mb-2 text-body-secondary">Personaje</h5>
+              <div class="container">
+                <div class="row ">
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Viendo a la izquierda.</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+
+                  <!-- espacio vacio -->
+                  <div class="col"></div>
+
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Viendo a la derecha.</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+                  
+                </div>                
+
+                <div class="row pt-3">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0">
+                    <h5 class="card-subtitle mb-2 text-body-secondary">Color de fondo (gradiente)</h5>
+                  </div>
+                  <div class="col-12 col-lg-5">
+                    
+                      <div class="">
+                        <label for="exampleColorInput" class="form-label">Color #1</label>
+                        
+                        <div class="form-group">
+                          <div class="input-group" style=" width: 150px; height: 30px;">
+                            <input type="color" class="form-control form-control-color" value="#3671D1"
+                                   [(ngModel)]="selectedColor1" name="colorInput" 
+                                   [ngModelOptions]="{ standalone: true }">  
+                            <div class="input-group-append" style="width: 100px;">
+                              <span class="input-group-text">{{selectedColor1}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                     
+                  
+                  </div>
+
+                  <!-- espacio vacio -->
+                  <div class="col py-2"></div>
+
+                  <div class="col-12 col-lg-5">
+                    
+                    <div class="">
+                      <label for="exampleColorInput" class="form-label">Color #2</label>
+                      
+                      <div class="form-group">
+                        <div class="input-group" style=" width: 150px; height: 30px;">
+                          <input type="color" class="form-control form-control-color" value="#3671D1"
+                                 [(ngModel)]="selectedColor2" name="colorInput" 
+                                 [ngModelOptions]="{ standalone: true }">  
+                          <div class="input-group-append" style="width: 100px;">
+                            <span class="input-group-text">{{selectedColor2}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+                   
+                
+                </div>
+                </div>
+                <!--PLATAFORMA-->                
+                  <div class="row py-4 ">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0">
+                    <h5 class="card-subtitle mb-2 text-body-secondary">Plataforma (Lugar donde salta el personaje)</h5>
+                  </div>
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Plataforma 1</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+
+                  <!-- espacio vacio -->
+                  <div class="col"></div>
+
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Plataforma 2</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Plataforma 3</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+
+                  <!-- espacio vacio -->
+                  <div class="col"></div>
+
+                  <div class="col-12 col-lg-5 ">
+                    <div>
+                      <div class="row">
+                        <div class="col-12 p-0 mt-3">
+                          <p>Plataforma 4 </p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-12 p-0">
+                          <div class="input-group">
+                            <input
+                              type="file"
+                              (change)="onFileSelected($event)"
+                              class="form-control"
+                              placeholder="Imagen"
+                              accept=".png"
+                              name="archivoimgCharacterLeft"
+                              pattern="[^<>=]*"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>                    
+                  </div>
+                  
+                </div> 
+
+                <!--Decoraciones-->                
+                <div class="row py-2 ">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0 d-flex align-items-center">
+                    <h5 class="card-subtitle text-body-secondary m-0">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="checkedDecoracion" (change)="onSwitchChange($event)" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Decoraciones de la plataforma (Ejm: Piedras o hierbas)</label>
+                      </div> 
+                    </h5>
+                  </div>
+                  <div *ngIf="checkedDecoracion">
+                    <div class="row">
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Decoración 1</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+    
+                      <!-- espacio vacio -->
+                      <div class="col"></div>
+    
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Decoración 2</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+    
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Decoración 3</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+
+                      <!-- espacio vacio -->
+                    <div class="col"></div>
+  
+                    <div class="col-12 col-lg-5 ">
+                      <div>
+                        <div class="row">
+                          <div class="col-12 p-0 mt-3">
+                            <p>Decoración 4 </p>
+                          </div>
+                        </div>
+  
+                        <div class="row">
+                          <div class="col-12 p-0">
+                            <div class="input-group">
+                              <input
+                                type="file"
+                                (change)="onFileSelected($event)"
+                                class="form-control"
+                                placeholder="Imagen"
+                                accept=".png"
+                                name="archivoimgCharacterLeft"
+                                pattern="[^<>=]*"
+                              />
+                            </div>
+                          </div>
+                        </div>
+  
+                      </div>                    
+                    </div>
+                    </div>
+                    
+  
+                    
+
+                  </div>  
+                </div> 
+
+                <!--Objetos de Cielo (Ejm: Planetas, aviones)-->                
+                <div class="row py-2 ">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0 d-flex align-items-center">
+                    <h5 class="card-subtitle text-body-secondary m-0">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="checkedDecoracion2" (change)="onSwitchChange2($event)" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Objetos de Cielo (Ejm: Planetas o aviones)</label>
+                      </div> 
+                    </h5>
+                  </div>
+                  <div *ngIf="checkedDecoracion2">
+                    <div class="row">
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Objeto del Cielo 1</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+    
+                      <!-- espacio vacio -->
+                      <div class="col"></div>
+    
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Objeto del Cielo 2</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+    
+                    </div>
+                    
+  
+                    
+
+                  </div>  
+                </div> 
+
+                <!--Objetos Final-->                
+                <div class="row py-2 ">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0 d-flex align-items-center">
+                    <h5 class="card-subtitle text-body-secondary m-0">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="checkedDecoracion3" (change)="onSwitchChange3($event)" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Objetos de Fondo (Ejm: Estrellas o nubes)</label>
+                        
+                      </div> 
+                    </h5>
+                    
+                  </div>
+                  
+                  <div *ngIf="checkedDecoracion3">
+                   
+                      <div class="row">                        
+                        <div class="col-12 col-lg-5 ">
+                          <div>
+                            <div class="row">
+                              <div class="col-12 p-0 mt-3">
+                                <p>Objeto de Fondo 1</p>
+                              </div>
+                            </div>
+      
+                            <div class="row">
+                              <div class="col-12 p-0">
+                                <div class="input-group">
+                                  <input
+                                    type="file"
+                                    (change)="onFileSelected($event)"
+                                    class="form-control"
+                                    placeholder="Imagen"
+                                    accept=".png"
+                                    name="archivoimgCharacterLeft"
+                                    pattern="[^<>=]*"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+      
+                          </div>                    
+                        </div>
+      
+                        <!-- espacio vacio -->
+                        <div class="col"></div>
+      
+                        <div class="col-12 col-lg-5 ">
+                          <div>
+                            <div class="row">
+                              <div class="col-12 p-0 mt-3">
+                                <p>Objeto de Fondo 2</p>
+                              </div>
+                            </div>
+      
+                            <div class="row">
+                              <div class="col-12 p-0">
+                                <div class="input-group">
+                                  <input
+                                    type="file"
+                                    (change)="onFileSelected($event)"
+                                    class="form-control"
+                                    placeholder="Imagen"
+                                    accept=".png"
+                                    name="archivoimgCharacterLeft"
+                                    pattern="[^<>=]*"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+      
+                          </div>                    
+                        </div>
+      
+                        <div class="col-12 col-lg-5 ">
+                          <div>
+                            <div class="row">
+                              <div class="col-12 p-0 mt-3">
+                                <p>Objeto de Fondo 3</p>
+                              </div>
+                            </div>
+      
+                            <div class="row">
+                              <div class="col-12 p-0">
+                                <div class="input-group">
+                                  <input
+                                    type="file"
+                                    (change)="onFileSelected($event)"
+                                    class="form-control"
+                                    placeholder="Imagen"
+                                    accept=".png"
+                                    name="archivoimgCharacterLeft"
+                                    pattern="[^<>=]*"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+      
+                          </div>                    
+                        </div>
+
+                        <!-- espacio vacio -->
+                        <div class="col"></div>
+    
+                        <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0 mt-3">
+                              <p>Objeto de Fondo 4 </p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+
+                      <div class="container" style="height: 10px;"></div>
+
+                      <p class="pt-4 px-0">Sugerencia: Imagen de 330 x 770</p>
+                      <div class="col-12 col-lg-5 ">
+                        <div>
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <p>Objeto de Fondo para versión móvil</p>
+                            </div>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-12 p-0">
+                              <div class="input-group">
+                                <input
+                                  type="file"
+                                  (change)="onFileSelected($event)"
+                                  class="form-control"
+                                  placeholder="Imagen"
+                                  accept=".png"
+                                  name="archivoimgCharacterLeft"
+                                  pattern="[^<>=]*"
+                                />
+                              </div>
+                            </div>
+                          </div>
+    
+                        </div>                    
+                      </div>
+
+                    </div>
+                    
+
+                  </div>  
+                </div> 
+
+                 <!--Objetos Final-->                
+                 <div class="row py-2 ">
+                  <div class="col-12 py-2"></div>
+                  <div class="col-12 p-0 d-flex align-items-center">
+                    <h5 class="card-subtitle text-body-secondary m-0">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="checkedDecoracion4" (change)="onSwitchChange4($event)" checked>
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Objeto Final que se ubica en la última plataforma (Ejm: Nave Espacial)</label>
+                        
+                      </div> 
+                    </h5>                    
+                  </div>
+                  
+                  <div *ngIf="checkedDecoracion4">                   
+                      <div class="row">                        
+                        <div class="col-12 col-lg-5 ">
+                          <div>
+                                  
+                            <div class="row pt-3">
+                              <div class="col-12 p-0">
+                                <div class="input-group">
+                                  <input
+                                    type="file"
+                                    (change)="onFileSelected($event)"
+                                    class="form-control"
+                                    placeholder="Imagen"
+                                    accept=".png"
+                                    name="archivoimgCharacterLeft"
+                                    pattern="[^<>=]*"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+      
+                          </div>                    
+                        </div>      
+                        
+                    </div>   
+                  </div>  
+                </div> 
+
+
+               </div>
+              </div>
+            
+          </div>
         </div>
         <div class="container" style="height: 30px"></div>
         <div class="container text-center">

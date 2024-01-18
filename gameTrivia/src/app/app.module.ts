@@ -23,6 +23,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { SliderModule } from 'primeng/slider';
 import { KnobModule } from 'primeng/knob';
 import { MenuModule } from 'primeng/menu';
+import { InputSwitchModule } from 'primeng/inputswitch';
+
 
 //Ventanas creadas
 import { VentanaLoginComponent } from './components/ventana-login/ventana-login.component';
@@ -92,6 +94,7 @@ import { CrearUsuarioComponent } from './pages/crear-usuario/crear-usuario.compo
     DialogModule,
     NgxDropzoneModule,
     ToastModule, */
+    InputSwitchModule,
     MenuModule,
     ProgressBarModule,
     KnobModule,

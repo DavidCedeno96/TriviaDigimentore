@@ -7,6 +7,7 @@ import { Sala } from 'src/app/model/SalaModel';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { SalaService } from 'src/app/services/sala.service';
 
+
 @Component({
   selector: 'app-crear-sala',
   templateUrl: './crear-sala.component.html',
@@ -42,6 +43,14 @@ export class CrearSalaComponent implements OnInit {
     fecha_modificacion: '',
     fechaActivacion: '',
   };
+
+  selectedColor1: string = "#3671D1";
+  selectedColor2: string = "#00002A";
+
+  checkedDecoracion: boolean=true;
+  checkedDecoracion2: boolean=true;
+  checkedDecoracion3: boolean=true;
+  checkedDecoracion4: boolean=true;
 
   constructor(
     private salaServicio: SalaService,
@@ -240,5 +249,23 @@ export class CrearSalaComponent implements OnInit {
       this.constantsService.loading(false);
     }
     return isValid;
+  }
+
+  onColorChange():void{
+    console.log('Color seleccionado en formato hexadecimal:', this.selectedColor1);
+    
+  }
+
+  onSwitchChange(event: any) {
+    this.checkedDecoracion = event.target.checked; 
+  }
+  onSwitchChange2(event: any) {
+    this.checkedDecoracion2 = event.target.checked; 
+  }
+  onSwitchChange3(event: any) {
+    this.checkedDecoracion3 = event.target.checked; 
+  }
+  onSwitchChange4(event: any) {
+    this.checkedDecoracion4 = event.target.checked; 
   }
 }

@@ -40,7 +40,6 @@ body {
   
   
 
-
   #btnIngresar:active,
   #btnIngresar:focus {
     background-color: var( --color-primario); /* Naranja */
@@ -60,9 +59,14 @@ body {
   }
 
   .card p {
-    color: var( --color-texto1);
+    color: var( --color-texto2);
   }
 
+  .card h4, h5{
+    font-weight: bold;
+  }
+
+ 
   .custom-placeholder::placeholder {
     color: var( --color-primario);
   }
@@ -128,5 +132,12 @@ body {
 }
 
 
+::ng-deep .form-check-input:checked {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
 
-
+::ng-deep .form-control[type=file]:not(:disabled):not([readonly]) {
+  font-size: smaller;
+  cursor: pointer;
+}
