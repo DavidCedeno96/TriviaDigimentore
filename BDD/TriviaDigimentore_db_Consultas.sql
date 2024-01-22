@@ -91,6 +91,37 @@ create table SalaReciente( -- este es para las salas recientes visitadas
 );
 
 -----------------------------------------------------------------
+-- Complementos => Colores, gráfica y sonido del juego
+create table Complemento(
+	idCom int identity(1,1) primary key,
+	idSala int references Sala(idSala) not null,
+	viendoIzquierda varchar(50),
+	viendoDerecha varchar(50),
+	color1 varchar(20),
+	color2 varchar(20),
+	plataforma1 varchar(50),
+	plataforma2 varchar(50),
+	plataforma3 varchar(50),
+	plataforma4 varchar(50),
+	decoracion1 varchar(50),
+	decoracion2 varchar(50),
+	decoracion3 varchar(50),
+	decoracion4 varchar(50),
+	objetoCielo1 varchar(50),
+	objetoCielo2 varchar(50),
+	objetoFondo1 varchar(50),
+	objetoFondo2 varchar(50),
+	objetoFondo3 varchar(50),
+	objetoFondo4 varchar(50),
+	objetoFondoMovil varchar(50),
+	objetoFinal varchar(50),
+	sonido varchar(50),
+	fecha_creacion datetime default getdate(),
+	fecha_modificacion datetime default getdate(),
+);
+
+
+-----------------------------------------------------------------
 select * from Rol -- Hacer el insert y no truncar
 select * from ModoJuego -- Hacer el insert y no truncar
 
@@ -191,6 +222,68 @@ exec sp_D_Usuario
 @idUsuario = 0,	
 @info = '',
 @error = ''
+
+---- COMPLEMENTOS ---------------------------------------------
+Select * from Complemento
+Select * from Sala
+
+exec sp_B_Complemento
+@idSala = 2,
+@info = '',
+@error = ''
+
+exec sp_C_Complemento
+@idSala = 1,
+@viendoIzq = 'viendoIzq_Sala 1.png',
+@viendoDer = 'viendoDer_Sala 1.png',
+@color1 = '#0b49ad',
+@color2 = '#a76244',
+@plat1 = 'plat1_Sala 1.png',
+@plat2 = 'plat2_Sala 1.png',
+@plat3 = 'plat3_Sala 1.png',
+@plat4 = 'plat4_Sala 1.png',
+@dec1 = 'dec1_Sala 1.png',
+@dec2 = 'dec2_Sala 1.png',
+@dec3 = 'dec3_Sala 1.png',
+@dec4 = 'dec4_Sala 1.png',
+@objCie1 = 'objCie1_Sala 1.png',
+@objCie2 = 'objCie2_Sala 1.png',
+@objFon1 = 'objFon1_Sala 1.png',
+@objFon2 = 'objFon2_Sala 1.png',
+@objFon3 = 'objFon3_Sala 1.png',
+@objFon4 = 'objFon4_Sala 1.png',
+@objFonMov = 'objFonMov_Sala 1.png',
+@objFinal = 'objFinal_Sala 1.png',
+@sonido = 'sonido_Sala 1.png',
+@info = '',
+@error = ''
+
+exec sp_U_Complemento		
+@idCom = 0,	
+@viendoIzq = 'viendoIzq_Sala 1.png',
+@viendoDer = 'viendoDer_Sala 1.png',
+@color1 = '#0b49ad',
+@color2 = '#a76244',
+@plat1 = 'plat1_Sala 1.png',
+@plat2 = 'plat2_Sala 1.png',
+@plat3 = 'plat3_Sala 1.png',
+@plat4 = 'plat4_Sala 1.png',
+@dec1 = 'dec1_Sala 1.png',
+@dec2 = 'dec2_Sala 1.png',
+@dec3 = 'dec3_Sala 1.png',
+@dec4 = 'dec4_Sala 1.png',
+@objCie1 = 'objCie1_Sala 1.png',
+@objCie2 = 'objCie2_Sala 1.png',
+@objFon1 = 'objFon1_Sala 1.png',
+@objFon2 = 'objFon2_Sala 1.png',
+@objFon3 = 'objFon3_Sala 1.png',
+@objFon4 = 'objFon4_Sala 1.png',
+@objFonMov = 'objFonMov_Sala 1.png',
+@objFinal = 'objFinal_Sala 1.png',
+@sonido = 'sonido_Sala 1.png',
+@info = '',
+@error = ''
+
 ---- SALA ---------------------------------------------
 select * from ModoJuego
 
@@ -421,7 +514,7 @@ WHERE TABLE_NAME = 'Usuario' AND CONSTRAINT_TYPE = 'CHECK';
 ---
 SELECT tc.COLUMN_NAME, tc.DATA_TYPE, tc.CHARACTER_MAXIMUM_LENGTH, tc.IS_NULLABLE
 FROM INFORMATION_SCHEMA.COLUMNS tc
-WHERE tc.TABLE_NAME = 'Usuario';
+WHERE tc.TABLE_NAME = 'Complemento';
 
 ---
 SELECT @@VERSION;

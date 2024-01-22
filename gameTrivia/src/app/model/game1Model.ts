@@ -1,34 +1,35 @@
 export interface game1Model {
-    imgCharacterLeft: string;
-    imgCharacterRight: string;
+  idCom: number;
+  viendoIzquierda: string;
+  viendoDerecha: string;
 
-    gradientColor1:string
-    gradientColor2:string
+  color1: string;
+  color2: string;
 
-    imgPlatform1:string;
-    imgPlatform2:string;
-    imgPlatform3:string;
-    imgPlatform4:string;
+  plataforma1: string;
+  plataforma2: string;
+  plataforma3: string;
+  plataforma4: string;
 
-    isDecoration:number;
-    imgDecoration1:string;
-    imgDecoration2:string;
-    imgDecoration3:string;
-    imgDecoration4:string;
+  isDecoration: number;
+  decoracion1: string;
+  decoracion2: string;
+  decoracion3: string;
+  decoracion4: string;
 
-    isSkyObjects: number;
-    imgSkyObject1:string;
-    imgSkyObject2:string;
+  isSkyObjects: number;
+  objetoCielo1: string;
+  objetoCielo2: string;
 
-    isBackgroundObjects: number;
-    imgBackgroundObjects1:string;
-    imgBackgroundObjects2:string;
-    imgBackgroundObjects3:string;
-    imgBackgroundObjects4:string;
-    imgBackgroundObjectsMovil:string;
+  isBackgroundObjects: number;
+  objetoFondo1: string;
+  objetoFondo2: string;
+  objetoFondo3: string;
+  objetoFondo4: string;
+  objetoFondoMovil: string;
 
-    isFinalObject: number;
-    imgFinalObject:string;
+  isFinalObject: number;
+  objetoFinal: string;
 
-  }
-  
+  sonido: string;
+}

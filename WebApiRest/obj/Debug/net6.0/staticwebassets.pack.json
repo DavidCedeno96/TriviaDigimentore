@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Content\\Archivos\\Sala\\Reporte.xls"
     },
     {
+      "Id": "C:\\Users\\Alejandro\\OneDrive - Digimentore SA\\Escritorio\\GitHub\\TriviaDigimentore\\WebApiRest\\wwwroot\\Content\\Images\\Complemento\\_default.png",
+      "PackagePath": "staticwebassets\\Content\\Images\\Complemento\\_default.png"
+    },
+    {
       "Id": "C:\\Users\\Alejandro\\OneDrive - Digimentore SA\\Escritorio\\GitHub\\TriviaDigimentore\\WebApiRest\\wwwroot\\Content\\Images\\Logo\\icono-d.png",
       "PackagePath": "staticwebassets\\Content\\Images\\Logo\\icono-d.png"
     },
@@ -17,8 +21,8 @@
       "PackagePath": "staticwebassets\\Content\\Images\\Logo\\logo-dm.png"
     },
     {
-      "Id": "C:\\Users\\Alejandro\\OneDrive - Digimentore SA\\Escritorio\\GitHub\\TriviaDigimentore\\WebApiRest\\wwwroot\\Content\\Images\\Sala\\default.png",
-      "PackagePath": "staticwebassets\\Content\\Images\\Sala\\default.png"
+      "Id": "C:\\Users\\Alejandro\\OneDrive - Digimentore SA\\Escritorio\\GitHub\\TriviaDigimentore\\WebApiRest\\wwwroot\\Content\\Images\\Sala\\_default.png",
+      "PackagePath": "staticwebassets\\Content\\Images\\Sala\\_default.png"
     },
     {
       "Id": "C:\\Users\\Alejandro\\OneDrive - Digimentore SA\\Escritorio\\GitHub\\TriviaDigimentore\\WebApiRest\\wwwroot\\homeRest.html",

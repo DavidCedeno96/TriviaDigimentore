@@ -1,4 +1,6 @@
-﻿namespace WebApiRest.Utilities
+﻿using WebApiRest.Models;
+
+namespace WebApiRest.Utilities
 {
     public static class WC
     {        
@@ -82,7 +84,40 @@
             
             return false;
         }
-        
+
+        public async static Task<string> SaveImagenGetNombre(IFormFile archivo, string tipoArchivo, IWebHostEnvironment env, string nombreCarpeta, string nombreArchivo, string imagenAnterior)
+        {
+            string fullNombre = "";
+
+            if (archivo != null)
+            {                
+                Response response = VF.ValidarArchivo(env, archivo, tipoArchivo, nombreCarpeta);
+
+                if (response.Error == 0)
+                {
+                    //Aqui eliminamos el archivo anterior
+                    string rutaArchivoAnterior = GetRutaImagen(env, imagenAnterior, nombreCarpeta);
+                    if (File.Exists(rutaArchivoAnterior))
+                    {
+                        File.Delete(rutaArchivoAnterior);
+                    }
+
+
+                    //Aqui creamos una nueva imagen
+                    string rutaArchivo = GetRutaImagen(env, nombreArchivo, nombreCarpeta);
+                    FileStream fileStream = new(rutaArchivo, FileMode.Create);
+                    await archivo.CopyToAsync(fileStream);
+                    await fileStream.DisposeAsync();
+
+                    string extension = Path.GetExtension(archivo.FileName);
+
+                    fullNombre = nombreArchivo+extension;
+                }
+            }
+
+            return fullNombre;
+        }        
+
         public static string GetSatisfactorio()
         {
             return satisfactorio;

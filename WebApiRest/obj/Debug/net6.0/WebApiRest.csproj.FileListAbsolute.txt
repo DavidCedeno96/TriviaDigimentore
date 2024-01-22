@@ -1,6 +1,5 @@
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Archivos\Ranking\Reporte.xls
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Archivos\Sala\Reporte.xls
-C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Images\Sala\default.png
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\appsettings.json
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\WebApiRest.staticwebassets.runtime.json
@@ -76,3 +75,5 @@ C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Images\Logo\icono-d.png
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Images\Logo\logo-dm.png
 C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\homeRest.html
+C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Images\Complemento\_default.png
+C:\Users\Alejandro\OneDrive - Digimentore SA\Escritorio\GitHub\TriviaDigimentore\WebApiRest\bin\Debug\net6.0\wwwroot\Content\Images\Sala\_default.png
