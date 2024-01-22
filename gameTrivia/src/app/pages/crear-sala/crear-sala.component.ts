@@ -213,8 +213,18 @@ export class CrearSalaComponent implements OnInit {
         this.result = info;
         //console.log(info, campo);
         if (error > 0) {
-          this.result += '_' + campo;
+          if (campo) {
+            this.result += '_' + campo;
+          } else {
+            this.result;
+          }
           this.existeError = true;
+
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
           this.constantsService.loading(false);
         } else {
           let idSalaCreada = info.split(',')[1];
@@ -480,7 +490,7 @@ export class CrearSalaComponent implements OnInit {
       .crearItem(this.infoComplemento(idCom, idSala, nombreSala))
       .subscribe({
         next: (data: any) => {
-          const { info, error, campo } = data.result;
+          const { info, error, campo } = data.response;
           this.result = info;
           console.log(info, campo);
           if (error > 0) {
@@ -505,7 +515,7 @@ export class CrearSalaComponent implements OnInit {
       .updateItem(this.infoComplemento(idCom, idSala, nombreSala))
       .subscribe({
         next: (data: any) => {
-          const { info, error, campo } = data.result;
+          const { info, error, campo } = data.response;
           this.result = info;
           console.log(info, campo);
           if (error > 0) {
