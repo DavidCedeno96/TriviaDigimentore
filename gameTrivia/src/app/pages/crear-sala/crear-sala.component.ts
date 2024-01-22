@@ -253,6 +253,8 @@ export class CrearSalaComponent implements OnInit {
     if (this.selectedFile) {
       formData.append('archivo', this.selectedFile);
     }
+    console.log(formData);
+
     this.salaServicio.editarSala(formData).subscribe({
       next: (data: any) => {
         const { info, error, campo } = data.result;
@@ -322,6 +324,8 @@ export class CrearSalaComponent implements OnInit {
       next: (data: any) => {
         const { info, error, complemento } = data.result;
         this.complemento = complemento;
+        this.selectedColor1 = this.complemento.color1;
+        this.selectedColor2 = this.complemento.color2;
         //console.log(this.complemento);
         this.constantsService.loading(false);
       },
@@ -418,7 +422,7 @@ export class CrearSalaComponent implements OnInit {
 
   infoComplemento(idCom: number, idSala: number, nombreSala: string): FormData {
     let formData = new FormData();
-    formData.append('IdCom', idCom.toString());
+    formData.append('idCom', idCom.toString());
     formData.append('idSala', idSala.toString());
     formData.append('nombreSala', nombreSala);
     formData.append('color1', this.selectedColor1);
@@ -480,58 +484,60 @@ export class CrearSalaComponent implements OnInit {
     if (this.sonido) {
       formData.append('sonido', this.sonido);
     }
+    console.log(formData);
 
     return formData;
   }
 
   createComplemento(idCom: number, idSala: number, nombreSala: string) {
-    /* AQUI LLAMA AL END POINT DE COMPLEMENTO */
-    this.complementoServicio
-      .crearItem(this.infoComplemento(idCom, idSala, nombreSala))
-      .subscribe({
-        next: (data: any) => {
-          const { info, error, campo } = data.response;
-          this.result = info;
-          console.log(info, campo);
-          if (error > 0) {
-            this.existeError = true;
-          } else {
-            this.existeError = false;
-            this.router.navigate(['/Administrador']);
-          }
-          this.constantsService.loading(false);
-        },
-        error: (e) => {
-          //console.log(e);
-          if (e.status === 401) {
-            this.router.navigate(['/']);
-          }
-        },
-      });
+    let formData: FormData;
+    formData = this.infoComplemento(idCom, idSala, nombreSala);
+
+    this.complementoServicio.crearItem(formData).subscribe({
+      next: (data: any) => {
+        const { info, error, campo } = data.response;
+        this.result = info;
+        console.log(info, campo);
+        if (error > 0) {
+          this.existeError = true;
+        } else {
+          this.existeError = false;
+          this.router.navigate(['/Administrador']);
+        }
+        this.constantsService.loading(false);
+      },
+      error: (e) => {
+        //console.log(e);
+        if (e.status === 401) {
+          this.router.navigate(['/']);
+        }
+      },
+    });
   }
 
-  updateComplemento(idCom: number, idSala: number, nombreSala: string) {
-    this.complementoServicio
-      .updateItem(this.infoComplemento(idCom, idSala, nombreSala))
-      .subscribe({
-        next: (data: any) => {
-          const { info, error, campo } = data.response;
-          this.result = info;
-          console.log(info, campo);
-          if (error > 0) {
-            this.existeError = true;
-          } else {
-            this.existeError = false;
-            this.router.navigate(['/Administrador']);
-          }
-          this.constantsService.loading(false);
-        },
-        error: (e) => {
-          //console.log(e);
-          if (e.status === 401) {
-            this.router.navigate(['/']);
-          }
-        },
-      });
+  async updateComplemento(idCom: number, idSala: number, nombreSala: string) {
+    let formData: FormData;
+    formData = this.infoComplemento(idCom, idSala, nombreSala);
+
+    this.complementoServicio.updateItem(formData).subscribe({
+      next: (data: any) => {
+        const { info, error, campo } = data.response;
+        this.result = info;
+        console.log(info, campo);
+        if (error > 0) {
+          this.existeError = true;
+        } else {
+          this.existeError = false;
+          this.router.navigate(['/Administrador']);
+        }
+        this.constantsService.loading(false);
+      },
+      error: (e) => {
+        //console.log(e);
+        if (e.status === 401) {
+          this.router.navigate(['/']);
+        }
+      },
+    });
   }
 }

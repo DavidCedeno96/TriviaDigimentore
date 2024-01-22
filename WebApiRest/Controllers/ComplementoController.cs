@@ -74,8 +74,9 @@ namespace WebApiRest.Controllers
             Complemento complemento = new();
             string nombreSala = complementoInfo.NombreSala;
 
-            ComplementoItem resultItem = await data.GetComplemento(complementoInfo.IdSala);            
+            ComplementoItem resultItem = await data.GetComplemento(complementoInfo.IdSala);
 
+            complemento.IdCom = complementoInfo.IdCom;
             complemento.ViendoIzquierda = await WC.SaveImagenGetNombre(complementoInfo.ViendoIzquierda, "png", _env, nombreCarpeta, "viendoIzq_" + nombreSala, resultItem.Complemento.ViendoIzquierda);
             complemento.ViendoDerecha = await WC.SaveImagenGetNombre(complementoInfo.ViendoDerecha, "png", _env, nombreCarpeta, "viendoDer_" + nombreSala, resultItem.Complemento.ViendoDerecha);
             complemento.Color1 = complementoInfo.Color1;
