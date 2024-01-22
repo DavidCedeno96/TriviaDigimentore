@@ -367,31 +367,31 @@ export class ChallengersGameComponent
 
     this.getComponentesList();
     //Para utilizar esta funcion cuando rellenemos imagenes que provienen de la api
-    /*     this.cargarElementos( "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      1,
-      "",
-      "",
-      "",
-      "",
-      1,
-      "",
-      "",
-      1,
-      "",
-      "",
-      "",
-      "",
-      "",
-      1,
-      "") */
-    this.cargarTexturasEscena();
+    /*      this.cargarElementos( this.characterSprite1,
+          this.characterSprite2,
+          this.color1,
+          this.color2,
+          this.rutaPlataforma1,
+          this.rutaPlataforma2,
+          this.rutaPlataforma3,
+          this.rutaPlataforma4,
+          1,
+          this.rutaadorno1,
+          this.rutaadorno2,
+          this.rutaadorno3,
+          this.rutaadorno4,
+          1,
+          this.rutaObjetoFondo1,
+          this.rutaObjetoFondo2,
+          1,
+          this.rutaFondoDesk1,
+          this.rutaFondoDesk2,
+          this.rutaFondoDesk3,
+          this.rutaFondoDesk4,
+          this.rutaFondoMovil,
+          1,
+          this.rutaFinalObject)  */
+    //this.cargarTexturasEscena();
 
     //Slide para la meta
     this.optionsMeta = {
@@ -429,14 +429,15 @@ export class ChallengersGameComponent
   getComponentesList() {
     this.complementoService.getItem(this.idSala).subscribe({
       next: (data: any) => {
+        console.log(data);
         const { info, error, complemento } = data.result;
         if (error === 0) {
           let com: game1Model = complemento;
           this.cargarElementos(
             this.getImageCom(com.viendoIzquierda, 'Characters2.png'),
             this.getImageCom(com.viendoDerecha, 'Characters1.png'),
-            this.getImageCom(com.color1, this.color1),
-            this.getImageCom(com.color2, this.color2),
+            com.color1,
+            com.color2,
             this.getImageCom(com.plataforma1, 'plataforma1.png'),
             this.getImageCom(com.plataforma2, 'plataforma2.png'),
             this.getImageCom(com.plataforma3, 'plataforma3.png'),
@@ -458,6 +459,7 @@ export class ChallengersGameComponent
             1,
             this.getImageCom(com.objetoFinal, 'nave2.png')
           );
+          
         } else {
           window.location.reload();
         }
@@ -729,6 +731,7 @@ export class ChallengersGameComponent
     for (let i = 0; i < this.listaDePreguntas.length; i++) {
       floorYPositions.push(base - distanciaH * (i + 1));
     }
+    console.log("this.listaDePreguntas.length "+this.listaDePreguntas.length);
 
     const numTextures = this.floorTextures.length;
     var jT = 1;
