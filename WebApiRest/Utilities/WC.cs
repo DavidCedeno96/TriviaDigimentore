@@ -104,12 +104,11 @@ namespace WebApiRest.Utilities
 
 
                     //Aqui creamos una nueva imagen
-                    string rutaArchivo = GetRutaImagen(env, nombreArchivo, nombreCarpeta);
+                    string extension = Path.GetExtension(archivo.FileName);
+                    string rutaArchivo = GetRutaImagen(env, nombreArchivo+extension, nombreCarpeta);
                     FileStream fileStream = new(rutaArchivo, FileMode.Create);
                     await archivo.CopyToAsync(fileStream);
-                    await fileStream.DisposeAsync();
-
-                    string extension = Path.GetExtension(archivo.FileName);
+                    await fileStream.DisposeAsync();                    
 
                     fullNombre = nombreArchivo+extension;
                 }
