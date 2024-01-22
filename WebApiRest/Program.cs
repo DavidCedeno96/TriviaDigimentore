@@ -12,7 +12,8 @@ var misReglasCors = "ReglasCors";
 builder.Services.AddCors(p => p.AddPolicy(misReglasCors, build => {
     build.WithOrigins(settings.Origin.Split(','))
     .AllowAnyHeader()
-    .AllowAnyMethod();
+    .AllowAnyMethod()
+    .WithExposedHeaders("Content-Disposition");
 }));
 
 //JWT
@@ -55,7 +56,14 @@ app.UseDefaultFiles();
 //Crear una nueva carpeta llamada wwwroot
 //Guardar una nueva imagen default.png => propiedades => Copiar en el directorio de salida => Copiar siempre
 //Recuperar imagenes del wwwroot/Content
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    OnPrepareResponse = ctx => {
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Origin", "*");
+        ctx.Context.Response.Headers.Append("Access-Control-Allow-Headers",
+          "Origin, X-Requested-With, Content-Type, Accept");
+    },
+});
 
 //CORS
 app.UseCors(misReglasCors);
