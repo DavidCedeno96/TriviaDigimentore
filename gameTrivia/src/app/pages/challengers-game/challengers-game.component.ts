@@ -442,24 +442,23 @@ export class ChallengersGameComponent
             this.getImageCom(com.plataforma2, 'plataforma2.png'),
             this.getImageCom(com.plataforma3, 'plataforma3.png'),
             this.getImageCom(com.plataforma4, 'plataforma4.png'),
-            1,
+            com.isDecoration,
             this.getImageCom(com.decoracion1, 'piedras1.png'),
             this.getImageCom(com.decoracion2, 'piedras2.png'),
             this.getImageCom(com.decoracion3, 'piedras2.png'),
             this.getImageCom(com.decoracion4, 'piedras2.png'),
-            1,
+            com.isSkyObjects,
             this.getImageCom(com.objetoCielo1, 'planeta1.png'),
             this.getImageCom(com.objetoCielo2, 'planeta2.png'),
-            1,
+            com.isBackgroundObjects,
             this.getImageCom(com.objetoFondo1, 'StarsD1.png'),
             this.getImageCom(com.objetoFondo2, 'StarsD2.png'),
             this.getImageCom(com.objetoFondo3, 'StarsD3.png'),
             this.getImageCom(com.objetoFondo4, 'StarsD4.png'),
             this.getImageCom(com.objetoFondoMovil, 'Estrellas movil.png'),
-            1,
+            com.isFinalObject,
             this.getImageCom(com.objetoFinal, 'nave2.png')
           );
-          
         } else {
           window.location.reload();
         }
@@ -476,12 +475,11 @@ export class ChallengersGameComponent
     let imageRuta = '';
 
     if (image !== '') {
-      imageRuta = environment.URL + '/Content/Images/Complemento/' + image;
+      imageRuta = `${environment.URL}/Content/Images/Complemento/${image}`;
     } else {
-      imageRuta = 'assets/game1/' + imgDefault;
+      imageRuta = `assets/game1/${imgDefault}`;
     }
-
-    console.log(imageRuta);
+    //console.log(imageRuta);
     return imageRuta;
   }
 
@@ -731,7 +729,7 @@ export class ChallengersGameComponent
     for (let i = 0; i < this.listaDePreguntas.length; i++) {
       floorYPositions.push(base - distanciaH * (i + 1));
     }
-    console.log("this.listaDePreguntas.length "+this.listaDePreguntas.length);
+    console.log('this.listaDePreguntas.length ' + this.listaDePreguntas.length);
 
     const numTextures = this.floorTextures.length;
     var jT = 1;
