@@ -364,35 +364,9 @@ export class ChallengersGameComponent
     this.pixiContainer.nativeElement.appendChild(this.app.view);
     const container = new PIXI.Container();
     this.app.stage.addChild(container);
-
+    //CARGAR IMAGENES DE LA API
     this.getComponentesList();
-    //Para utilizar esta funcion cuando rellenemos imagenes que provienen de la api
-    /*      this.cargarElementos( this.characterSprite1,
-          this.characterSprite2,
-          this.color1,
-          this.color2,
-          this.rutaPlataforma1,
-          this.rutaPlataforma2,
-          this.rutaPlataforma3,
-          this.rutaPlataforma4,
-          1,
-          this.rutaadorno1,
-          this.rutaadorno2,
-          this.rutaadorno3,
-          this.rutaadorno4,
-          1,
-          this.rutaObjetoFondo1,
-          this.rutaObjetoFondo2,
-          1,
-          this.rutaFondoDesk1,
-          this.rutaFondoDesk2,
-          this.rutaFondoDesk3,
-          this.rutaFondoDesk4,
-          this.rutaFondoMovil,
-          1,
-          this.rutaFinalObject)  */
-    //this.cargarTexturasEscena();
-
+    
     //Slide para la meta
     this.optionsMeta = {
       readOnly: true,
@@ -493,83 +467,88 @@ export class ChallengersGameComponent
     const planet2 = new PIXI.Sprite(texturePlaneta2);
 
     //Estrellas
-    if (this.app.screen.width < 577) {
-      var textureStar = PIXI.Texture.from(this.rutaFondoMovil);
-      const stars = new PIXI.Sprite(textureStar);
-      stars.anchor.set(0.5);
-
-      var resp = stars.texture.baseTexture.valid;
-      const checkTextureS = () => {
-        if (resp) {
-          stars.x = this.app.screen.width / 2;
-          stars.y = this.app.screen.height / 2 - 100;
-
-          //Calculamos el ancho
-          const proporcion = this.hbackgroundmovil / stars.height;
-          const newWidth = stars.width * proporcion;
-
-          stars.height = this.hbackgroundmovil;
-          stars.width = newWidth;
-          this.app.stage.addChild(stars);
-        } else {
-          resp = stars.texture.baseTexture.valid;
-          requestAnimationFrame(checkTextureS);
-        }
-      };
-      checkTextureS();
-    } else {
-      for (let i = 0; i < this.starsTextures.length; i++) {
-        const texture = this.starsTextures[i];
-        const stars = new PIXI.Sprite(texture);
-
+    if (this.isBackgroundObjects) {
+      if (this.app.screen.width < 577) {
+        var textureStar = PIXI.Texture.from(this.rutaFondoMovil);
+        const stars = new PIXI.Sprite(textureStar);
+        stars.anchor.set(0.5);
+  
         var resp = stars.texture.baseTexture.valid;
-        const checkTexture = (iValue: number) => {
-          //console.log("entrar texture")
+        const checkTextureS = () => {
           if (resp) {
+            stars.x = this.app.screen.width / 2;
+            stars.y = this.app.screen.height / 2 - 100;
+  
             //Calculamos el ancho
-            const proporcion = this.hbackground / stars.height;
+            const proporcion = this.hbackgroundmovil / stars.height;
             const newWidth = stars.width * proporcion;
-
-            switch (iValue) {
-              case 0:
-                stars.anchor.set(0);
-                stars.x = 50;
-
-                break;
-              case 1:
-                stars.anchor.set(1, 0);
-                stars.x = this.app.screen.width - 50;
-                break;
-              case 2:
-                stars.anchor.set(0, 1);
-                stars.x = 50;
-                stars.y = this.app.screen.height - 200;
-                break;
-              case 3:
-                stars.anchor.set(1, 1);
-                stars.x = this.app.screen.width - 50;
-                stars.y = this.app.screen.height - 200;
-                break;
-              default:
-                break;
-            }
-            //stars.scale.set(0.95);
+  
+            stars.height = this.hbackgroundmovil;
             stars.width = newWidth;
-            stars.height = this.hbackground;
             this.app.stage.addChild(stars);
           } else {
             resp = stars.texture.baseTexture.valid;
-            //console.log(this.character.texture.baseTexture.valid);
-            requestAnimationFrame(() => checkTexture(iValue));
+            requestAnimationFrame(checkTextureS);
           }
         };
-        checkTexture(i);
+        checkTextureS();
+      } else {
+        for (let i = 0; i < this.starsTextures.length; i++) {
+          const texture = this.starsTextures[i];
+          const stars = new PIXI.Sprite(texture);
+  
+          var resp = stars.texture.baseTexture.valid;
+          const checkTexture = (iValue: number) => {
+            //console.log("entrar texture")
+            if (resp) {
+              //Calculamos el ancho
+              const proporcion = this.hbackground / stars.height;
+              const newWidth = stars.width * proporcion;
+  
+              switch (iValue) {
+                case 0:
+                  stars.anchor.set(0);
+                  stars.x = 50;
+  
+                  break;
+                case 1:
+                  stars.anchor.set(1, 0);
+                  stars.x = this.app.screen.width - 50;
+                  break;
+                case 2:
+                  stars.anchor.set(0, 1);
+                  stars.x = 50;
+                  stars.y = this.app.screen.height - 200;
+                  break;
+                case 3:
+                  stars.anchor.set(1, 1);
+                  stars.x = this.app.screen.width - 50;
+                  stars.y = this.app.screen.height - 200;
+                  break;
+                default:
+                  break;
+              }
+              //stars.scale.set(0.95);
+              stars.width = newWidth;
+              stars.height = this.hbackground;
+              this.app.stage.addChild(stars);
+            } else {
+              resp = stars.texture.baseTexture.valid;
+              //console.log(this.character.texture.baseTexture.valid);
+              requestAnimationFrame(() => checkTexture(iValue));
+            }
+          };
+          checkTexture(i);
+        }
       }
+      
     }
+   
 
     //Planetas
     //Necesitamos que la textura se cargue para detectar el tamaño de la imagen
-    var resp2 = planet1.texture.baseTexture.valid;
+    if (this.isSkyObjects) {
+      var resp2 = planet1.texture.baseTexture.valid;
     const checkTexture2 = () => {
       //console.log("entrar texture")
       if (resp2) {
@@ -632,6 +611,9 @@ export class ChallengersGameComponent
       };
       checkTexture3();
     }
+      
+    }
+    
   }
   //CHARACTER
 
@@ -773,7 +755,8 @@ export class ChallengersGameComponent
       //console.log(jT);
 
       ///Rellenar rocas
-      const textureR = this.rocksTextures[jT - 1];
+      if (this.isDecoration) {
+        const textureR = this.rocksTextures[jT - 1];
       const rock = new PIXI.Sprite(textureR);
 
       var resp2 = rock.texture.baseTexture.valid;
@@ -802,6 +785,9 @@ export class ChallengersGameComponent
         }
       };
       checkTexture2(i, jT);
+        
+      }
+      
 
       jT++;
       if (jT > numTextures) {
@@ -810,7 +796,8 @@ export class ChallengersGameComponent
     }
 
     //Nave
-    const textureSpaceShip = PIXI.Texture.from(this.rutaFinalObject);
+    if (this.isFinalObject) {
+      const textureSpaceShip = PIXI.Texture.from(this.rutaFinalObject);
     const ship = new PIXI.Sprite(textureSpaceShip);
 
     //Necesitamos que la textura se cargue para detectar el tamaño de la imagen
@@ -838,6 +825,9 @@ export class ChallengersGameComponent
       }
     };
     checkTexture3();
+      
+    }
+    
   }
 
   private jump(): void {
@@ -882,10 +872,16 @@ export class ChallengersGameComponent
       this.floors.forEach(function (floor) {
         floor.y += translateRocks;
       });
-      this.rocks.forEach(function (rock) {
-        rock.y += translateRocks;
-      });
-      this.spaceShip.y += translateRocks;
+      if (this.isDecoration) {
+        this.rocks.forEach(function (rock) {
+          rock.y += translateRocks;
+        });
+      }
+      
+      if (this.isFinalObject) {
+        this.spaceShip.y += translateRocks;        
+      }
+      
     }
   }
 
@@ -1283,6 +1279,8 @@ export class ChallengersGameComponent
     this.rutaFondoMovil = imgBackgroundObjectsMovil;
     this.isFinalObject = isFinalObject == 1;
     this.rutaFinalObject = imgFinalObject;
+
+    //console.log("this.isDecoration"+this.isDecoration);
 
     //Rellenar la escena
     this.cargarTexturasEscena();
