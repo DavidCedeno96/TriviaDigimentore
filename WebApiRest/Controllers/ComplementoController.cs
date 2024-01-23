@@ -59,6 +59,11 @@ namespace WebApiRest.Controllers
             complemento.ObjetoFinal = await WC.SaveImagenGetNombre(complementoInfo.ObjetoFinal, "png", _env, nombreCarpeta, "objFinal_" + nombreSala, "");
             complemento.Sonido = await WC.SaveImagenGetNombre(complementoInfo.Sonido, "mp3", _env, nombreCarpeta, "sonido_" + nombreSala, "");
 
+            complemento.IsDecoration = complementoInfo.IsDecoration;
+            complemento.IsSkyObjects = complementoInfo.IsSkyObjects;
+            complemento.IsBackgroundObjects = complementoInfo.IsBackgroundObjects;
+            complemento.IsFinalObject = complementoInfo.IsFinalObject;
+
 
             Response response = await data.CreateComplemento(complemento);
 
@@ -99,6 +104,10 @@ namespace WebApiRest.Controllers
             complemento.ObjetoFinal = await WC.SaveImagenGetNombre(complementoInfo.ObjetoFinal, "png", _env, nombreCarpeta, "objFinal_" + nombreSala, resultItem.Complemento.ObjetoFinal);
             complemento.Sonido = await WC.SaveImagenGetNombre(complementoInfo.Sonido, "mp3", _env, nombreCarpeta, "sonido_" + nombreSala, resultItem.Complemento.Sonido);
 
+            complemento.IsDecoration = complementoInfo.IsDecoration;
+            complemento.IsSkyObjects = complementoInfo.IsSkyObjects;
+            complemento.IsBackgroundObjects = complementoInfo.IsBackgroundObjects;
+            complemento.IsFinalObject = complementoInfo.IsFinalObject;
 
             Response response = await data.UpdateComplemento(complemento);
 

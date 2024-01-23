@@ -240,7 +240,25 @@ namespace WebApiRest.Controllers
         [Authorize(Roles = "Administrador,SuperAdministrador")]
         public async Task<IActionResult> DeleteItem([FromQuery] int idSala)
         {
-            Response result = await data.DeleteSala(idSala);           
+            Response result = await data.DeleteSala(idSala);
+            
+            if(result.Error == 0)
+            {
+                string imagenAnterior = result.Info.Split(':')[1];
+                string nombreSala = result.Info.Split(':')[2];
+
+                //Aqui eliminamos el archivo anterior
+                string rutaArchivoAnterior = WC.GetRutaImagen(_env, imagenAnterior, nombreCarpeta);
+                if (System.IO.File.Exists(rutaArchivoAnterior))
+                {
+                    System.IO.File.Delete(rutaArchivoAnterior);
+                }
+
+                WC.EliminarVariasImagenes(_env, "Complemento", $"_{nombreSala}");
+
+                result.Info = result.Info.Split(',')[0];
+            }
+
             return StatusCode(StatusCodes.Status200OK, new { result });
         }
     }

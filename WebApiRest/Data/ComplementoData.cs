@@ -56,6 +56,11 @@ namespace WebApiRest.Data
                         ObjetoFinal = dr["objetoFinal"].ToString(),
                         Sonido = dr["sonido"].ToString(),
 
+                        IsDecoration = Convert.ToInt32(dr["isDecoration"].ToString()),
+                        IsSkyObjects = Convert.ToInt32(dr["isSkyObjects"].ToString()),
+                        IsBackgroundObjects = Convert.ToInt32(dr["isBackgroundObjects"].ToString()),
+                        IsFinalObject = Convert.ToInt32(dr["isFinalObject"].ToString()),
+
                         FechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString()),
                         FechaModificacion = Convert.ToDateTime(dr["fecha_modificacion"].ToString()),
                     };
@@ -117,6 +122,12 @@ namespace WebApiRest.Data
             cmd.Parameters.AddWithValue("@objFinal", complemento.ObjetoFinal);
             cmd.Parameters.AddWithValue("@sonido", complemento.Sonido);
 
+            cmd.Parameters.AddWithValue("@isDecoration", complemento.IsDecoration);
+            cmd.Parameters.AddWithValue("@isSkyObjects", complemento.IsSkyObjects);
+            cmd.Parameters.AddWithValue("@isBackgroundObjects", complemento.IsBackgroundObjects);
+            cmd.Parameters.AddWithValue("@isFinalObject", complemento.IsFinalObject);            
+
+
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;
             cmd.Parameters.Add("@error", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -175,6 +186,10 @@ namespace WebApiRest.Data
             cmd.Parameters.AddWithValue("@objFonMov", complemento.ObjetoFondoMovil);
             cmd.Parameters.AddWithValue("@objFinal", complemento.ObjetoFinal);
             cmd.Parameters.AddWithValue("@sonido", complemento.Sonido);
+            cmd.Parameters.AddWithValue("@isDecoration", complemento.IsDecoration);
+            cmd.Parameters.AddWithValue("@isSkyObjects", complemento.IsSkyObjects);
+            cmd.Parameters.AddWithValue("@isBackgroundObjects", complemento.IsBackgroundObjects);
+            cmd.Parameters.AddWithValue("@isFinalObject", complemento.IsFinalObject);
 
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;

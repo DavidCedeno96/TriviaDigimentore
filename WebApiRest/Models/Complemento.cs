@@ -29,6 +29,10 @@
 
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public int IsDecoration { get; set; }
+        public int IsSkyObjects { get; set; }
+        public int IsBackgroundObjects { get; set; }
+        public int IsFinalObject { get; set; }
     }
 
     public class ComplementoInfo
@@ -60,6 +64,10 @@
 
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public int IsDecoration { get; set; }
+        public int IsSkyObjects { get; set; }
+        public int IsBackgroundObjects { get; set; }
+        public int IsFinalObject { get; set; }
     }
 
     public class ComplementoList

@@ -118,9 +118,13 @@ create table Complemento(
 	sonido varchar(50),
 	fecha_creacion datetime default getdate(),
 	fecha_modificacion datetime default getdate(),
+	isDecoration int,
+	isSkyObjects int,
+	isBackgroundObjects int,
+	isFinalObject int
 );
 
-
+select * from Complemento
 -----------------------------------------------------------------
 select * from Rol -- Hacer el insert y no truncar
 select * from ModoJuego -- Hacer el insert y no truncar
@@ -255,6 +259,10 @@ exec sp_C_Complemento
 @objFonMov = 'objFonMov_Sala 1.png',
 @objFinal = 'objFinal_Sala 1.png',
 @sonido = 'sonido_Sala 1.png',
+@isDecoration = 1,
+@isSkyObjects = 1,
+@isBackgroundObjects = 1,
+@isFinalObject = 1,
 @info = '',
 @error = ''
 
@@ -281,6 +289,10 @@ exec sp_U_Complemento
 @objFonMov = 'objFonMov_Sala 1.png',
 @objFinal = 'objFinal_Sala 1.png',
 @sonido = 'sonido_Sala 1.png',
+@isDecoration = 1,
+@isSkyObjects = 1,
+@isBackgroundObjects = 1,
+@isFinalObject = 1,
 @info = '',
 @error = ''
 

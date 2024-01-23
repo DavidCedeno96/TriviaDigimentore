@@ -70,6 +70,28 @@ namespace WebApiRest.Utilities
             }            
         }
 
+        public static void EliminarVariasImagenes(IWebHostEnvironment env, string nombreCarpeta, string infoNombreArchivo)
+        {
+            string rutaArchivos = Path.Combine(env.ContentRootPath, "wwwroot", "Content", "Images", nombreCarpeta);
+            string[] img = Directory.GetFiles(rutaArchivos);
+
+            List<FileInfo> images = img
+                .Select(archivo => new FileInfo(archivo))
+                .Where(info => info.Name.Contains(infoNombreArchivo))
+                .ToList();
+
+            if (images.Count > 0)
+            {
+                foreach (var archivo in images)
+                {
+                    if (File.Exists(archivo.FullName))
+                    {
+                        File.Delete(archivo.FullName);
+                    }
+                }
+            }
+        }
+
         public static bool GetArchivoPermitido(string tipos, string nombreArchivo)
         {
             string extension = Path.GetExtension(nombreArchivo.ToLower());

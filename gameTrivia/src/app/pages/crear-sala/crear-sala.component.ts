@@ -307,15 +307,19 @@ export class CrearSalaComponent implements OnInit {
 
   onSwitchChange(event: any) {
     this.checkedDecoracion = event.target.checked;
+    //console.log('Decoraciones ', this.checkedDecoracion);
   }
   onSwitchChange2(event: any) {
     this.checkedDecoracion2 = event.target.checked;
+    //console.log('Objetos de Cielo', this.checkedDecoracion2);
   }
   onSwitchChange3(event: any) {
     this.checkedDecoracion3 = event.target.checked;
+    //console.log('Objetos de Fondo', this.checkedDecoracion3);
   }
   onSwitchChange4(event: any) {
     this.checkedDecoracion4 = event.target.checked;
+    //console.log('Objeto Final', this.checkedDecoracion4);
   }
 
   /* Compelementos */
@@ -326,6 +330,14 @@ export class CrearSalaComponent implements OnInit {
         this.complemento = complemento;
         this.selectedColor1 = this.complemento.color1;
         this.selectedColor2 = this.complemento.color2;
+        this.checkedDecoracion =
+          this.complemento.isDecoration === 1 ? true : false;
+        this.checkedDecoracion2 =
+          this.complemento.isSkyObjects === 1 ? true : false;
+        this.checkedDecoracion3 =
+          this.complemento.isBackgroundObjects === 1 ? true : false;
+        this.checkedDecoracion4 =
+          this.complemento.isFinalObject === 1 ? true : false;
         //console.log(this.complemento);
         this.constantsService.loading(false);
       },
@@ -484,7 +496,13 @@ export class CrearSalaComponent implements OnInit {
     if (this.sonido) {
       formData.append('sonido', this.sonido);
     }
-    console.log(formData);
+
+    formData.append('isDecoration', this.checkedDecoracion ? '1' : '0');
+    formData.append('isSkyObjects', this.checkedDecoracion2 ? '1' : '0');
+    formData.append('isBackgroundObjects', this.checkedDecoracion3 ? '1' : '0');
+    formData.append('isFinalObject', this.checkedDecoracion4 ? '1' : '0');
+
+    //console.log(formData);
 
     return formData;
   }
