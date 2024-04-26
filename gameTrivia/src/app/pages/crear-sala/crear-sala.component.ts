@@ -9,6 +9,7 @@ import { game1Model } from 'src/app/model/game1Model';
 import { ComplementoService } from 'src/app/services/complemento.service';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { SalaService } from 'src/app/services/sala.service';
+import { TimeApiService } from 'src/app/services/time-api.service';
 
 @Component({
   selector: 'app-crear-sala',
@@ -41,9 +42,12 @@ export class CrearSalaComponent implements OnInit {
     estado: 1,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   selectedColor1: string = '#3671D1';
@@ -79,12 +83,11 @@ export class CrearSalaComponent implements OnInit {
   date: Date | undefined;
   tiemposXPregunta: number[] = [15, 20, 30, 40, 50, 60];
 
-
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private salaServicio: SalaService,
+    private timeServicio: TimeApiService,
     private complementoServicio: ComplementoService,
     private encryptionService: EncryptionService,
     private constantsService: ConstantsService,
@@ -171,6 +174,8 @@ export class CrearSalaComponent implements OnInit {
   cargarData(idSala: number) {
     this.salaServicio.itemSala(0, idSala, 0).subscribe({
       next: (data: any) => {
+        console.log(data);
+
         const { info, error, sala } = data.result;
         this.result = info;
         console.log(this.result);
@@ -181,6 +186,7 @@ export class CrearSalaComponent implements OnInit {
         } else {
           //no hay error
           this.existeError = false;
+          this.date = new Date(sala.fechaCierre);
           this.nuevaSala = sala;
           /* this.imageSala = `${this.salaServicio.getURLImages()}/${
             this.nuevaSala.imagen
@@ -205,85 +211,114 @@ export class CrearSalaComponent implements OnInit {
   }
 
   crearNuevaSala() {
-    const formData = new FormData();
-    formData.append('nombre', this.nuevaSala.nombre.trim());
-    formData.append('descripcion', this.nuevaSala.descripcion.trim());
-    formData.append('idModoJuego', this.selectedCard.toString());
-    if (this.selectedFile) {
-      formData.append('archivo', this.selectedFile);
-    }
-
-    this.salaServicio.crearSala(formData).subscribe({
-      next: (data: any) => {
-        const { info, error, campo } = data.result;
-        this.result = info;
-        //console.log(info, campo);
-        if (error > 0) {
-          if (campo) {
-            this.result += '_' + campo;
-          } else {
-            this.result;
-          }
-          this.existeError = true;
-
-          window.scroll({
-            top: 0,
-            left: 0,
-            behavior: 'smooth',
-          });
-          this.constantsService.loading(false);
-        } else {
-          let idSalaCreada = info.split(',')[1];
-          let nomSalaCreada = info.split(',')[2];
-          this.createComplemento(0, idSalaCreada, nomSalaCreada);
-          /* this.existeError = false;
-          this.router.navigate(['/Administrador']); */
+    this.nuevaSala.fechaCierre = this.setFecha(this.date?.toString()!);
+    this.timeServicio.convertToLondonTime(this.date!).subscribe({
+      next: (dataDate: any) => {
+        const formData = new FormData();
+        formData.append('nombre', this.nuevaSala.nombre.trim());
+        formData.append('descripcion', this.nuevaSala.descripcion.trim());
+        formData.append('idModoJuego', this.selectedCard.toString());
+        formData.append(
+          'tiempoXpregunta',
+          this.nuevaSala.tiempoXpregunta.toString()
+        );
+        formData.append('fechaCierre', this.nuevaSala.fechaCierre);
+        formData.append('fechaCierreLondon', this.setFecha(dataDate));
+        if (this.selectedFile) {
+          formData.append('archivo', this.selectedFile);
         }
-        //this.constantsService.loading(false);
+
+        this.salaServicio.crearSala(formData).subscribe({
+          next: (data: any) => {
+            const { info, error, campo } = data.result;
+            this.result = info;
+            //console.log(info, campo);
+            if (error > 0) {
+              if (campo) {
+                this.result += '_' + campo;
+              } else {
+                this.result;
+              }
+              this.existeError = true;
+
+              window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+              this.constantsService.loading(false);
+            } else {
+              let idSalaCreada = info.split(',')[1];
+              let nomSalaCreada = info.split(',')[2];
+              this.createComplemento(0, idSalaCreada, nomSalaCreada);
+              /* this.existeError = false;
+              this.router.navigate(['/Administrador']); */
+            }
+            //this.constantsService.loading(false);
+          },
+          error: (e) => {
+            //console.log(e);
+            if (e.status === 401) {
+              this.router.navigate(['/']);
+            }
+          },
+        });
       },
       error: (e) => {
-        //console.log(e);
-        if (e.status === 401) {
-          this.router.navigate(['/']);
-        }
+        console.error(e);
+        this.router.navigate(['/Administrador']);
       },
     });
   }
 
   editarSala() {
-    const formData = new FormData();
-    formData.append('idSala', this.nuevaSala.idSala.toString());
-    formData.append('nombre', this.nuevaSala.nombre.trim());
-    formData.append('descripcion', this.nuevaSala.descripcion.trim());
-    formData.append('idModoJuego', this.selectedCard.toString());
-    if (this.selectedFile) {
-      formData.append('archivo', this.selectedFile);
-    }
-    console.log(formData);
-
-    this.salaServicio.editarSala(formData).subscribe({
-      next: (data: any) => {
-        const { info, error, campo } = data.result;
-        this.result = info;
-        console.log(info, campo);
-        if (error > 0) {
-          this.existeError = true;
-        } else {
-          this.updateComplemento(
-            this.complemento.idCom,
-            this.nuevaSala.idSala,
-            this.nuevaSala.nombre.trim()
-          );
-          /* this.existeError = false;
-          this.router.navigate(['/Administrador']); */
+    this.nuevaSala.fechaCierre = this.setFecha(this.date?.toString()!);
+    this.timeServicio.convertToLondonTime(this.date!).subscribe({
+      next: (dataDate: any) => {
+        const formData = new FormData();
+        formData.append('idSala', this.nuevaSala.idSala.toString());
+        formData.append('nombre', this.nuevaSala.nombre.trim());
+        formData.append('descripcion', this.nuevaSala.descripcion.trim());
+        formData.append('idModoJuego', this.selectedCard.toString());
+        formData.append(
+          'tiempoXpregunta',
+          this.nuevaSala.tiempoXpregunta.toString()
+        );
+        formData.append('fechaCierre', this.nuevaSala.fechaCierre);
+        formData.append('fechaCierreLondon', this.setFecha(dataDate));
+        if (this.selectedFile) {
+          formData.append('archivo', this.selectedFile);
         }
-        //this.constantsService.loading(false);
+
+        this.salaServicio.editarSala(formData).subscribe({
+          next: (data: any) => {
+            const { info, error, campo } = data.result;
+            this.result = info;
+            console.log(info, campo);
+            if (error > 0) {
+              this.existeError = true;
+            } else {
+              this.updateComplemento(
+                this.complemento.idCom,
+                this.nuevaSala.idSala,
+                this.nuevaSala.nombre.trim()
+              );
+              /* this.existeError = false;
+              this.router.navigate(['/Administrador']); */
+            }
+            //this.constantsService.loading(false);
+          },
+          error: (e) => {
+            //console.log(e);
+            if (e.status === 401) {
+              this.router.navigate(['/']);
+            }
+          },
+        });
       },
       error: (e) => {
-        //console.log(e);
-        if (e.status === 401) {
-          this.router.navigate(['/']);
-        }
+        console.error(e);
+        this.router.navigate(['/Administrador']);
       },
     });
   }
@@ -573,14 +608,14 @@ export class CrearSalaComponent implements OnInit {
 
   selectTiempoXpregunta(event: Event) {
     const selectedValue = (event.target as HTMLSelectElement).value;
-   // this.nuevaSala.tiempoXpregunta = Number(selectedValue);
+    this.nuevaSala.tiempoXpregunta = Number(selectedValue);
   }
 
-   indexTiemXpreg(): number {
-    /* if (this.nuevaSala.tiempoXpregunta) {
+  indexTiemXpreg(): number {
+    if (this.nuevaSala.tiempoXpregunta) {
       let n = this.tiemposXPregunta.indexOf(this.nuevaSala.tiempoXpregunta);
       return n;
-    } */
+    }
     return 0;
-  } 
+  }
 }

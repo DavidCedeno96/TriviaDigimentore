@@ -275,6 +275,45 @@ namespace WebApiRest.Data
 
         }
 
+        public async Task<Response> CreateUsuarioJugador(Usuario usuario)
+        {
+            Response response = new();
+
+            SqlConnection sqlConnection = new(conexion.GetConnectionSqlServer());
+            SqlCommand cmd = new("sp_C_Usuario", sqlConnection)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@nombre", WC.GetTrim(usuario.Nombre));
+            cmd.Parameters.AddWithValue("@idRol", usuario.IdRol);
+
+            cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;
+            cmd.Parameters.Add("@error", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+            try
+            {
+                await sqlConnection.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+
+                response.Info = cmd.Parameters["@info"].Value.ToString();
+                response.Error = Convert.ToInt16(cmd.Parameters["@error"].Value.ToString());
+
+            }
+            catch (Exception ex)
+            {
+                response.Info = ex.Message;
+                response.Error = 1;
+            }
+            finally
+            {
+                await sqlConnection.CloseAsync();
+            }
+
+            return response;
+
+        }
+
         public async Task<Response> UpdateUsuario(Usuario usuario)
         {
             Response response = new();

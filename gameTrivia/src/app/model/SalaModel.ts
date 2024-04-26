@@ -8,9 +8,12 @@ export interface Sala {
   estado: number;
   totalPreguntas: number;
   cantJugadas: number;
+  tiempoXpregunta: number;
   fecha_creacion: string;
   fecha_modificacion: string;
   fechaActivacion: string;
+  fechaCierre: string;
+  fechaCierreLondon: string;
 }
 
 export interface SalaReciente {

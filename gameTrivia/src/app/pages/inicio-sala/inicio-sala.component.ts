@@ -59,9 +59,12 @@ export class InicioSalaComponent implements OnInit, AfterViewInit {
     estado: 1,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   msjChallenger = [

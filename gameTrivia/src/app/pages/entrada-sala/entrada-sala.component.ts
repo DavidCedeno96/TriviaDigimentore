@@ -38,7 +38,7 @@ export class EntradaSalaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.constantsService.loading(false);
+    this.constantsService.loading(true);
 
     this.route.queryParams.subscribe((params) => {
       let idSala = this.encryptionService.decrypt(params['idSala']);

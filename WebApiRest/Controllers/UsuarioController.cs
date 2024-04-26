@@ -86,6 +86,7 @@ namespace WebApiRest.Controllers
 
         [HttpPost]
         [Route("create")]
+        [Authorize(Roles = "Administrador,SuperAdministrador")] //En los claims estan guardados los roles al iniciar sesion en el token: ClaimTypes.Role
         public async Task<IActionResult> CreateItem([FromBody] Usuario usuario)
         {
             Response result = VF.ValidarUsuario(usuario);
@@ -95,6 +96,50 @@ namespace WebApiRest.Controllers
                 result = await data.CreateUsuario(usuario);
             }
             
+            return StatusCode(StatusCodes.Status200OK, new { result });
+        }
+
+        [HttpPost]
+        [Route("create/jugador")]
+        public async Task<IActionResult> CreateItemJugador([FromBody] Usuario usuario)
+        {
+            Response result = VF.ValidarUsuario(usuario);
+
+            if (result.Error == 0)
+            {
+                usuario.IdRol = 2;
+                result = await data.CreateUsuarioJugador(usuario);
+                if (result.Error == 0)
+                {
+                    int idUsuario = Convert.ToInt32(result.Info.Split(':')[1]);
+                    UsuarioItem response = await data.GetUsuario(0, idUsuario);
+                    if (response.Error == 0)
+                    {
+                        var keyBytes = Encoding.ASCII.GetBytes(settings.SecretKey);
+                        var claims = new ClaimsIdentity();
+                        //claims.AddClaim(new Claim("correo", result.Usuario.Correo));  //ClaimTypes.NameIdentifier
+                        claims.AddClaim(new Claim("id", response.Usuario.IdUsuario.ToString()));
+                        claims.AddClaim(new Claim("nombre", response.Usuario.Nombre));
+                        claims.AddClaim(new Claim("idRol", response.Usuario.IdRol.ToString()));
+                        claims.AddClaim(new Claim(ClaimTypes.Role, response.Usuario.Rol));
+                        var tokenDescriptor = new SecurityTokenDescriptor
+                        {
+                            Subject = claims,
+                            Expires = DateTime.UtcNow.AddMinutes(settings.TimeExpTokenMin), //Tiempo de expiracion del token en minutos
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
+                        };
+
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var tokenConfig = tokenHandler.CreateToken(tokenDescriptor);
+                        string tokenCreado = tokenHandler.WriteToken(tokenConfig);
+                        response.Info = tokenCreado;
+                        response.Usuario = null;
+                    }
+                    result.Info = response.Info;
+                    result.Error = response.Error;
+                }
+            }
+
             return StatusCode(StatusCodes.Status200OK, new { result });
         }
 

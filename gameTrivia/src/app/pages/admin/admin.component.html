@@ -28,8 +28,9 @@
               "
             >
               <div class="offcanvas-header">
-                <img class="ms-3"
-                  [src]=logoMenuLateral
+                <img
+                  class="ms-3"
+                  [src]="logoMenuLateral"
                   alt="Logo_AppMenu.png"
                   style="max-height: 40px; width: auto"
                 />
@@ -116,13 +117,12 @@
           </div>
         </nav>
       </div>
-     
     </div>
 
     <div class="row text-center">
       <div class="col my-4">
         <img
-          [src]=logoMenu
+          [src]="logoMenu"
           style="height: 80px; width: auto"
           alt="Imagen"
           class="image-inside-container"
@@ -133,7 +133,7 @@
     <div class="row mx-2" style="vertical-align: middle">
       <div
         class="col-2 col-lg-2 text-end px-3 py-1 py-lg-4"
-        style="color: var(--color-texto1);; font-weight: bold"
+        style="color: var(--color-texto1); font-weight: bold"
       >
         Buscar
       </div>
@@ -150,10 +150,9 @@
             (keyup.enter)="buscar()"
           />
           <button class="btn btn-primary" type="button" (click)="buscar()">
-            <svg class="icono-svg2" >
+            <svg class="icono-svg2">
               <use xlink:href="assets/Icons/Lupa.svg#Capa_1"></use>
-            </svg> 
-            
+            </svg>
           </button>
         </div>
       </div>
@@ -221,7 +220,7 @@
                   class="col-sm-12 col-lg-6 align-items-center text-center text-lg-start my-3"
                 >
                   <div class="container">
-                    <div class="row" style="color: var(--color-texto2);">
+                    <div class="row" style="color: var(--color-texto2)">
                       <div class="py-sm-0 py-lg-2 col-sm-12 col-lg-2">
                         <strong>Id:</strong>
                         {{ sala.idSala }}
@@ -253,9 +252,11 @@
                         class="btn btn-primary dropdown-toggle"
                         aria-controls="dropdown-basic"
                       >
-                      <svg class="icono-svg2" >
-                        <use xlink:href="assets/Icons/Engrane.svg#Capa_1"></use>
-                      </svg> 
+                        <svg class="icono-svg2">
+                          <use
+                            xlink:href="assets/Icons/Engrane.svg#Capa_1"
+                          ></use>
+                        </svg>
                         <strong>Configuración</strong>
                         <span class="caret"></span>
                       </button>
@@ -264,7 +265,10 @@
                         id="dropdown-basic"
                         *dropdownMenu
                         class="dropdown-menu"
-                        style="background-color: var(--color-secundario); cursor: default"
+                        style="
+                          background-color: var(--color-secundario);
+                          cursor: default;
+                        "
                         role="menu"
                         aria-labelledby="button-basic"
                       >
@@ -272,9 +276,11 @@
                           <a
                             class="dropdown-item"
                             (click)="cambiarPag('/Sala', sala.idSala)"
-                            ><svg class="icono-svg2" >
-                              <use xlink:href="assets/Icons/Editar.svg#Capa_1"></use>
-                            </svg> 
+                            ><svg class="icono-svg2">
+                              <use
+                                xlink:href="assets/Icons/Editar.svg#Capa_1"
+                              ></use>
+                            </svg>
                             <strong>Editar</strong></a
                           >
                         </li>
@@ -284,9 +290,11 @@
                             class="dropdown-item"
                             (click)="confirmEliminar(sala.idSala)"
                           >
-                          <svg class="icono-svg2" >
-                            <use xlink:href="assets/Icons/Basurero.svg#Capa_1"></use>
-                          </svg>                            
+                            <svg class="icono-svg2">
+                              <use
+                                xlink:href="assets/Icons/Basurero.svg#Capa_1"
+                              ></use>
+                            </svg>
                             <strong>Eliminar</strong></a
                           >
                         </li>
@@ -297,9 +305,11 @@
                             (click)="
                               cambiarPag('/RankingChallengers', sala.idSala)
                             "
-                            ><svg class="icono-svg2" >
-                              <use xlink:href="assets/Icons/Trofeo.svg#Capa_1"></use>
-                            </svg>   
+                            ><svg class="icono-svg2">
+                              <use
+                                xlink:href="assets/Icons/Trofeo.svg#Capa_1"
+                              ></use>
+                            </svg>
                             <strong>Resultados</strong>
                           </a>
                         </li>
@@ -312,9 +322,11 @@
                             class="dropdown-item"
                             (click)="dataSalaOnModal(sala)"
                           >
-                          <svg class="icono-svg2" >
-                            <use xlink:href="assets/Icons/Compartir.svg#Capa_1"></use>
-                          </svg>  
+                            <svg class="icono-svg2">
+                              <use
+                                xlink:href="assets/Icons/Compartir.svg#Capa_1"
+                              ></use>
+                            </svg>
                             <strong>Compartir</strong>
                           </a>
                         </li>
@@ -323,9 +335,11 @@
                             class="dropdown-item"
                             (click)="confirmResetear(sala.idSala)"
                           >
-                          <svg class="icono-svg2" >
-                            <use xlink:href="assets/Icons/Reset.svg#Capa_1"></use>
-                          </svg>   
+                            <svg class="icono-svg2">
+                              <use
+                                xlink:href="assets/Icons/Reset.svg#Capa_1"
+                              ></use>
+                            </svg>
                             <strong>Resetear</strong>
                           </a>
                         </li>
@@ -358,7 +372,6 @@
                       </ul>
                     </div>
                   </div>
-                 
                 </div>
 
                 <!-- INICIO MODAL -->
@@ -376,7 +389,10 @@
                         <h5
                           class="modal-title"
                           id="exampleModalLabel"
-                          style="font-weight: bold; color: var(--color-primario)"
+                          style="
+                            font-weight: bold;
+                            color: var(--color-primario);
+                          "
                         >
                           Compartir
                         </h5>
@@ -405,10 +421,10 @@
                               >{{ currentURL }}</a
                             >
                           </div>
-                          <div class="col-12 text-truncate">
+                          <!-- <div class="col-12 text-truncate">
                             <strong>Código de la sala:&nbsp;</strong>
                             <span>{{ currentCodigo }}</span>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="row py-2">
                           <div class="col-12 text-end">
@@ -421,7 +437,6 @@
                           </div>
                         </div>
                       </div>
-                      
                     </div>
                   </div>
                 </div>

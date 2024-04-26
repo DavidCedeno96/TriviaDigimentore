@@ -22,9 +22,8 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
   providers: [ConfirmationService, MessageService],
 })
 export class AdminComponent implements OnInit {
-
-  logoMenuLateral = "";
-  logoMenu = "";
+  logoMenuLateral = '';
+  logoMenu = '';
 
   @ViewChild('closeModal') closeModal!: ElementRef;
 
@@ -50,9 +49,12 @@ export class AdminComponent implements OnInit {
     estado: 0,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   cardsPerPage: number = 6;
@@ -70,14 +72,13 @@ export class AdminComponent implements OnInit {
     private encryptionService: EncryptionService,
     private constantsService: ConstantsService,
     private timeApiService: TimeApiService,
-    private _clipboardService: ClipboardService,    
+    private _clipboardService: ClipboardService,
     private imagenesService: ImagenesService
   ) {}
 
   ngOnInit(): void {
-
-    this.logoMenu =this.imagenesService.logoBlanco;
-    this.logoMenuLateral =this.imagenesService.logoColores;
+    this.logoMenu = this.imagenesService.logoBlanco;
+    this.logoMenuLateral = this.imagenesService.logoColores;
     this.constantsService.loading(true);
     this.idRol = parseInt(this.usuarioServicio.getRol()!);
     this.cargarSalas();
@@ -223,7 +224,7 @@ export class AdminComponent implements OnInit {
       '',
       'Link de la Sala: ' + this.currentURL,
       'Nombre de la Sala: ' + this.salaItem.nombre,
-      'Código de Sala: ' + this.currentCodigo,
+      //'Código de Sala: ' + this.currentCodigo,
     ];
     const textoAConcatenar = textos.join('\n');
     //this._clipboardService.copy(textoAConcatenar);
@@ -250,7 +251,7 @@ export class AdminComponent implements OnInit {
     let codigo1 = this.constantsService.randomNumber(10, 99);
     let codigo2 = this.constantsService.randomNumber(10, 99);
 
-    this.currentURL = `${window.location.origin}/EntradaSala?idSala=${idSala}`;
+    this.currentURL = `${window.location.origin}/IngresarJuego?idSala=${idSala}`;
     this.currentCodigo = codigo1 + sala.idSala.toString() + codigo2;
     //console.log(codigo1, codigo2);
   }
@@ -435,6 +436,4 @@ export class AdminComponent implements OnInit {
     const pageCount = Math.ceil(this.misSalas.length / this.cardsPerPage);
     return Array.from({ length: pageCount }, (_, i) => i + 1);
   }
-
-
 }

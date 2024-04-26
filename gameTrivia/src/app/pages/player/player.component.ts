@@ -36,9 +36,12 @@ export class PlayerComponent implements OnInit {
     estado: 0,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   //PAGINACION

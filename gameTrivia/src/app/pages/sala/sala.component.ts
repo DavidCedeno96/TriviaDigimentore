@@ -16,8 +16,7 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
   providers: [ConfirmationService, MessageService],
 })
 export class SalaComponent implements OnInit {
-
-  logoEmpresa="";
+  logoEmpresa = '';
 
   @ViewChild('closeModal') closeModal!: ElementRef;
   @ViewChild('valueArchivo') valueArchivo!: ElementRef;
@@ -44,9 +43,12 @@ export class SalaComponent implements OnInit {
     estado: 1,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   preguntasSala: Pregunta[] = [
@@ -69,7 +71,7 @@ export class SalaComponent implements OnInit {
     private messageService: MessageService,
     private encryptionService: EncryptionService,
     private constantsService: ConstantsService,
-    private sanitizer: DomSanitizer,    
+    private sanitizer: DomSanitizer,
     private imagenesService: ImagenesService
   ) {
     this.excelFileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -78,7 +80,7 @@ export class SalaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.logoEmpresa=this.imagenesService._logoBlanco;
+    this.logoEmpresa = this.imagenesService._logoBlanco;
 
     this.constantsService.loading(true);
     this.route.queryParams.subscribe((params) => {

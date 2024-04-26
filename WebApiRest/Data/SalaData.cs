@@ -41,9 +41,12 @@ namespace WebApiRest.Data
                         ModoJuego = dr["modoJuego"].ToString(),
                         Estado = Convert.ToInt16(dr["estado"].ToString()),
                         TotalPreguntas = Convert.ToInt32(dr["totalPreguntas"].ToString()),
+                        TiempoXpregunta = Convert.ToInt32(dr["tiempoXpreg"].ToString()),
                         FechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString()),
                         FechaModificacion = Convert.ToDateTime(dr["fecha_modificacion"].ToString()),
-                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString())
+                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString()),
+                        FechaCierre = Convert.ToDateTime(dr["fechaCierre"].ToString()),
+                        FechaCierreLondon = Convert.ToDateTime(dr["fechaCierreLondon"].ToString())
                     });
                 }
 
@@ -98,9 +101,12 @@ namespace WebApiRest.Data
                         ModoJuego = dr["modoJuego"].ToString(),
                         Estado = Convert.ToInt16(dr["estado"].ToString()),
                         TotalPreguntas = Convert.ToInt32(dr["totalPreguntas"].ToString()),
+                        TiempoXpregunta = Convert.ToInt32(dr["tiempoXpreg"].ToString()),
                         FechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString()),
                         FechaModificacion = Convert.ToDateTime(dr["fecha_modificacion"].ToString()),
-                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString())
+                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString()),
+                        FechaCierre = Convert.ToDateTime(dr["fechaCierre"].ToString()),
+                        FechaCierreLondon = Convert.ToDateTime(dr["fechaCierreLondon"].ToString())
                     });
                 }
 
@@ -155,10 +161,13 @@ namespace WebApiRest.Data
                         ModoJuego = dr["modoJuego"].ToString(),
                         Estado = Convert.ToInt16(dr["estado"].ToString()),
                         TotalPreguntas = Convert.ToInt32(dr["totalPreguntas"].ToString()),
+                        TiempoXpregunta = Convert.ToInt32(dr["tiempoXpreg"].ToString()),
                         CantJugadas = Convert.ToInt32(dr["cantJugadas"].ToString()),
                         FechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString()),
                         FechaModificacion = Convert.ToDateTime(dr["fecha_modificacion"].ToString()),
-                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString())
+                        FechaActivacion = Convert.ToDateTime(dr["fecha_activacion"].ToString()),
+                        FechaCierre = Convert.ToDateTime(dr["fechaCierre"].ToString()),
+                        FechaCierreLondon = Convert.ToDateTime(dr["fechaCierreLondon"].ToString())
                     };                    
                 }
                 await dr.NextResultAsync();
@@ -288,6 +297,9 @@ namespace WebApiRest.Data
             cmd.Parameters.AddWithValue("@imagen", WC.GetTrim(sala.Imagen));
             cmd.Parameters.AddWithValue("@descripcion", WC.GetTrim(sala.Descripcion));
             cmd.Parameters.AddWithValue("@idModoJuego", sala.IdModoJuego);
+            cmd.Parameters.AddWithValue("@tiempoXpregunta", sala.TiempoXpregunta);
+            cmd.Parameters.AddWithValue("@fechaCierre", sala.FechaCierre);
+            cmd.Parameters.AddWithValue("@fechaCierreLondon", sala.FechaCierreLondon);
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;
             cmd.Parameters.Add("@error", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -329,6 +341,9 @@ namespace WebApiRest.Data
             cmd.Parameters.AddWithValue("@imagen", WC.GetTrim(sala.Imagen));
             cmd.Parameters.AddWithValue("@descripcion", WC.GetTrim(sala.Descripcion));
             cmd.Parameters.AddWithValue("@idModoJuego", sala.IdModoJuego);
+            cmd.Parameters.AddWithValue("@tiempoXpregunta", sala.TiempoXpregunta);
+            cmd.Parameters.AddWithValue("@fechaCierre", sala.FechaCierre);
+            cmd.Parameters.AddWithValue("@fechaCierreLondon", sala.FechaCierreLondon);
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;
             cmd.Parameters.Add("@error", SqlDbType.Int).Direction = ParameterDirection.Output;

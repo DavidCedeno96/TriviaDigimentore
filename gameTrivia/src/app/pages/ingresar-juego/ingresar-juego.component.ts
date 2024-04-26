@@ -12,7 +12,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-ingresar-juego',
   templateUrl: './ingresar-juego.component.html',
-  styleUrls: ['./ingresar-juego.component.css']
+  styleUrls: ['./ingresar-juego.component.css'],
 })
 export class IngresarJuegoComponent implements OnInit, AfterViewInit {
   idSala: number = 0;
@@ -33,9 +33,12 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
     estado: 1,
     totalPreguntas: 0,
     cantJugadas: 0,
+    tiempoXpregunta: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
     fechaActivacion: '',
+    fechaCierre: '',
+    fechaCierreLondon: '',
   };
 
   usuario: Usuario = {
@@ -46,10 +49,10 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
     idRol: 0,
     rol: '',
     iniciales: '',
-    telefono:''
+    telefono: '',
   };
 
-  logoEmpresa = "assets/Imagenes Empresa/logo blanco.png";
+  logoEmpresa = 'assets/Imagenes Empresa/logo blanco.png';
 
   constructor(
     private route: ActivatedRoute,
@@ -75,8 +78,8 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    /* this.constantsService.loading(true);
-    this.getRouteParams(); */
+    this.constantsService.loading(true);
+    this.getRouteParams();
   }
 
   ngAfterViewInit(): void {
@@ -96,11 +99,14 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
   cargarData(idSala: number) {
     this.salaServicio.itemSala(0, idSala, 0).subscribe({
       next: (data: any) => {
+        console.log(data);
+
         const { info, error, sala } = data.result;
         this.result = info;
         if (error > 0) {
           //hay error
           this.existeError = true;
+          this.expiroLink = true;
         } else {
           //no hay error
           this.existeError = false;
@@ -142,7 +148,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
       this.usuario = this.formulario.value;
       //console.log('Enviando el usuario....', this.usuario);
 
-      /* this.usuarioServicio.crearUsuarioJugador(this.usuario).subscribe({
+      this.usuarioServicio.crearUsuarioJugador(this.usuario).subscribe({
         next: (data: any) => {
           //console.log(data);
           let { info, error } = data.result;
@@ -162,7 +168,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
           this.existeError = true;
           this.result = 'Ha! ocurrido un error intentalo mas tarde';
         },
-      }); */
+      });
     } else {
       this.verErrorsInputs = true;
     }

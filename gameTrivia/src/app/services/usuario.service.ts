@@ -43,7 +43,16 @@ export class UsuarioService {
   }
 
   crearUsuario(modelo: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiURL}/Create`, modelo);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+    return this.http.post<Usuario>(`${this.apiURL}/Create`, modelo, {
+      headers: headers,
+    });
+  }
+
+  crearUsuarioJugador(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiURL}/create/jugador`, usuario);
   }
 
   editarUsuario(modelo: Usuario): Observable<Usuario> {
