@@ -15,6 +15,7 @@ import { SurvivorGameComponent } from './pages/survivor-game/survivor-game.compo
 import { EntradaSalaComponent } from './pages/entrada-sala/entrada-sala.component';
 import { RankingChallengerComponent } from './components/ranking-challenger/ranking-challenger.component';
 import { SurvivorPersonalResultComponent } from './components/survivor-personal-result/survivor-personal-result.component';
+import { IngresarJuegoComponent } from './pages/ingresar-juego/ingresar-juego.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,11 @@ const routes: Routes = [
     path: 'SurvivorResult',
     component: SurvivorPersonalResultComponent,
    // canActivate: [authGuardPlayer],
+  },
+  {
+    path: 'IngresarJuego',
+    component: IngresarJuegoComponent,
+    //canActivate: [authGuardPlayer],
   },
 
 ];

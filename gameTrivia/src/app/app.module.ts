@@ -58,6 +58,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { SurvivorPersonalResultComponent } from './components/survivor-personal-result/survivor-personal-result.component';
 import { GestionarUsuariosComponent } from './pages/gestionar-usuarios/gestionar-usuarios.component';
 import { CrearUsuarioComponent } from './pages/crear-usuario/crear-usuario.component';
+import { IngresarJuegoComponent } from './pages/ingresar-juego/ingresar-juego.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { CrearUsuarioComponent } from './pages/crear-usuario/crear-usuario.compo
     SurvivorPersonalResultComponent,
     GestionarUsuariosComponent,
     CrearUsuarioComponent,
+    IngresarJuegoComponent,
   ],
   imports: [
     BrowserModule,
