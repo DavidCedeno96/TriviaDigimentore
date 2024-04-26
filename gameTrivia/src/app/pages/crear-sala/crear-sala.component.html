@@ -71,6 +71,7 @@
         <div class="row g-3">
           <div class="col-12 col-lg-6">
             <!-- Input nombre sala -->
+            <p>Nombre de la sala *</p>
             <div class="input-group">
               <input
                 type="text"
@@ -87,6 +88,7 @@
             </div>
           </div>
           <div class="col-12 col-lg-6">
+            <p>Imagen de la sala</p>
             <div class="input-group">
               <input
                 type="file"
@@ -100,6 +102,7 @@
             </div>
           </div>
           <div class="col-12">
+            <p>Descripción</p>
             <div class="input-group">
               <textarea
                 rows="3"
@@ -114,6 +117,37 @@
               Máximo 200 caracteres permitidos.
             </div>
           </div>
+
+          <div class="col-sm-12 col-lg-6 me-auto">
+            <p>Fecha y hora de caducidad del enlace *</p>
+            <span class="p-float-label">
+              <p-calendar
+                [(ngModel)]="date"
+                [showTime]="true"
+                [showSeconds]="true"
+                [showIcon]="true"
+                inputId="kill_date"
+                name="fechacirerr"
+                [required]="true"
+              ></p-calendar>
+            </span>
+          </div>
+          <div class="col-sm-12 col-lg-6 me-auto">
+            <p>Tiempo por pregunta (Segundos)</p>
+            <div class="input-group mb-3" style="max-width: 40%">
+              <select
+                class="form-select"
+                id="selectTiemXpreg"
+                (change)="selectTiempoXpregunta($event)"
+                [selectedIndex]="indexTiemXpreg()"
+              >
+                <option *ngFor="let item of tiemposXPregunta" [value]="item">
+                  {{ item }}
+                </option>
+              </select>
+            </div>
+          </div>
+          
         </div>
       </div>
       <div class="row mx-4 py-3" style="vertical-align: middle">

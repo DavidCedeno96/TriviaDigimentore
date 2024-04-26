@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -74,6 +75,11 @@ export class CrearSalaComponent implements OnInit {
   objFonMov: File;
   objFinal: File;
   sonido: File;
+
+  date: Date | undefined;
+  tiemposXPregunta: number[] = [15, 20, 30, 40, 50, 60];
+
+
 
   constructor(
     private router: Router,
@@ -558,4 +564,23 @@ export class CrearSalaComponent implements OnInit {
       },
     });
   }
+
+  setFecha(fecha: string): string {
+    let date = new Date(fecha);
+    let pipe = new DatePipe('en-US');
+    return pipe.transform(date, 'yyyy-MM-dd HH:mm:ss')!;
+  }
+
+  selectTiempoXpregunta(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+   // this.nuevaSala.tiempoXpregunta = Number(selectedValue);
+  }
+
+   indexTiemXpreg(): number {
+    /* if (this.nuevaSala.tiempoXpregunta) {
+      let n = this.tiemposXPregunta.indexOf(this.nuevaSala.tiempoXpregunta);
+      return n;
+    } */
+    return 0;
+  } 
 }

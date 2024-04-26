@@ -24,6 +24,8 @@ import { SliderModule } from 'primeng/slider';
 import { KnobModule } from 'primeng/knob';
 import { MenuModule } from 'primeng/menu';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { CalendarModule } from 'primeng/calendar';
+
 
 
 //Ventanas creadas
@@ -96,6 +98,7 @@ import { IngresarJuegoComponent } from './pages/ingresar-juego/ingresar-juego.co
     DialogModule,
     NgxDropzoneModule,
     ToastModule, */
+    CalendarModule,
     InputSwitchModule,
     MenuModule,
     ProgressBarModule,
