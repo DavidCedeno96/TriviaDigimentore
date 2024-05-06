@@ -80,8 +80,7 @@ exec sp_B_UsuarioLogin
 @error = '' 
 
 exec sp_C_Usuario
-@nombre = 'miJugador4',
-@clave = '12345555456',
+@nombre = 'sadmin name',
 @correo = '',
 @celular = '',
 @idRol = 2,

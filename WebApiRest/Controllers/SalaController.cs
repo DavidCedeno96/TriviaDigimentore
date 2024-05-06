@@ -36,8 +36,7 @@ namespace WebApiRest.Controllers
         }
 
         [HttpGet]
-        [Route("list/{estados}/{idSala}/{idUsuario}")] //{authorId:int:min(1)} {lcid:int=1033}
-        [Authorize]
+        [Route("list/{estados}/{idSala}/{idUsuario}")] //{authorId:int:min(1)} {lcid:int=1033}        
         public async Task<IActionResult> GetItem([FromRoute] int estados, [FromRoute] int idSala, [FromRoute] int idUsuario)
         {
             SalaItem result = await data.GetSala(estados, idSala, idUsuario);

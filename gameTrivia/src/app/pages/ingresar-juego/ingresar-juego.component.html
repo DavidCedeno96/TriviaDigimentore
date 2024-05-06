@@ -1,107 +1,148 @@
 <body>
-    <div class="container">
-      <div class="row justify-content-center align-items-center vh-100">
-        <div class="col-sm-8 mx-auto" *ngIf="!expiroLink">
-          <div class="card py-5 px-3">
-            <div class="card-body">
-              <h5
-                class="card-title text-center display-4 display-md-2 display-lg-2"
-              >
-                ¡Listo para competir!
-              </h5>
-  
-              <div class="row">
-                <div class="col-8 mx-auto">
-                  <img
-                    [src]="logoEmpresa"
-                    class="card-img-top my-5"
-                    alt="Logo empresa"
-                  />
-                </div>
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-sm-8 mx-auto" *ngIf="!expiroLink">
+        <div class="card py-5 px-3">
+          <div class="card-body">
+            <h5
+              class="card-title text-center display-4 display-md-2 display-lg-2 text-white"
+            >
+              ¡Listo para competir!
+            </h5>
+
+            <div class="row">
+              <div class="col-8 mx-auto">
+                <img
+                  [src]="logoEmpresa"
+                  class="card-img-top my-5"
+                  alt="Logo empresa"
+                />
               </div>
-  
-              <div class="text-white text-center mb-3" *ngIf="existeError">
-                {{ result }}
-              </div>
-  
-              <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-                <!-- NAME USUARIO -->
-                <span class="ms-3" style="color: white">
-                  Ingresa tu nombre y apellido
-                </span>
-  
-                <div class="form-floating p-0 mt-2 mb-4">
-                  <input
-                    type="text"
-                    class="form-control {{
-                      formulario.get('nombre')?.errors && verErrorsInputs
-                        ? 'is-invalid'
-                        : ''
-                    }}"
-                    id="floatingInput"
-                    placeholder="Ingresa tu nombre y apellido"
-                    formControlName="nombre"
-                    required
-                  />
-                  <label for="floatingInput">Nombre y apellido</label>
-                  <div class="invalid-feedback text-white ms-3">
-                    <span
-                      class="d-block"
-                      *ngIf="formulario.get('nombre')?.hasError('minlength')"
-                    >
-                      Mínimo 3 caracteres
-                    </span>
-                    <span
-                      class="d-block"
-                      *ngIf="formulario.get('nombre')?.hasError('maxlength')"
-                    >
-                      Máximo 60 caracteres
-                    </span>
-                    <span
-                      class="d-block"
-                      *ngIf="formulario.get('nombre')?.hasError('pattern')"
-                    >
-                      Contiene caracteres inválidos
-                    </span>
-                    <span
-                      class="d-block"
-                      *ngIf="formulario.get('nombre')?.hasError('required')"
-                    >
-                      Campo obligatorio
-                    </span>
-                  </div>
-                </div>
-  
-                <div class="text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-lg px-5"
-                    id="btnIngresar"
-                    [disabled]="false"
-                  >
-                    Continuar
-                  </button>
-                </div>
-              </form>
             </div>
+
+            <div class="text-white text-center mb-3" *ngIf="existeError">
+              {{ result }}
+            </div>
+
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+              <!-- NAME USUARIO -->
+              <span class="ms-3" style="color: white">
+                Ingresa tu nombre y apellido y correo electrónico
+              </span>
+
+              <div class="form-floating p-0 mt-2 mb-4">
+                <input
+                  type="text"
+                  class="form-control {{
+                    formulario.get('nombre')?.errors && verErrorsInputs
+                      ? 'is-invalid'
+                      : ''
+                  }}"
+                  id="floatingInput"
+                  placeholder="Ingresa tu nombre y apellido"
+                  formControlName="nombre"
+                  required
+                />
+                <label for="floatingInput">Nombre y apellido</label>
+                <div class="invalid-feedback text-white ms-3">
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('nombre')?.hasError('minlength')"
+                  >
+                    Mínimo 3 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('nombre')?.hasError('maxlength')"
+                  >
+                    Máximo 60 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('nombre')?.hasError('pattern')"
+                  >
+                    Contiene caracteres inválidos
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('nombre')?.hasError('required')"
+                  >
+                    Campo obligatorio
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-floating p-0 mt-2 mb-4">
+                <input
+                  type="text"
+                  class="form-control {{
+                    formulario.get('correo')?.errors && verErrorsInputs
+                      ? 'is-invalid'
+                      : ''
+                  }}"
+                  id="floatingInput"
+                  placeholder="Ingresa tu correo electrónico"
+                  formControlName="correo"
+                  required
+                />
+                <label for="floatingInput">Correo electónico</label>
+                <div class="invalid-feedback text-white ms-3">
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('minlength')"
+                  >
+                    Mínimo 5 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('maxlength')"
+                  >
+                    Máximo 60 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('email')"
+                  >
+                    Correo incorrecto
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('required')"
+                  >
+                    Campo obligatorio
+                  </span>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg px-5"
+                  id="btnIngresar"
+                  [disabled]="false"
+                >
+                  Continuar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-  
-        <div class="col-sm-8 mx-auto" *ngIf="expiroLink">
-          <div class="card py-5 px-3">
-            <div class="card-body">
-              <h5
-                class="card-title text-center display-4 display-md-2 display-lg-2"
-              >
-                ¡Lo sentimos!
-              </h5>
-              <p style="color: white; font-size: 20px; text-align: center">
-                La sala no existe o el enlace ha caducado.
-              </p>
-            </div>
+      </div>
+
+      <div class="col-sm-8 mx-auto" *ngIf="expiroLink">
+        <div class="card py-5 px-3">
+          <div class="card-body">
+            <h5
+              class="card-title text-center display-4 display-md-2 display-lg-2"
+            >
+              ¡Lo sentimos!
+            </h5>
+            <p style="color: white; font-size: 20px; text-align: center">
+              La sala no existe o el enlace ha caducado.
+            </p>
           </div>
         </div>
       </div>
     </div>
-  </body>
-  
+  </div>
+</body>

@@ -74,6 +74,15 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
           Validators.pattern(/^[^<>]+$/), // No se permiten caracteres invalidos
         ],
       ],
+      correo: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(60),
+          Validators.minLength(5),
+          Validators.email,
+        ],
+      ],
     });
   }
 
@@ -83,7 +92,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.cargarData(this.idSala);
+    this.cargarData();
   }
 
   getRouteParams() {
@@ -96,19 +105,23 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  cargarData(idSala: number) {
-    this.salaServicio.itemSala(0, idSala, 0).subscribe({
+  cargarData() {
+    this.salaServicio.itemSala(1, this.idSala, 0).subscribe({
       next: (data: any) => {
-        console.log(data);
-
         const { info, error, sala } = data.result;
         this.result = info;
         if (error > 0) {
           //hay error
           this.existeError = true;
           this.expiroLink = true;
+
+          this.constantsService.loading(false);
+        } else if (sala === null) {
+          this.expiroLink = true;
+          this.constantsService.loading(false);
         } else {
           //no hay error
+
           this.existeError = false;
           this.sala = sala;
 
@@ -120,12 +133,22 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
               const timeLondon = fecha.split('.')[0];
               const fechaActualLondres = new Date(timeLondon);
 
+              /* console.log(
+                'cierre:',
+                fechaCierreLondres,
+                ' Actual:',
+                fechaActualLondres
+              );*/
+
               if (fechaCierreLondres < fechaActualLondres) {
                 this.expiroLink = true;
               } else {
                 this.expiroLink = false;
               }
               this.constantsService.loading(false);
+            },
+            error: (e) => {
+              console.error(e);
             },
           });
         }
@@ -171,6 +194,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.verErrorsInputs = true;
+      this.constantsService.loading(false);
     }
   }
 
