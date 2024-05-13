@@ -26,6 +26,25 @@ body {
       box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2); 
   
     }
+
+    .card-img-top{
+      max-width: 30vw;
+    }
+
+  .card-title {
+    font-size: xx-large;
+  }
+
+    @media (max-width: 767.98px) {
+      .card-img-top{
+        max-width: 70vw;
+      }
+    }
+
+    
+
+
+
     .card h5 {
       color: var(--color-secundario); /* Cambia el color del texto a blanco */
       font-weight: bold; /* Aplica el estilo en negrita */

@@ -1,7 +1,7 @@
 <body>
   <div class="container">
     <div class="row justify-content-center align-items-center vh-100">
-      <div class="col-sm-8 mx-auto" *ngIf="!expiroLink">
+      <div class=" mx-auto my-3" *ngIf="!expiroLink">
         <div class="card py-5 px-3">
           <div class="card-body">
             <h5
@@ -11,10 +11,10 @@
             </h5>
 
             <div class="row">
-              <div class="col-8 mx-auto">
+              <div class="col-8 mx-auto text-center">
                 <img
                   [src]="logoEmpresa"
-                  class="card-img-top my-5"
+                  class="card-img-top my-5 "
                   alt="Logo empresa"
                 />
               </div>
@@ -27,10 +27,11 @@
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
               <!-- NAME USUARIO -->
               <span class="ms-3" style="color: white">
-                Ingresa tu nombre y apellido y correo electrónico
+                Ingresa tus datos personales para participar.
               </span>
+            <div class="row">
 
-              <div class="form-floating p-0 mt-2 mb-4">
+              <div class="form-floating p-0 mt-2 mb-4 col-sm-6 px-2 ">
                 <input
                   type="text"
                   class="form-control {{
@@ -43,7 +44,7 @@
                   formControlName="nombre"
                   required
                 />
-                <label for="floatingInput">Nombre y apellido</label>
+                <label class="mx-2" for="floatingInput">Nombre y apellido *</label>
                 <div class="invalid-feedback text-white ms-3">
                   <span
                     class="d-block"
@@ -72,7 +73,7 @@
                 </div>
               </div>
 
-              <div class="form-floating p-0 mt-2 mb-4">
+              <div class="form-floating p-0 mt-2 mb-4 col-sm-6 px-2">
                 <input
                   type="text"
                   class="form-control {{
@@ -85,7 +86,7 @@
                   formControlName="correo"
                   required
                 />
-                <label for="floatingInput">Correo electónico</label>
+                <label class="mx-2"  for="floatingInput">Correo electónico *</label>
                 <div class="invalid-feedback text-white ms-3">
                   <span
                     class="d-block"
@@ -114,6 +115,85 @@
                 </div>
               </div>
 
+            </div>
+
+            <div class="row">
+              <div class="form-floating p-0 mt-2 mb-4 col-sm-6 px-2">
+                <input
+                  type="text"
+                  class="form-control {{
+                    formulario.get('correo')?.errors && verErrorsInputs
+                      ? 'is-invalid'
+                      : ''
+                  }}"
+                  id="floatingInput"
+                  placeholder="Ingresa tu número telefónico"
+                  formControlName="correo"
+                  required
+                />
+                <label class="mx-2" for="floatingInput">Número telefónico</label>
+                <div class="invalid-feedback text-white ms-3">
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('minlength')"
+                  >
+                    Mínimo 9 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('maxlength')"
+                  >
+                    Máximo 60 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('email')"
+                  >
+                    Número de teléfono incorrecto
+                  </span>
+                  
+                </div>
+              </div>
+
+              <div class="form-floating p-0 mt-2 mb-4 col-sm-6 px-2">
+                <input
+                  type="text"
+                  class="form-control {{
+                    formulario.get('correo')?.errors && verErrorsInputs
+                      ? 'is-invalid'
+                      : ''
+                  }}"
+                  id="floatingInput"
+                  placeholder="Ingresa tu número telefónico"
+                  formControlName="correo"
+                  required
+                />
+                <label class="mx-2" for="floatingInput">Empresa</label>
+                <div class="invalid-feedback text-white ms-3">
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('minlength')"
+                  >
+                    Mínimo 9 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('maxlength')"
+                  >
+                    Máximo 60 caracteres
+                  </span>
+                  <span
+                    class="d-block"
+                    *ngIf="formulario.get('correo')?.hasError('email')"
+                  >
+                  Contiene caracteres inválidos
+                  </span>
+                  
+                </div>
+              </div>
+              
+            </div>          
+              
               <div class="text-center">
                 <button
                   type="submit"

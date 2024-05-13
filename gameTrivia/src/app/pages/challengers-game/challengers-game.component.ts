@@ -151,6 +151,8 @@ export class ChallengersGameComponent
   puntosGanados: number = 0;
   puedeResponder: boolean = true;
 
+  tiempoBD = 20;
+
   //MUSICA
   musicaFondo: HTMLAudioElement | null = null;
 
@@ -1012,7 +1014,7 @@ export class ChallengersGameComponent
           this.sidebarVisible4 = true;
           this.numPreguntasContestadas++;
           this.puedeResponder = true;
-          this.countdown = 20;
+          this.countdown = this.tiempoBD;
         }, 3000); // 3000 milisegundos = 3 segundos
       } else {
         this.Mensaje_error = 'Respuesta equivocada';
@@ -1052,7 +1054,7 @@ export class ChallengersGameComponent
       //this.moverVehiculo();
       this.numPreguntasContestadas++;
       this.puedeResponder = true;
-      this.countdown = 20;
+      this.countdown =  this.tiempoBD;
     }, 3000); // 3000 milisegundos = 3 segundos
   }
 
@@ -1095,7 +1097,7 @@ export class ChallengersGameComponent
   startMainTimer() {
     if (!this.isTimerRunning) {
       this.isTimerRunning = true; // Marca que el temporizador está en funcionamiento
-      this.countdown = 20; // Restablece el tiempo en segundos
+      this.countdown =  this.tiempoBD; // Restablece el tiempo en segundos
       this.mainTimerInterval = setInterval(() => {
         if (!this.userClicked) {
           this.countdown--; // Temporizador principal disminuye en segundos
@@ -1119,7 +1121,7 @@ export class ChallengersGameComponent
   }
 
   resetTimer() {
-    this.countdown = 20; // Reiniciar el tiempo en segundos
+    this.countdown =  this.tiempoBD; // Reiniciar el tiempo en segundos
     this.userClicked = false; // Reiniciar el estado del usuario
     this.startMainTimer(); // Iniciar nuevamente el temporizador principal
   }

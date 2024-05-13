@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, p {
 }
 /* Controlar el tamaño de las imagenes */
 .imagen-lg {
-  max-width: 100%; /* Ancho máximo en pantallas grandes (100% del contenedor) */
+  max-width: 60wh; /* Ancho máximo en pantallas grandes (100% del contenedor) */
   height: auto; /* Altura automática para mantener la proporción original */
   display: block; /* Hacer que la imagen sea un elemento de bloque */
   margin: 0 auto; /* Centrar horizontalmente la imagen en pantallas grandes */
