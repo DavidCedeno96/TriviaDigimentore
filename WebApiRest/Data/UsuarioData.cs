@@ -287,6 +287,8 @@ namespace WebApiRest.Data
 
             cmd.Parameters.AddWithValue("@nombre", WC.GetTrim(usuario.Nombre));
             cmd.Parameters.AddWithValue("@correo", WC.GetTrim(usuario.Correo));
+            cmd.Parameters.AddWithValue("@celular", WC.GetTrim(usuario.Telefono));
+            cmd.Parameters.AddWithValue("@empresa", WC.GetTrim(usuario.Empresa));
             cmd.Parameters.AddWithValue("@idRol", usuario.IdRol);
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;
@@ -330,6 +332,7 @@ namespace WebApiRest.Data
             cmd.Parameters.AddWithValue("@clave", WC.GetTrim(usuario.Contrasena));
             cmd.Parameters.AddWithValue("@correo", WC.GetTrim(usuario.Correo));
             cmd.Parameters.AddWithValue("@celular", WC.GetTrim(usuario.Telefono));
+            cmd.Parameters.AddWithValue("@empresa", WC.GetTrim(usuario.Empresa));
             cmd.Parameters.AddWithValue("@idRol", usuario.IdRol);
 
             cmd.Parameters.Add("@info", SqlDbType.VarChar, int.MaxValue).Direction = ParameterDirection.Output;

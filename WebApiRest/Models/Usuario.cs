@@ -7,6 +7,7 @@
         public string Correo { get; set; }
         public string Contrasena { get; set; }
         public string Telefono { get; set; }
+        public string Empresa { get; set; }
         public int IdRol { get; set; } 
         public string Rol { get; set; } 
         public int Estado { get; set; }

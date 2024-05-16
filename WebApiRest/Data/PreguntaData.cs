@@ -120,7 +120,8 @@ namespace WebApiRest.Data {
                     {
                         IdPregunta = Convert.ToInt32(dr["idPregunta"].ToString()),                        
                         Nombre = dr["nombre"].ToString(),
-                        IdSala = Convert.ToInt32(dr["idSala"].ToString()),                                                
+                        IdSala = Convert.ToInt32(dr["idSala"].ToString()),
+                        TiempoXpregunta = Convert.ToInt32(dr["tiempoXpreg"].ToString()),
                         Estado = Convert.ToInt16(dr["estado"].ToString()),
                         FechaCreacion = Convert.ToDateTime(dr["fecha_creacion"].ToString()),
                         FechaModificacion = Convert.ToDateTime(dr["fecha_modificacion"].ToString())

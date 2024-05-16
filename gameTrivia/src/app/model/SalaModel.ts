@@ -34,6 +34,7 @@ export interface Pregunta {
   idPregunta: number;
   nombre: string;
   idSala: number;
+  tiempoXpregunta: number;
   estado: number;
   fecha_creacion: string;
   fecha_modificacion: string;

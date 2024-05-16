@@ -56,6 +56,7 @@ export class SalaComponent implements OnInit {
       idPregunta: 1,
       nombre: '¿Porque deberia escribir Hola mundo?',
       idSala: 1,
+      tiempoXpregunta: 20,
       estado: 1,
       fecha_creacion: '',
       fecha_modificacion: '',

@@ -142,7 +142,7 @@ export class CrearSalaComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile?.name);
+    //console.log(this.selectedFile?.name);
   }
 
   UpsertSala() {
@@ -174,11 +174,8 @@ export class CrearSalaComponent implements OnInit {
   cargarData(idSala: number) {
     this.salaServicio.itemSala(0, idSala, 0).subscribe({
       next: (data: any) => {
-        console.log(data);
-
         const { info, error, sala } = data.result;
         this.result = info;
-        console.log(this.result);
         if (error > 0) {
           //hay error
           this.existeError = true;
@@ -294,7 +291,6 @@ export class CrearSalaComponent implements OnInit {
           next: (data: any) => {
             const { info, error, campo } = data.result;
             this.result = info;
-            console.log(info, campo);
             if (error > 0) {
               this.existeError = true;
             } else {
@@ -556,7 +552,6 @@ export class CrearSalaComponent implements OnInit {
       next: (data: any) => {
         const { info, error, campo } = data.response;
         this.result = info;
-        console.log(info, campo);
         if (error > 0) {
           this.existeError = true;
         } else {
@@ -582,7 +577,6 @@ export class CrearSalaComponent implements OnInit {
       next: (data: any) => {
         const { info, error, campo } = data.response;
         this.result = info;
-        console.log(info, campo);
         if (error > 0) {
           this.existeError = true;
         } else {

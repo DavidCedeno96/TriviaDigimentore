@@ -11,9 +11,8 @@ import { ImagenesService } from 'src/app/services/imagenes.service';
   styleUrls: ['./ventana-registro.component.scss'],
 })
 export class VentanaRegistroComponent implements OnInit {
-
   //LOGO
-  logoEmpresa: string = ""
+  logoEmpresa: string = '';
 
   //Ojos
   hidePassword: boolean = true;
@@ -28,6 +27,7 @@ export class VentanaRegistroComponent implements OnInit {
     correo: '',
     contrasena: '',
     telefono: '',
+    empresa: '',
     idRol: 2,
     rol: '',
     iniciales: '',

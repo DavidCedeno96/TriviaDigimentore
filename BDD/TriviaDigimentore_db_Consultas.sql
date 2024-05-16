@@ -54,6 +54,8 @@ exec sp_B_Rol
 @error = ''
 
 ---- USUARIO ---------------------------------------------
+select * from Usuario
+
 exec sp_B_Usuario
 @estados = 0, -- 0 va a mostrar todo y 1 o > 1 mostrar las de estado 1
 @info = '',
@@ -83,6 +85,7 @@ exec sp_C_Usuario
 @nombre = 'sadmin name',
 @correo = '',
 @celular = '',
+@empresa = '',
 @idRol = 2,
 @info = '',
 @error = ''
@@ -92,13 +95,14 @@ exec sp_U_Usuario
 @nombre = 'user_edit',
 @clave = '12344',
 @celular = '',
+@empresa = '',
 @correo = '',
 @idRol = 2,
 @info = '',
 @error = ''
 
 exec sp_D_Usuario	
-@idUsuario = 0,	
+@idUsuario = 14,	
 @info = '',
 @error = ''
 
@@ -241,7 +245,7 @@ exec sp_B_PreguntaByIdSala
 @error = ''
 
 exec sp_B_PreguntaById	
-@idPregunta = 12,
+@idPregunta = 41,
 @estados = 0, -- 0 va a mostrar todo y 1 o > 1 mostrar las de estado 1
 @info = '',
 @error = ''

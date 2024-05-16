@@ -104,6 +104,7 @@ export class ChallengersGameComponent
     idPregunta: 0,
     nombre: 'Mi primera Pregunta de prueba',
     idSala: 0,
+    tiempoXpregunta: 20,
     estado: 0,
     fecha_creacion: '',
     fecha_modificacion: '',
@@ -348,6 +349,7 @@ export class ChallengersGameComponent
 
     this.idSala = this.PreguntasList[0].pregunta.idSala;
     this.listaDePreguntas = this.PreguntasList;
+    this.tiempoBD = this.PreguntasList[0].pregunta.tiempoXpregunta;
 
     this.rellenarPregunta(1);
     //this.updateCenters(window.innerWidth);
@@ -368,7 +370,7 @@ export class ChallengersGameComponent
     this.app.stage.addChild(container);
     //CARGAR IMAGENES DE LA API
     this.getComponentesList();
-    
+
     //Slide para la meta
     this.optionsMeta = {
       readOnly: true,
@@ -405,7 +407,6 @@ export class ChallengersGameComponent
   getComponentesList() {
     this.complementoService.getItem(this.idSala).subscribe({
       next: (data: any) => {
-        console.log(data);
         const { info, error, complemento } = data.result;
         if (error === 0) {
           let com: game1Model = complemento;
@@ -474,17 +475,17 @@ export class ChallengersGameComponent
         var textureStar = PIXI.Texture.from(this.rutaFondoMovil);
         const stars = new PIXI.Sprite(textureStar);
         stars.anchor.set(0.5);
-  
+
         var resp = stars.texture.baseTexture.valid;
         const checkTextureS = () => {
           if (resp) {
             stars.x = this.app.screen.width / 2;
             stars.y = this.app.screen.height / 2 - 100;
-  
+
             //Calculamos el ancho
             const proporcion = this.hbackgroundmovil / stars.height;
             const newWidth = stars.width * proporcion;
-  
+
             stars.height = this.hbackgroundmovil;
             stars.width = newWidth;
             this.app.stage.addChild(stars);
@@ -498,7 +499,7 @@ export class ChallengersGameComponent
         for (let i = 0; i < this.starsTextures.length; i++) {
           const texture = this.starsTextures[i];
           const stars = new PIXI.Sprite(texture);
-  
+
           var resp = stars.texture.baseTexture.valid;
           const checkTexture = (iValue: number) => {
             //console.log("entrar texture")
@@ -506,12 +507,12 @@ export class ChallengersGameComponent
               //Calculamos el ancho
               const proporcion = this.hbackground / stars.height;
               const newWidth = stars.width * proporcion;
-  
+
               switch (iValue) {
                 case 0:
                   stars.anchor.set(0);
                   stars.x = 50;
-  
+
                   break;
                 case 1:
                   stars.anchor.set(1, 0);
@@ -543,79 +544,75 @@ export class ChallengersGameComponent
           checkTexture(i);
         }
       }
-      
     }
-   
 
     //Planetas
     //Necesitamos que la textura se cargue para detectar el tamaño de la imagen
     if (this.isSkyObjects) {
       var resp2 = planet1.texture.baseTexture.valid;
-    const checkTexture2 = () => {
-      //console.log("entrar texture")
-      if (resp2) {
-        this.boolFinishTextures[0] = true;
-
-        planet1.anchor.set(0, 0.5);
-        if (this.app.screen.width < 577) {
-          //Calculamos el ancho
-          const proporcion = this.hSkyObject1_movil / planet1.height;
-          const newWidth = planet1.width * proporcion;
-          //planet1.scale.set(0.35);
-          planet1.width = newWidth;
-          planet1.height = this.hSkyObject1_movil;
-          planet1.x = planet1.width / 4 + 10;
-          planet1.y = this.app.screen.height / 2 - 100;
-        } else {
-          //Calculamos el ancho
-          const proporcion = this.hSkyObject1 / planet1.height;
-          const newWidth = planet1.width * proporcion;
-          planet1.width = newWidth;
-          planet1.height = this.hSkyObject1;
-
-          planet1.x = planet1.width / 4 + 100;
-          planet1.y = this.app.screen.height / 2 - 100;
-          //planet1.scale.set(0.5);
-        }
-
-        this.app.stage.addChild(planet1);
-        //Posición inicial
-      } else {
-        resp2 = planet1.texture.baseTexture.valid;
-        //console.log(this.character.texture.baseTexture.valid);
-        requestAnimationFrame(checkTexture2);
-      }
-    };
-    checkTexture2();
-
-    //Planeta2
-    if (this.app.screen.width > 580) {
-      var resp3 = planet2.texture.baseTexture.valid;
-      const checkTexture3 = () => {
+      const checkTexture2 = () => {
         //console.log("entrar texture")
-        if (resp3) {
-          this.boolFinishTextures[1] = true;
-          planet2.anchor.set(1, 0.5);
-          planet2.x = this.app.screen.width - 80;
-          planet2.y = this.app.screen.height / 2 - 300;
-          //Calculamos el ancho
-          const proporcion2 = this.hSkyObject2 / planet2.height;
-          const newWidth = planet2.width * proporcion2;
-          planet2.width = newWidth;
-          planet2.height = this.hSkyObject2;
+        if (resp2) {
+          this.boolFinishTextures[0] = true;
 
-          this.app.stage.addChild(planet2);
+          planet1.anchor.set(0, 0.5);
+          if (this.app.screen.width < 577) {
+            //Calculamos el ancho
+            const proporcion = this.hSkyObject1_movil / planet1.height;
+            const newWidth = planet1.width * proporcion;
+            //planet1.scale.set(0.35);
+            planet1.width = newWidth;
+            planet1.height = this.hSkyObject1_movil;
+            planet1.x = planet1.width / 4 + 10;
+            planet1.y = this.app.screen.height / 2 - 100;
+          } else {
+            //Calculamos el ancho
+            const proporcion = this.hSkyObject1 / planet1.height;
+            const newWidth = planet1.width * proporcion;
+            planet1.width = newWidth;
+            planet1.height = this.hSkyObject1;
+
+            planet1.x = planet1.width / 4 + 100;
+            planet1.y = this.app.screen.height / 2 - 100;
+            //planet1.scale.set(0.5);
+          }
+
+          this.app.stage.addChild(planet1);
+          //Posición inicial
         } else {
-          resp3 = planet2.texture.baseTexture.valid;
+          resp2 = planet1.texture.baseTexture.valid;
           //console.log(this.character.texture.baseTexture.valid);
-          requestAnimationFrame(checkTexture3);
+          requestAnimationFrame(checkTexture2);
         }
       };
-      checkTexture3();
+      checkTexture2();
+
+      //Planeta2
+      if (this.app.screen.width > 580) {
+        var resp3 = planet2.texture.baseTexture.valid;
+        const checkTexture3 = () => {
+          //console.log("entrar texture")
+          if (resp3) {
+            this.boolFinishTextures[1] = true;
+            planet2.anchor.set(1, 0.5);
+            planet2.x = this.app.screen.width - 80;
+            planet2.y = this.app.screen.height / 2 - 300;
+            //Calculamos el ancho
+            const proporcion2 = this.hSkyObject2 / planet2.height;
+            const newWidth = planet2.width * proporcion2;
+            planet2.width = newWidth;
+            planet2.height = this.hSkyObject2;
+
+            this.app.stage.addChild(planet2);
+          } else {
+            resp3 = planet2.texture.baseTexture.valid;
+            //console.log(this.character.texture.baseTexture.valid);
+            requestAnimationFrame(checkTexture3);
+          }
+        };
+        checkTexture3();
+      }
     }
-      
-    }
-    
   }
   //CHARACTER
 
@@ -759,37 +756,35 @@ export class ChallengersGameComponent
       ///Rellenar rocas
       if (this.isDecoration) {
         const textureR = this.rocksTextures[jT - 1];
-      const rock = new PIXI.Sprite(textureR);
+        const rock = new PIXI.Sprite(textureR);
 
-      var resp2 = rock.texture.baseTexture.valid;
-      const checkTexture2 = (iValue: number, jValue: number) => {
-        //console.log("entrar texture")
-        if (resp2) {
-          //Calculamos el ancho
-          const proporcion = floorH[jValue - 1] / floor.height;
-          const newWidth = floor.width * proporcion;
+        var resp2 = rock.texture.baseTexture.valid;
+        const checkTexture2 = (iValue: number, jValue: number) => {
+          //console.log("entrar texture")
+          if (resp2) {
+            //Calculamos el ancho
+            const proporcion = floorH[jValue - 1] / floor.height;
+            const newWidth = floor.width * proporcion;
 
-          rock.anchor.set(0.5, 0.95);
-          rock.width = newWidth * 0.6;
-          rock.height = floorH[jValue - 1] * 0.6;
-          if (iValue <= 4) {
-            rock.x = floorXPositions[iValue] + 30;
+            rock.anchor.set(0.5, 0.95);
+            rock.width = newWidth * 0.6;
+            rock.height = floorH[jValue - 1] * 0.6;
+            if (iValue <= 4) {
+              rock.x = floorXPositions[iValue] + 30;
+            } else {
+              rock.x = floorXPositions[jValue - 1] + 30;
+            }
+            rock.y = floorYPositions[iValue];
+            this.rocks.push(rock);
+            this.app.stage.addChild(rock);
           } else {
-            rock.x = floorXPositions[jValue - 1] + 30;
+            resp2 = rock.texture.baseTexture.valid;
+            //console.log(this.character.texture.baseTexture.valid);
+            requestAnimationFrame(() => checkTexture2(iValue, jValue));
           }
-          rock.y = floorYPositions[iValue];
-          this.rocks.push(rock);
-          this.app.stage.addChild(rock);
-        } else {
-          resp2 = rock.texture.baseTexture.valid;
-          //console.log(this.character.texture.baseTexture.valid);
-          requestAnimationFrame(() => checkTexture2(iValue, jValue));
-        }
-      };
-      checkTexture2(i, jT);
-        
+        };
+        checkTexture2(i, jT);
       }
-      
 
       jT++;
       if (jT > numTextures) {
@@ -800,36 +795,34 @@ export class ChallengersGameComponent
     //Nave
     if (this.isFinalObject) {
       const textureSpaceShip = PIXI.Texture.from(this.rutaFinalObject);
-    const ship = new PIXI.Sprite(textureSpaceShip);
+      const ship = new PIXI.Sprite(textureSpaceShip);
 
-    //Necesitamos que la textura se cargue para detectar el tamaño de la imagen
-    var resp3 = ship.texture.baseTexture.valid;
-    const checkTexture3 = () => {
-      //console.log("entrar texture")
-      if (resp3) {
-        //Calculamos el ancho
-        const proporcion = this.hFinalObject / ship.height;
-        const newWidth = ship.width * proporcion;
+      //Necesitamos que la textura se cargue para detectar el tamaño de la imagen
+      var resp3 = ship.texture.baseTexture.valid;
+      const checkTexture3 = () => {
+        //console.log("entrar texture")
+        if (resp3) {
+          //Calculamos el ancho
+          const proporcion = this.hFinalObject / ship.height;
+          const newWidth = ship.width * proporcion;
 
-        // Establecer tamaño
-        ship.anchor.set(0.5);
-        ship.width = newWidth;
-        ship.height = this.hFinalObject;
-        ship.x = floorXPositions[0] + 50;
-        //floor.y = floorYPositions[this.listaDePreguntas.length];
-        ship.y = floorYPositions[floorYPositions.length - 1] - 100;
-        this.spaceShip = ship;
-        this.app.stage.addChild(ship);
-      } else {
-        resp3 = ship.texture.baseTexture.valid;
-        //console.log(this.character.texture.baseTexture.valid);
-        requestAnimationFrame(checkTexture3);
-      }
-    };
-    checkTexture3();
-      
+          // Establecer tamaño
+          ship.anchor.set(0.5);
+          ship.width = newWidth;
+          ship.height = this.hFinalObject;
+          ship.x = floorXPositions[0] + 50;
+          //floor.y = floorYPositions[this.listaDePreguntas.length];
+          ship.y = floorYPositions[floorYPositions.length - 1] - 100;
+          this.spaceShip = ship;
+          this.app.stage.addChild(ship);
+        } else {
+          resp3 = ship.texture.baseTexture.valid;
+          //console.log(this.character.texture.baseTexture.valid);
+          requestAnimationFrame(checkTexture3);
+        }
+      };
+      checkTexture3();
     }
-    
   }
 
   private jump(): void {
@@ -879,11 +872,10 @@ export class ChallengersGameComponent
           rock.y += translateRocks;
         });
       }
-      
+
       if (this.isFinalObject) {
-        this.spaceShip.y += translateRocks;        
+        this.spaceShip.y += translateRocks;
       }
-      
     }
   }
 
@@ -1033,7 +1025,7 @@ export class ChallengersGameComponent
         }
       },
       error: (e) => {
-        console.log(e);
+        console.error(e);
       },
     });
   }
@@ -1054,7 +1046,7 @@ export class ChallengersGameComponent
       //this.moverVehiculo();
       this.numPreguntasContestadas++;
       this.puedeResponder = true;
-      this.countdown =  this.tiempoBD;
+      this.countdown = this.tiempoBD;
     }, 3000); // 3000 milisegundos = 3 segundos
   }
 
@@ -1097,7 +1089,7 @@ export class ChallengersGameComponent
   startMainTimer() {
     if (!this.isTimerRunning) {
       this.isTimerRunning = true; // Marca que el temporizador está en funcionamiento
-      this.countdown =  this.tiempoBD; // Restablece el tiempo en segundos
+      this.countdown = this.tiempoBD; // Restablece el tiempo en segundos
       this.mainTimerInterval = setInterval(() => {
         if (!this.userClicked) {
           this.countdown--; // Temporizador principal disminuye en segundos
@@ -1121,7 +1113,7 @@ export class ChallengersGameComponent
   }
 
   resetTimer() {
-    this.countdown =  this.tiempoBD; // Reiniciar el tiempo en segundos
+    this.countdown = this.tiempoBD; // Reiniciar el tiempo en segundos
     this.userClicked = false; // Reiniciar el estado del usuario
     this.startMainTimer(); // Iniciar nuevamente el temporizador principal
   }

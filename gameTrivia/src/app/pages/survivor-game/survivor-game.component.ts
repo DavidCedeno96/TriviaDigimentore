@@ -71,6 +71,7 @@ export class SurvivorGameComponent implements OnInit, AfterViewInit, OnDestroy {
     idPregunta: 0,
     nombre: 'Mi primera Pregunta de prueba',
     idSala: 0,
+    tiempoXpregunta: 20,
     estado: 0,
     fecha_creacion: '',
     fecha_modificacion: '',

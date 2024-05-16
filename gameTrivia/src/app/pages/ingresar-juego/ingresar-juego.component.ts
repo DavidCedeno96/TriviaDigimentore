@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CaracterInvalid, exp_numeros } from 'src/app/Utils/RegularExpressions';
 import { ConstantsService } from 'src/app/constants.service';
 import { EncryptionService } from 'src/app/encryption.service';
 import { Sala } from 'src/app/model/SalaModel';
@@ -15,6 +16,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./ingresar-juego.component.css'],
 })
 export class IngresarJuegoComponent implements OnInit, AfterViewInit {
+  caracterInvalid = CaracterInvalid();
+
   idSala: number = 0;
   expiroLink = false;
 
@@ -50,6 +53,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
     rol: '',
     iniciales: '',
     telefono: '',
+    empresa: '',
   };
 
   logoEmpresa = 'assets/Imagenes Empresa/logo blanco.png';
@@ -83,6 +87,15 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
           Validators.email,
         ],
       ],
+      telefono: [
+        '',
+        [
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern(exp_numeros),
+        ],
+      ],
+      empresa: ['', [Validators.maxLength(100), this.caracterInvalid]],
     });
   }
 
@@ -138,7 +151,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
                 fechaCierreLondres,
                 ' Actual:',
                 fechaActualLondres
-              );*/
+              ); */
 
               if (fechaCierreLondres < fechaActualLondres) {
                 this.expiroLink = true;
@@ -163,7 +176,7 @@ export class IngresarJuegoComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     this.constantsService.loading(true);
-    /*  console.log(this.formulario.valid);
+    /* console.log(this.formulario.valid);
     console.log(this.formulario.value); */
 
     if (this.formulario.valid) {

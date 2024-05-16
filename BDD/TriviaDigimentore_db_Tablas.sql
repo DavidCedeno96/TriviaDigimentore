@@ -17,6 +17,7 @@ create table Usuario(
 	foto varchar(50),
 	idRol int references Rol(idRol) not null,	
 	celular varchar(10),
+	empresa varchar(100),
 	estado int default 1,
 	fecha_creacion datetime default getdate(),
 	fecha_modificacion datetime default getdate(),

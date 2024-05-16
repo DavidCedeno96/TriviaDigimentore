@@ -4,6 +4,7 @@
         public int IdPregunta { get; set; }
         public string Nombre { get; set; }
         public int IdSala { get; set; }
+        public int TiempoXpregunta { get; set; }
         public int Estado { get; set; }
         public DateTime FechaCreacion { get; set; }
         public DateTime FechaModificacion { get; set; }

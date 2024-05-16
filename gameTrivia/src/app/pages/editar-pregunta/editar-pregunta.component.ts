@@ -29,6 +29,7 @@ export class EditarPreguntaComponent implements OnInit {
       idPregunta: 0,
       nombre: '',
       idSala: 0,
+      tiempoXpregunta: 20,
       estado: 0,
       fecha_creacion: '',
       fecha_modificacion: '',
